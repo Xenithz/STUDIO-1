@@ -1,0 +1,4 @@
+sceneSetups:
+- path: Assets/New_Penthouse_WithAssets.unity
+  isLoaded: 1
+  isActive: 1
