@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 607c3c10cd4b4ce4085e12c967eb6516
-timeCreated: 1487459098
+guid: f7c21e942a0a45b45870b141d61be0a4
+timeCreated: 1486254967
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -9,7 +9,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Bed
+    4300000: Box001
   materials:
     importMaterials: 1
     materialName: 0

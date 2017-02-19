@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 367268474d703b146b9fc1e77236884a
-timeCreated: 1487482219
+guid: d0f36bf12ff226741a3c0da9e8ffdb12
+timeCreated: 1486255122
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -9,7 +9,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Pillow
+    4300000: Line001
   materials:
     importMaterials: 1
     materialName: 0
@@ -39,7 +39,7 @@ ModelImporter:
     addColliders: 0
     importBlendShapes: 1
     swapUVChannels: 0
-    generateSecondaryUV: 0
+    generateSecondaryUV: 1
     useFileUnits: 1
     optimizeMeshForGPU: 1
     keepQuads: 0
