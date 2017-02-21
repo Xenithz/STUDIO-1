@@ -14,11 +14,11 @@ public class SequenceSelector : Node
         this.NodeName = desiredName;
     }
 
-    public override void NodeBehavior()
+    public override void NodeBehavior(Handler agent)
     {
        for(int i = 0; i < this.Children.Count; i++)
         {
-            this.Children[i].NodeBehavior();
+            this.Children[i].NodeBehavior(agent);
 
             if (this.Children[i].BoolCheckNodeState(NodeStates.failed))
             {

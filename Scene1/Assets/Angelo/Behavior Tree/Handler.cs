@@ -14,10 +14,12 @@ public class Handler : MonoBehaviour
     private void Awake()
     {
         test = new BehaviorTree();
+        test.AddRoot();
     }
 
     private void Update()
     {
-        
+        test.MassNodeReset();
+        test.RunThroughTree(this);
     }
 }
