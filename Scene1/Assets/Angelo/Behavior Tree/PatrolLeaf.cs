@@ -14,7 +14,7 @@ public class PatrolLeaf : Node
         this.NodeName = desiredName;
     }
 
-    public override void NodeBehavior()
+    public override void NodeBehavior(Handler agent)
     {
 
     }

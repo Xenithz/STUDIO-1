@@ -14,8 +14,8 @@ public class AttackLeaf : Node
         this.NodeName = desiredName;
     }
 
-    public override void NodeBehavior()
+    public override void NodeBehavior(Handler agent)
     {
-        
+
     }
 }

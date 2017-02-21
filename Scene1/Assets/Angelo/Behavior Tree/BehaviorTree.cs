@@ -70,6 +70,7 @@ public class BehaviorTree
         }
     }
 
+    //Reset the nodes in treeNodeCollection list to ready according to their nodeState
     public void MassNodeReset()
     {
         for(int i = 0; i < treeNodeCollection.Count; i++)
@@ -79,6 +80,12 @@ public class BehaviorTree
                 treeNodeCollection[i].SetNodeStatus(Node.NodeStates.ready);
             }
         }
+    }
+
+    //Run through the whole tree by running the NodeBehavior of the root (priority selector)
+    public void RunThroughTree(Handler agent)
+    {
+        this.Root.NodeBehavior(agent);
     }
 
     //AddToTreeNodeCollection will add a node to the treeNodeCollectionList

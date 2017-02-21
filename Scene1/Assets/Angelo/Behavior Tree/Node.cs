@@ -106,7 +106,7 @@ public class Node : IComparable<Node>
     }
 
     //Virtual NodeBehavior function will be overriden in other Node classes to provide different Behaviors for Nodes
-    public virtual void NodeBehavior()
+    public virtual void NodeBehavior(Handler agent)
     {
 
     }
