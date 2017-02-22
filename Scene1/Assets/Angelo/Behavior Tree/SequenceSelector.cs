@@ -5,7 +5,8 @@ using UnityEngine;
 public class SequenceSelector : Node
 {
     /*
-         
+         The sequence selector node will iterate through all the nodes in it's children list and run each node's NodeBehavior.
+         If a NodeBehavior returns failed, it will go end the loop
     */
 
     public SequenceSelector(int desiredPriority, string desiredName) : base(desiredPriority, desiredName)
@@ -14,25 +15,24 @@ public class SequenceSelector : Node
         this.NodeName = desiredName;
     }
 
-    public override void NodeBehavior(Handler agent)
+    public override void NodeBehavior(Handler agent = null)
     {
-       for(int i = 0; i < this.Children.Count; i++)
+        for(int i = 0; i < this.Children.Count; i++)
         {
             this.Children[i].NodeBehavior(agent);
 
             if (this.Children[i].BoolCheckNodeState(NodeStates.failed))
             {
-                base.BoolCheckNodeState(NodeStates.failed);
+                BoolCheckNodeState(NodeStates.failed);
                 return;
             }
             else if (this.Children[i].BoolCheckNodeState(NodeStates.running))
             {
-                base.BoolCheckNodeState(NodeStates.running);
-                continue;
+                BoolCheckNodeState(NodeStates.running);
             }
             else if (this.Children[i].BoolCheckNodeState(NodeStates.success))
             {
-                continue;
+                
             }
         }
         base.BoolCheckNodeState(NodeStates.success);

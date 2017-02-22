@@ -23,17 +23,16 @@ public class PrioritySelector : Node
 
             if (this.Children[i].BoolCheckNodeState(NodeStates.success))
             {
-                base.BoolCheckNodeState(NodeStates.success);
+                BoolCheckNodeState(NodeStates.success);
                 return;
             }
             else if (this.Children[i].BoolCheckNodeState(NodeStates.running))
             {
-                base.BoolCheckNodeState(NodeStates.running);
-                continue;
+                BoolCheckNodeState(NodeStates.running);
             }
             else if (this.Children[i].BoolCheckNodeState(NodeStates.failed))
             {
-                continue;
+
             }
         }
         base.BoolCheckNodeState(NodeStates.failed);
