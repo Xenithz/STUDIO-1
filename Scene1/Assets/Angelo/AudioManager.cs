@@ -44,6 +44,8 @@ public class AudioManager
 
     private int audioIndex;
 
+    private AudioClip[] environmentAudioClips;
+
     public void FootStepCues()
     {
         this.KeyBools = new bool[]
@@ -93,5 +95,15 @@ public class AudioManager
             this.inputKeyIsDown = false;
             this.inputKeyIsAlreadyDown = false;
         }
+    }
+
+    public void SetCurrentFootSteps()
+    {
+
+    }
+
+    public void EnvironmentCue(string environmentSoundName)
+    {
+        
     }
 }

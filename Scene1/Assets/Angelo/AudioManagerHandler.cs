@@ -15,4 +15,9 @@ public class AudioManagerHandler : MonoBehaviour
     {
         audioManagerInstance.FootStepCues();
     }
+
+    public void FootStepSet()
+    {
+        audioManagerInstance.SetCurrentFootSteps();
+    }
 }
