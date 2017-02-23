@@ -15,11 +15,11 @@ public class PrioritySelector : Node
         this.NodeName = desiredName;
     }
 
-    public override void NodeBehavior(Handler agent = null)
+    public override void NodeBehavior(Handler agent, bool isInTrigger, Collider doorCollider, float doorOpenTimer, GameObject player, float distanceToPlayer)
     {
         for(int i = 0; i < this.Children.Count; i++)
         {
-            this.Children[i].NodeBehavior(agent);
+            this.Children[i].NodeBehavior(agent, isInTrigger, doorCollider, doorOpenTimer, player, distanceToPlayer);
 
             if (this.Children[i].BoolCheckNodeState(NodeStates.success))
             {
@@ -29,6 +29,7 @@ public class PrioritySelector : Node
             else if (this.Children[i].BoolCheckNodeState(NodeStates.running))
             {
                 BoolCheckNodeState(NodeStates.running);
+                return;
             }
             else if (this.Children[i].BoolCheckNodeState(NodeStates.failed))
             {

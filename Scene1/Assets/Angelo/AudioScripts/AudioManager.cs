@@ -26,7 +26,7 @@ public class AudioManager
 
     public AudioClip[] footStepAudioClips;
     
-    private enum FootStepTypes
+    public enum FootStepTypes
     {
         gravel,
         metal
@@ -97,9 +97,9 @@ public class AudioManager
         }
     }
 
-    public void SetCurrentFootSteps()
+    public void SetCurrentFootSteps(FootStepTypes desiredFootStepType)
     {
-
+        this.currentFootStepType = desiredFootStepType;
     }
 
     public void EnvironmentCue(string environmentSoundName)

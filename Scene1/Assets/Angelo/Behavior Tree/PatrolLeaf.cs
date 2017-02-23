@@ -14,7 +14,7 @@ public class PatrolLeaf : Node
         this.NodeName = desiredName;
     }
 
-    public override void NodeBehavior(Handler agent)
+    public override void NodeBehavior(Handler agent, bool isInTrigger, Collider doorCollider, float doorOpenTimer, GameObject player, float distanceToPlayer)
     {
 
     }

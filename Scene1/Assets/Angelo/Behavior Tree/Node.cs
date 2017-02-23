@@ -106,7 +106,7 @@ public class Node : IComparable<Node>
     }
 
     //Virtual NodeBehavior function will be overriden in other Node classes to provide different Behaviors for Nodes
-    public virtual void NodeBehavior(Handler agent)
+    public virtual void NodeBehavior(Handler agent, bool isInTrigger, Collider doorCollider, float doorOpenTimer, GameObject player, float distanceToPlayer)
     {
 
     }

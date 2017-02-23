@@ -83,9 +83,9 @@ public class BehaviorTree
     }
 
     //Run through the whole tree by running the NodeBehavior of the root (priority selector)
-    public void RunThroughTree(Handler agent)
+    public void RunThroughTree(Handler agent, bool isInTrigger, Collider doorCollider, float doorOpenTimer, GameObject player, float distanceToPlayer)
     {
-        this.Root.NodeBehavior(agent);
+        this.Root.NodeBehavior(agent, isInTrigger, doorCollider, doorOpenTimer, player, distanceToPlayer);
     }
 
     //AddToTreeNodeCollection will add a node to the treeNodeCollectionList
