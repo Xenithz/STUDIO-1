@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LightHandler : MonoBehaviour {
+public class EventManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
