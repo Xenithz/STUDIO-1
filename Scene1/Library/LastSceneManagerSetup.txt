@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/DevelopmentScenes/GameOver.unity
+- path: Assets/Angelo/TestingScenes/AngeloTesting.unity
   isLoaded: 1
   isActive: 1
