@@ -8,7 +8,7 @@ public class Turn : MonoBehaviour {
     {
         open,
         closed
-    };
+    }
     //States for the door
 
     private State currentState;
