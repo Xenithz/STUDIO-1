@@ -28,6 +28,18 @@ public class Handler : MonoBehaviour
     //track the distance to the player
     private float distanceToPlayer;
 
+    //angle will contain the angle between the direction of the enemy and player, and the front direction of the agent
+    private float angle;
+
+    //enemyFieldOfView will contain the fixed FOV of the enemy(can only see the player in that angle)
+    private float enemyFieldOfView;
+
+    //speed will store the desired rotation speed
+    private float rotationSpeed;
+
+    //directionbetween enemy and player will store the normalized magnitude (direction) of the agent to the target
+    private Vector3 directionBetweenEnemyAndPlayer;
+
     private void Awake()
     {
         //Set the player variable to the player in the scene
@@ -42,6 +54,18 @@ public class Handler : MonoBehaviour
 
     private void Update()
     {
+        //Continously update the speed
+        float rotationSpeed = 3f * Time.deltaTime;
+
+        //Calculate the magnitude and then normalize to get the direction
+        directionBetweenEnemyAndPlayer = (player.transform.position - transform.position).normalized;
+
+        //calculate the angle between the direction of the agent to the target, and the forward direction of the agent
+        angle = Vector3.Angle(directionBetweenEnemyAndPlayer, transform.forward);
+
+        //Create a new quaternion with the specified direction
+        Quaternion lookAt = Quaternion.LookRotation(directionBetweenEnemyAndPlayer);
+
         //Update the door timer
         doorOpenTimer += Time.deltaTime;
         
@@ -52,7 +76,7 @@ public class Handler : MonoBehaviour
         test.MassNodeReset();
 
         //Run through the behaviors of the tree
-        test.RunThroughTree(this, isInTrigger, doorCollider, doorOpenTimer, player, distanceToPlayer);
+        test.RunThroughTree(this, isInTrigger, doorCollider, doorOpenTimer, player, distanceToPlayer, angle, enemyFieldOfView, rotationSpeed, directionBetweenEnemyAndPlayer);
     }
 
     private void OnTriggerStay(Collider other)
