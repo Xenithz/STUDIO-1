@@ -15,7 +15,7 @@ public class OpenDoorLeaf : Node
     {
         if(isInTrigger == true && doorOpenTimer >= 3)
         {
-
+            doorCollider.gameObject.GetComponentInParent<ItemHandler>().ItemBehavior();
         }
     }
 }

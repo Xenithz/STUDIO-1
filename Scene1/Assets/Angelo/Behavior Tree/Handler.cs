@@ -32,7 +32,7 @@ public class Handler : MonoBehaviour
     private float angle;
 
     //enemyFieldOfView will contain the fixed FOV of the enemy(can only see the player in that angle)
-    private float enemyFieldOfView;
+    private float enemyFieldOfView = 100f;
 
     //speed will store the desired rotation speed
     private float rotationSpeed;
