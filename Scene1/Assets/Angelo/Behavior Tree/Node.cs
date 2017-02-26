@@ -70,6 +70,21 @@ public class Node : IComparable<Node>
         }
     }
 
+    private Handler nodeHandler;
+
+    public Handler NodeHandler
+    {
+        get
+        {
+            return this.nodeHandler;
+        }
+
+        set
+        {
+            this.nodeHandler = value;
+        }
+    }
+
     //Node Constructor
     public Node(int desiredPriority, string desiredName)
     {
