@@ -120,8 +120,12 @@ public class AudioManager
         this.currentFootStepType = desiredFootStepType;
     }
 
-    public void EnvironmentCue(string environmentSoundName)
+    public void EnvironmentCue(int environmentSoundIndex, Collider audioCollider)
     {
-        
+        AudioSource temporaryAudioSource;
+
+        temporaryAudioSource = audioCollider.gameObject.GetComponent<AudioSource>();
+        temporaryAudioSource.clip = environmentAudioClips[environmentSoundIndex];
+        temporaryAudioSource.Play();
     }
 }

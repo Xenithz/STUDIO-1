@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Angelo/TestingScenes/AngeloTesting.unity
+- path: Assets/Angelo/TestingScenes/AngeloTesting2.unity
   isLoaded: 1
   isActive: 1

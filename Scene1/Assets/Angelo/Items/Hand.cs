@@ -24,19 +24,22 @@ public class Hand : MonoBehaviour
                 {
                     targettingAnItem = true;
                     distanceToItem = Vector3.Distance(this.gameObject.transform.position, rayHit.transform.position);
-                    Item temporaryItem;
+
+                    //FINISH LATER
+                    ItemHandler temporaryItem = rayHit.transform.gameObject.GetComponent<ItemHandler>();
+
+                    if (targettingAnItem == true && distanceToItem <= 3f)
+                    {
+                        if (Input.GetMouseButton(1))
+                        {
+                            temporaryItem.ItemBehavior();
+                        }
+                    }
                 }
+
                 else
                 {
                     targettingAnItem = false;
-                }
-
-                if (targettingAnItem == true && distanceToItem <= 3f)
-                {
-                    if (Input.GetMouseButton(1))
-                    {
-
-                    }
                 }
             }
         }
