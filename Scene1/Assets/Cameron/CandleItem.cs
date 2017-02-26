@@ -19,10 +19,6 @@ public class CandleItem : Item
 
     public override void ItemBehavior(Transform thisItem)
     {
-<<<<<<< HEAD
-        Debug.Log("working candle");
-=======
->>>>>>> refs/remotes/origin/master
         Transform TargetFlame = thisItem.FindChild("Flame");
 
         if (currentState == State.on)

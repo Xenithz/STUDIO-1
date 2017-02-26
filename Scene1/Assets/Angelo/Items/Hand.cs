@@ -12,12 +12,11 @@ public class Hand : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButtonDown(2))
         {
             Vector3 rayStartingLocation = mainCamera.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0.0f));
 
             RaycastHit rayHit;
-            Debug.Log("thro");
 
             if (Physics.Raycast(rayStartingLocation, mainCamera.transform.forward, out rayHit))
             {
@@ -29,13 +28,11 @@ public class Hand : MonoBehaviour
                     //FINISH LATER
                     ItemHandler temporaryItem = rayHit.transform.gameObject.GetComponent<ItemHandler>();
 
-                    if (targettingAnItem == true && distanceToItem <= 6f)
+                    if (targettingAnItem == true && distanceToItem <= 3f)
                     {
                         if (Input.GetMouseButton(1))
                         {
                             temporaryItem.ItemBehavior();
-                            Debug.Log("working");
-
                         }
                     }
                 }

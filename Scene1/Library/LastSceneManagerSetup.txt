@@ -1,8 +1,4 @@
 sceneSetups:
-<<<<<<< HEAD
-- path: Assets/Scenes/MainMenu.unity
-=======
 - path: Assets/Angelo/TestingScenes/AngeloTesting.unity
->>>>>>> refs/remotes/origin/master
   isLoaded: 1
   isActive: 1
