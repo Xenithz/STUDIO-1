@@ -14,8 +14,17 @@ public class AttackLeaf : Node
         this.NodeName = desiredName;
     }
 
-    public override void NodeBehavior(Handler agent)
+    public override void NodeBehavior(Handler agent, bool isInTrigger, Collider doorCollider, float doorOpenTimer, GameObject player, float distanceToPlayer)
     {
-
+        if(distanceToPlayer < 2f)
+        {
+            player.GetComponent<PlayerControl>().Die();
+            base.BoolCheckNodeState(NodeStates.success);
+        }
+        else
+        {
+            base.BoolCheckNodeState(NodeStates.failed);
+            return;
+        }
     }
 }

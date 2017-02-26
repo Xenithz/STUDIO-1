@@ -21,6 +21,7 @@ public class PlayerControl : MonoBehaviour
     bool keyAlreadyDown;
     int audioIndex;
 
+    private GameObject gameManager;
 
     // Simple Walk
     public float speed;
@@ -49,6 +50,8 @@ public class PlayerControl : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        gameManager = GameObject.Find("GameManager"); 
+
         rb = GetComponent<Rigidbody>();
 
         this.soundType = PlayerControl.SoundType.gravel;
@@ -185,5 +188,10 @@ public class PlayerControl : MonoBehaviour
             this.keyIsDown = false;
             this.keyAlreadyDown = false;
         }
+    }
+
+    public void Die()
+    {
+        gameManager.GetComponent<GameManagerHandler>().gameManagerInstance.PlayerHasDied();
     }
 }
