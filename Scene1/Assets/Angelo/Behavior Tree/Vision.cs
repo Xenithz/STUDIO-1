@@ -30,6 +30,7 @@ public class Vision : MonoBehaviour
 
         //calculate the angle between the direction of the agent to the target, and the forward direction of the agent
         angle = Vector3.Angle(directionBetweenEnemyAndPlayer, transform.forward);
+        Debug.Log(transform.forward);
 
         //Create a new quaternion with the specified direction
         Quaternion lookAt = Quaternion.LookRotation(directionBetweenEnemyAndPlayer);
@@ -41,7 +42,7 @@ public class Vision : MonoBehaviour
             transform.rotation = Quaternion.Lerp(transform.rotation, lookAt, speed);
 
             //Debug that the player is inside the FOV of the agent
-            Debug.Log("is in FOV");
+            //Debug.Log("is in FOV");
         }
 	}
 }
