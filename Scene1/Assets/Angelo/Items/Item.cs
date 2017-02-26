@@ -4,7 +4,18 @@ using UnityEngine;
 
 public class Item
 {
-    public virtual void ItemBehavior()
+
+    public Item(Transform thisItem)
+    {
+
+    }
+
+    public virtual void ItemBehavior(Transform thisItem)
+    {
+
+    }
+
+    public virtual void ItemStateSetOnAwake()
     {
 
     }

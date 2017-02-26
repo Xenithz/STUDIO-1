@@ -6,14 +6,14 @@ public class Candle : MonoBehaviour
 {
 
     public bool CandleCanStart;
-    public Transform Flame1;
+    public Transform TargetFlame;
     public bool IsCandleOn;
 
 
 
     void OnTriggerStay(Collider other)
     {
-        Flame1 = transform.FindChild("Flame");
+        TargetFlame = transform.FindChild("Flame");
         if (other.tag == "Player")
         {
             CandleCanStart = true;
@@ -31,7 +31,7 @@ public class Candle : MonoBehaviour
             {
                 if (Input.GetKey(KeyCode.E))
                 {
-                    Flame1.gameObject.SetActive(false);
+                    TargetFlame.gameObject.SetActive(false);
                     IsCandleOn = false;
                 }
             }
@@ -40,7 +40,7 @@ public class Candle : MonoBehaviour
             {
                 if (Input.GetKey(KeyCode.E))
                 {
-                    Flame1.gameObject.SetActive(true);
+                    TargetFlame.gameObject.SetActive(true);
                     IsCandleOn = true;
                 }
             }
