@@ -20,19 +20,17 @@ public class ItemHandler : MonoBehaviour
         {
             case ItemType.door:
                 thisItem = new DoorItem(transform);
-                thisItem.ItemStateSetOnAwake();
-
                 break;
             case ItemType.candle:
                 thisItem = new CandleItem(transform);
-                thisItem.ItemStateSetOnAwake();
                 break;
         }
+
+        thisItem.ItemStateSetOnAwake();
     }
 
     public void ItemBehavior()
     {
         thisItem.ItemBehavior(transform);
     }
-
 }

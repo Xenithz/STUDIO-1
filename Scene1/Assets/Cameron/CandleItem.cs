@@ -19,6 +19,7 @@ public class CandleItem : Item
 
     public override void ItemBehavior(Transform thisItem)
     {
+        Debug.Log("working candle");
         Transform TargetFlame = thisItem.FindChild("Flame");
 
         if (currentState == State.on)
