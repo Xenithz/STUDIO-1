@@ -12,13 +12,14 @@ public class AttackLeaf : Node
     {
         this.NodePriority = desiredPriority;
         this.NodeName = desiredName;
+        this.NodeHandler = desiredHandler;
     }
 
-    public override void NodeBehavior(Handler agent, bool isInTrigger, Collider doorCollider, float doorOpenTimer, GameObject player, float distanceToPlayer, float angle, float enemyFieldOfView, float rotationSpeed, Vector3 directionBetweenEnemyAndPlayer)
+    public override void NodeBehavior()
     {
-        if(distanceToPlayer < 2f)
+        if(this.NodeHandler.DistanceToPlayer < 2f)
         {
-            player.GetComponent<PlayerControl>().Die();
+            this.NodeHandler.Player.GetComponent<PlayerControl>().Die();
             base.BoolCheckNodeState(NodeStates.success);
         }
         else

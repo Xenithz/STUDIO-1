@@ -29,10 +29,25 @@ public class BehaviorTree
     //List of ALL nodes being stored in the tree. This will allow for searching according to name.
     public List<Node> treeNodeCollection = new List<Node>();
 
-    //Behavior Tree constructor
-    public BehaviorTree()
-    {
+    private Handler behaviorTreeHandler;
 
+    public Handler BehaviorTreeHandler
+    {
+        get
+        {
+            return behaviorTreeHandler;
+        }
+
+        set
+        {
+            behaviorTreeHandler = value;
+        }
+    }
+
+    //Behavior Tree constructor
+    public BehaviorTree(Handler desiredHandler)
+    {
+        BehaviorTreeHandler = desiredHandler;
     }
     
     //AddRoot will add the root to the tree. Incase the root already exists, it will notify the user to use the DynamicAddNode function instead.
@@ -47,7 +62,7 @@ public class BehaviorTree
         else
         {
             //If it is null, add a new root to the tree
-            Root = new PrioritySelector(1, "root");
+            Root = new PrioritySelector(1, "root", behaviorTreeHandler);
 
             //Add the new root to the full list of nodes inside of the tree
             AddToTreeNodeCollection(Root);
@@ -77,7 +92,7 @@ public class BehaviorTree
             Debug.LogError("OVERRIDING REQUEST, ROOT IS NULL AND HAS TO BE ADDED");
 
             //Override and add a new root
-            Root = new PrioritySelector(1, "root");
+            Root = new PrioritySelector(1, "root", behaviorTreeHandler);
 
             //Add the new root to the full list of nodes inside of the tree
             AddToTreeNodeCollection(Root);
@@ -107,10 +122,10 @@ public class BehaviorTree
     }
 
     //Run through the whole tree by running the NodeBehavior of the root (priority selector)
-    public void RunThroughTree(Handler agent, bool isInTrigger, Collider doorCollider, float doorOpenTimer, GameObject player, float distanceToPlayer, float angle, float enemyFieldOfView, float rotationSpeed, Vector3 directionBetweenEnemyAndPlayer)
+    public void RunThroughTree()
     {
         //Call the nodebehavior of the root
-        this.Root.NodeBehavior(agent, isInTrigger, doorCollider, doorOpenTimer, player, distanceToPlayer, angle, enemyFieldOfView, rotationSpeed, directionBetweenEnemyAndPlayer);
+        this.Root.NodeBehavior();
     }
 
     //AddToTreeNodeCollection will add a node to the treeNodeCollectionList

@@ -8,14 +8,15 @@ public class OpenDoorLeaf : Node
     {
         this.NodePriority = desiredPriority;
         this.NodeName = desiredName;
+        this.NodeHandler = desiredHandler;
     }
 
 
-    public override void NodeBehavior(Handler agent, bool isInTrigger, Collider doorCollider, float doorOpenTimer, GameObject player, float distanceToPlayer, float angle, float enemyFieldOfView, float rotationSpeed, Vector3 directionBetweenEnemyAndPlayer)
+    public override void NodeBehavior()
     {
-        if(isInTrigger == true && doorOpenTimer >= 3)
+        if(this.NodeHandler.IsInTrigger == true && this.NodeHandler.DoorOpenTimer >= 3)
         {
-            doorCollider.gameObject.GetComponentInParent<ItemHandler>().ItemBehavior();
+            this.NodeHandler.DoorCollider.gameObject.GetComponentInParent<ItemHandler>().ItemBehavior();
         }
     }
 }
