@@ -14,9 +14,17 @@ public class OpenDoorLeaf : Node
 
     public override void NodeBehavior()
     {
-        if(this.NodeHandler.IsInTrigger == true && this.NodeHandler.DoorOpenTimer >= 3)
+       if(this.NodeHandler.IsInTrigger == true)
         {
-            this.NodeHandler.DoorCollider.gameObject.GetComponentInParent<ItemHandler>().ItemBehavior();
+            //Update the door timer
+            this.NodeHandler.DoorOpenTimer += Time.deltaTime;
+
+            if (this.NodeHandler.DoorOpenTimer >= 3)
+            {
+                this.NodeHandler.DoorCollider.gameObject.GetComponentInParent<MonoItem>().CurrentBehavior();
+                this.NodeHandler.DoorOpenTimer = 0f;
+                SetNodeStatus(NodeStates.success);
+            }
         }
     }
 }

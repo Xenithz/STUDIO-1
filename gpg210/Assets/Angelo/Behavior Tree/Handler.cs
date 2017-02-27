@@ -175,9 +175,6 @@ public class Handler : MonoBehaviour
 
     private void Update()
     {
-        //Update the door timer
-        doorOpenTimer += Time.deltaTime;
-
         //Reset the nodes in the tree
         test.MassNodeReset();
 
