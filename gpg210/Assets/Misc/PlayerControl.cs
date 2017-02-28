@@ -46,6 +46,8 @@ public class PlayerControl : MonoBehaviour
     public float cameraRange = 80.0f;
     public GameObject cameraRotate;
 
+    public AudioManagerHandler amH;
+
 
     // Use this for initialization
     void Start()
@@ -65,6 +67,11 @@ public class PlayerControl : MonoBehaviour
         }
         this.audio = base.GetComponent<AudioSource>();
         this.audio.clip = this.footstepAudioClips[this.audioIndex];
+
+        //amH = GameObject.FindGameObjectWithTag("audioManagerHandler").GetComponent<AudioManagerHandler>();
+        //amH.audioManagerInstance.audioSource = gameObject.GetComponent<AudioSource>();
+        //amH.audioManagerInstance.SetCurrentFootSteps(AudioManager.FootStepTypes.gravel);
+        //amH.audioManagerInstance.audioSource.clip = amH.audioManagerInstance.footStepAudioClips[amH.audioManagerInstance.audioIndex];
     }
 
     // Update is called once per frame

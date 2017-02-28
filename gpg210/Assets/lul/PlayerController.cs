@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        rb = GetComponent <Rigidbody>(); 
+        rb = GetComponent<Rigidbody>();
        
 
         staminaRect = new Rect(Screen.width / 10, Screen.height * 9 / 10, Screen.width / 3, Screen.height / 50); 
@@ -129,8 +129,6 @@ public class PlayerController : MonoBehaviour
         {
             presentStamina += Time.deltaTime;  
         }
-
-
 
 
     }

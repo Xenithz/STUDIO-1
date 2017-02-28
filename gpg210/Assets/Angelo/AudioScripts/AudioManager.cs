@@ -44,7 +44,7 @@ public class AudioManager
     }
     
     //Tracks the current footstep type
-    private FootStepTypes currentFootStepType;
+    public FootStepTypes currentFootStepType;
 
     //Bool to check if input key is down
     private bool inputKeyIsDown;
@@ -56,68 +56,82 @@ public class AudioManager
     private bool[] KeyBools;
 
     //Audio source to play sound
-    private AudioSource audioSource;
+    public AudioSource audioSource1;
 
     //Audio index to iterate through array
-    private int audioIndex;
+    public int audioIndex;
 
     //Array to store environment audio clips
     private AudioClip[] environmentAudioClips;
 
-    public void FootStepCues()
+    public void FootStepCues(AudioSource audioSource)
     {
-        this.KeyBools = new bool[]
+        KeyBools = new bool[]
             {
                 Input.GetKey(KeyCode.W),
                 Input.GetKey(KeyCode.A),
                 Input.GetKey(KeyCode.S),
                 Input.GetKey(KeyCode.D)
             };
-        if (this.KeyBools[0] || this.KeyBools[1] || this.KeyBools[2] || this.KeyBools[3])
+        if (KeyBools[0] || KeyBools[1] || KeyBools[2] || KeyBools[3])
         {
-            this.inputKeyIsDown = true;
-            if (!this.audioSource.isPlaying)
+            inputKeyIsDown = true;
+            if (!audioSource.isPlaying)
             {
-                if (this.currentFootStepType == FootStepTypes.gravel)
+                if (currentFootStepType == FootStepTypes.gravel)
                 {
-                    if (this.audioIndex  > 3)
+                    if (audioIndex  > 3)
                     {
-                        this.audioIndex = 0;
+                        audioIndex = 0;
                     }
                 }
-                else if (this.currentFootStepType == FootStepTypes.metal && this.audioIndex > 7)
+                else if (currentFootStepType == FootStepTypes.metal && audioIndex > 7)
                 {
-                    this.audioIndex = 4;
+                    audioIndex = 4;
                 }
-                this.audioSource.clip = this.footStepAudioClips[this.audioIndex];
-                this.audioSource.Play();
-                this.audioIndex++;
+                audioSource.clip = footStepAudioClips[audioIndex];
+                audioSource.Play();
+                audioIndex++;
             }
         }
-        if (this.inputKeyIsDown && !this.inputKeyIsAlreadyDown)
+        if (inputKeyIsDown && !inputKeyIsAlreadyDown)
         {
-            this.inputKeyIsAlreadyDown = true;
+            inputKeyIsAlreadyDown = true;
         }
-        if (!this.KeyBools[0] && !this.KeyBools[1] && !this.KeyBools[2] && !this.KeyBools[3] && this.inputKeyIsAlreadyDown)
+        if (!KeyBools[0] && !KeyBools[1] && !KeyBools[2] && !KeyBools[3] && inputKeyIsAlreadyDown)
         {
-            this.audioSource.Stop();
-            if (this.currentFootStepType == FootStepTypes.gravel)
+            audioSource.Stop();
+            if (currentFootStepType == FootStepTypes.gravel)
             {
-                this.audioIndex = 0;
+                audioIndex = 0;
             }
-            else if (this.currentFootStepType == FootStepTypes.metal)
+            else if (currentFootStepType == FootStepTypes.metal)
             {
-                this.audioIndex = 4;
+                audioIndex = 4;
             }
-            this.audioSource.clip = this.footStepAudioClips[this.audioIndex];
-            this.inputKeyIsDown = false;
-            this.inputKeyIsAlreadyDown = false;
+            audioSource.clip = footStepAudioClips[audioIndex];
+            inputKeyIsDown = false;
+            inputKeyIsAlreadyDown = false;
         }
     }
 
     public void SetCurrentFootSteps(FootStepTypes desiredFootStepType)
     {
-        this.currentFootStepType = desiredFootStepType;
+        currentFootStepType = desiredFootStepType;
+    }
+
+    public void InitialFootStepSetting()
+    {
+        if (currentFootStepType == FootStepTypes.gravel)
+        {
+            this.audioIndex = 0;
+        }
+        else if (currentFootStepType == FootStepTypes.metal)
+        {
+            this.audioIndex = 4;
+        }
+        //this.audio = base.GetComponent<AudioSource>();
+        //this.audio.clip = this.footstepAudioClips[this.audioIndex];
     }
 
     public void EnvironmentCue(int environmentSoundIndex, Collider audioCollider)
