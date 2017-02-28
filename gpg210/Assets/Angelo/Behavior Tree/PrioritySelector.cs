@@ -9,6 +9,7 @@ public class PrioritySelector : Node
          If a node returns successfull, it will stop going through the nodes
     */
 
+    //PrioritySelector constructor
     public PrioritySelector(int desiredPriority, string desiredName, Handler desiredHandler) : base(desiredPriority, desiredName, desiredHandler)
     {
         this.NodePriority = desiredPriority;
@@ -16,27 +17,37 @@ public class PrioritySelector : Node
         this.NodeHandler = desiredHandler;
     }
 
+    //Override the virtual NodeBehavior in the Node class to apply the priority selector's specific functionality
     public override void NodeBehavior()
     {
+        //Iterate through all the nodes in the children list of the priority selector
         for(int i = 0; i < this.Children.Count; i++)
         {
+            //Run each child's behavior
             this.Children[i].NodeBehavior();
 
+            //Check if the child's nodestate success
             if (this.Children[i].BoolCheckNodeState(NodeStates.success))
             {
-                BoolCheckNodeState(NodeStates.success);
+                //Set the priority selector's state to successs
+                SetNodeStatus(NodeStates.success);
                 return;
             }
+
+            //Check if the child's nodestate is running
             else if (this.Children[i].BoolCheckNodeState(NodeStates.running))
             {
-                BoolCheckNodeState(NodeStates.running);
+                //Set the priority selector's state to runnning
+                SetNodeStatus(NodeStates.running);
                 return;
             }
-            else if (!this.Children[i].BoolCheckNodeState(NodeStates.failed))
+
+            //Check if the child's nodestate is failed
+            else if (this.Children[i].BoolCheckNodeState(NodeStates.failed))
             {
 
             }
         }
-        base.BoolCheckNodeState(NodeStates.failed);
+        SetNodeStatus(NodeStates.failed);
     }
 }

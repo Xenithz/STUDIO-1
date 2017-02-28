@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class DebugLeaf : Node
 {
+    /*
+         The debug leaf class will be used to debug the behavior tree
+    */
+
+
     public DebugLeaf(int desiredPriority, string desiredName, Handler desiredHandler) : base(desiredPriority, desiredName, desiredHandler)
     {
         this.NodePriority = desiredPriority;
@@ -13,6 +18,6 @@ public class DebugLeaf : Node
 
     public override void NodeBehavior()
     {
-        BoolCheckNodeState(NodeStates.success);
+        SetNodeStatus(NodeStates.success);
     }
 }

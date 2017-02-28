@@ -70,8 +70,10 @@ public class Node : IComparable<Node>
         }
     }
 
+    //nodeHandler will be used to store access to all variables that the A.I stores in it's handler script
     private Handler nodeHandler;
 
+    //NodeHandler will allow the nodeHandler to be kept private
     public Handler NodeHandler
     {
         get

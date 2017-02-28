@@ -11,7 +11,6 @@ public class OpenDoorLeaf : Node
         this.NodeHandler = desiredHandler;
     }
 
-
     public override void NodeBehavior()
     {
        if(this.NodeHandler.IsInTrigger == true)

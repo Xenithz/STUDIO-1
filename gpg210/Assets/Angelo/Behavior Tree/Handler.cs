@@ -16,6 +16,7 @@ public class Handler : MonoBehaviour
     [SerializeField]
     private GameObject player;
 
+    //Allows the player variable to be kept private
     public GameObject Player
     {
         get
@@ -32,6 +33,7 @@ public class Handler : MonoBehaviour
     //Check if the A.I is inside the trigger of a doorspace
     private bool isInTrigger;
 
+    //allows the isInTrigger variable to be kept private
     public bool IsInTrigger
     {
         get
@@ -48,6 +50,7 @@ public class Handler : MonoBehaviour
     //Get a reference for the collider of the door
     private Collider doorCollider;
 
+    //allows the doorCollider variable to be kept private
     public Collider DoorCollider
     {
         get
@@ -64,6 +67,7 @@ public class Handler : MonoBehaviour
     //Incrementing timer for door opening mechanic
     private float doorOpenTimer;
 
+    //allows the doorOpenTimer to be kept private
     public float DoorOpenTimer
     {
         get
@@ -80,6 +84,7 @@ public class Handler : MonoBehaviour
     //track the distance to the player
     private float distanceToPlayer;
 
+    //allows the distanceToPlayer variable to kept private
     public float DistanceToPlayer
     {
         get
@@ -96,6 +101,7 @@ public class Handler : MonoBehaviour
     //angle will contain the angle between the direction of the enemy and player, and the front direction of the agent
     private float angle;
 
+    //allows the angle variable to be kept private
     public float Angle
     {
         get
@@ -112,6 +118,7 @@ public class Handler : MonoBehaviour
     //enemyFieldOfView will contain the fixed FOV of the enemy(can only see the player in that angle)
     private float enemyFieldOfView = 100f;
 
+    //allows the enemyFieldOfView variable to be kept private
     public float EnemyFieldOfView
     {
         get
@@ -128,6 +135,7 @@ public class Handler : MonoBehaviour
     //speed will store the desired rotation speed
     private float rotationSpeed;
 
+    //allows the rotationSpeed variable to be kept private
     public float RotationSpeed
     {
         get
@@ -144,6 +152,7 @@ public class Handler : MonoBehaviour
     //directionbetween enemy and player will store the normalized magnitude (direction) of the agent to the target
     private Vector3 directionBetweenEnemyAndPlayer;
 
+    //allows the directionBetweenEnemyAndPlayer variable to be kept private
     public Vector3 DirectionBetweenEnemyAndPlayer
     {
         get

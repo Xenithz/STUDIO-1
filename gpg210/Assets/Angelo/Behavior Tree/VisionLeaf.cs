@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class VisionLeaf : Node
 {
+    /*
+        
+    */
+
     public VisionLeaf(int desiredPriority, string desiredName, Handler desiredHandler) : base(desiredPriority, desiredName, desiredHandler)
     {
         this.NodePriority = desiredPriority;
