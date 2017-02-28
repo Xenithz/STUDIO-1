@@ -98,9 +98,10 @@ public class Node : IComparable<Node>
     //List of Nodes which will hold the children of a parent
     public List<Node> Children = new List<Node>();
 
-    //Compare the NodePriority for sorting
+    //Compare the NodePriority for sorting (make new custom comparer)
     public int CompareTo(Node nodeToCompare)
     {
+        //Compare the current node priority to the nodeToCompare's node priority
         return NodePriority.CompareTo(nodeToCompare.NodePriority);
     }
 

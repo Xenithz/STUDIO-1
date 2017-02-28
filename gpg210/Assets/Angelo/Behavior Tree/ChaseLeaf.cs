@@ -37,6 +37,7 @@ public class ChaseLeaf : Node
         {
             //Set the nodestatus to success
             SetNodeStatus(NodeStates.success);
+            Debug.Log("done");
         }
     }
 }

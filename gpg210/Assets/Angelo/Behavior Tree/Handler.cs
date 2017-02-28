@@ -178,8 +178,17 @@ public class Handler : MonoBehaviour
         test.AddRoot();
 
         test.DynamicAddNode(new SequenceSelector(0, "seq", this), "root");
+
+        //Attack sequence
         test.DynamicAddNode(new VisionLeaf(0, "vision", this), "seq");
         test.DynamicAddNode(new ChaseLeaf(1, "chase", this), "seq");
+        test.DynamicAddNode(new AttackLeaf(2, "attack", this), "seq");
+
+        //Second sequence
+        test.DynamicAddNode(new SequenceSelector(1, "seq2", this), "root");
+
+        //Patrol leaf
+        test.DynamicAddNode(new PatrolLeaf(2, "patrol", this), "root");
     }
 
     private void Update()
