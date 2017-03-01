@@ -4,21 +4,6 @@ using UnityEngine;
 
 public class MonoDoor : MonoItem
 {
-    private bool triggerDoorAction;
-
-    public bool TriggerDoorAction
-    {
-        get
-        {
-            return triggerDoorAction;
-        }
-
-        set
-        {
-            triggerDoorAction = value;
-        }
-    }
-
     private enum State
     {
         open,
@@ -50,7 +35,7 @@ public class MonoDoor : MonoItem
         }
     }
 
-    private void Start()
+    private void Awake()
     {
         currentState = State.closed;
     }
