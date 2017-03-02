@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Angelo/TestingScenes/ItemTest.unity
+- path: Assets/Angelo/TestingScenes/PatrolTest.unity
   isLoaded: 1
   isActive: 1
