@@ -30,6 +30,21 @@ public class Handler : MonoBehaviour
         }
     }
 
+    private Rigidbody agentRigidBody;
+
+    public Rigidbody AgentRigidBody
+    {
+        get
+        {
+            return agentRigidBody;
+        }
+
+        set
+        {
+            agentRigidBody = value;
+        }
+    }
+
     //Check if the A.I is inside the trigger of a doorspace
     private bool isInTrigger;
 
@@ -149,7 +164,37 @@ public class Handler : MonoBehaviour
         }
     }
 
-    //directionbetween enemy and player will store the normalized magnitude (direction) of the agent to the target
+    private float maxVelocityForPatrol = 5;
+
+    public float MaxVelocityForPatrol
+    {
+        get
+        {
+            return maxVelocityForPatrol;
+        }
+
+        set
+        {
+            maxVelocityForPatrol = value; 
+        }
+    }
+
+    private float distanceFromAgentToWaypoint;
+
+    public float DistanceFromAgentToWaypoint
+    {
+        get
+        {
+            return distanceFromAgentToWaypoint;
+        }
+
+        set
+        {
+            distanceFromAgentToWaypoint = value;
+        }
+    }
+
+    //directionbetween enemy and player will store the normalized direction of the agent to the target
     private Vector3 directionBetweenEnemyAndPlayer;
 
     //allows the directionBetweenEnemyAndPlayer variable to be kept private
@@ -166,29 +211,118 @@ public class Handler : MonoBehaviour
         }
     }
 
+    //directionToPatrolWaypoint will store the normalized direction of the agent to the target
+    private Vector3 directionToPatrolWaypoint;
+
+    //allows the directionToPatrolWaypoint variable to be kept private
+    public Vector3 DirectionToPatrolWaypoint
+    {
+        get
+        {
+            return directionToPatrolWaypoint;
+        }
+
+        set
+        {
+            directionToPatrolWaypoint = value;
+        }
+    }
+
+    private Vector3 steeringForPatrol;
+
+    public Vector3 SteeringForPatrol
+    {
+        get
+        {
+            return steeringForPatrol;
+        }
+
+        set
+        {
+            steeringForPatrol = value;
+        }
+    }
+
+    private Vector3 desiredVelocityForPatrolling;
+
+    public Vector3 DesiredVelocityForPatrolling
+    {
+        get
+        {
+            return desiredVelocityForPatrolling;
+        }
+
+        set
+        {
+            desiredVelocityForPatrolling = value;
+        }
+    }
+
+    //patrolTargetTransform will store the transform of the current waypoint that the A.I is patrolling to
+    private Transform patrolTargetTransform;
+
+    //allows the patrolTargetTransform variable to be kept private
+    public Transform PatrolTargetTransform
+    {
+        get
+        {
+            return patrolTargetTransform;
+        }
+
+        set
+        {
+            patrolTargetTransform = value;
+        }
+    }
+
+    //patrolIncrementer stores the value for iterating through the patrolWaypoints list
+    private int patrolIncrementer = 0;
+
+    //allows the patrolIncrementer variable to be kept private
+    public int PatrolIncrementer
+    {
+        get
+        {
+            return patrolIncrementer;
+        }
+
+        set
+        {
+            patrolIncrementer = value;
+        }
+    }
+
+    //patrolWaypoints list will store all the waypoints for the A.I
+    public List<Transform> patrolWaypoints = new List<Transform>();
+
     private void Awake()
     {
         //Set the player variable to the player in the scene
         player = GameObject.FindGameObjectWithTag("player");
+
+        //Set the agentRigidBody variable to the rigidbody attached to the gameobject which the handler is attached to
+        agentRigidBody = gameObject.GetComponent<Rigidbody>();
 
         //Initialize the new behavior tree
         test = new BehaviorTree(this);
 
         //Add the root to the behavior tree
         test.AddRoot();
-
-        test.DynamicAddNode(new SequenceSelector(0, "seq", this), "root");
-
-        //Attack sequence
-        test.DynamicAddNode(new VisionLeaf(0, "vision", this), "seq");
-        test.DynamicAddNode(new ChaseLeaf(1, "chase", this), "seq");
-        test.DynamicAddNode(new AttackLeaf(2, "attack", this), "seq");
-
-        //Second sequence
-        test.DynamicAddNode(new SequenceSelector(1, "seq2", this), "root");
+        
+        //Add Sequence selector to handle the attack sequence
+        test.DynamicAddNode(new SequenceSelector(0, "attackSequence", this), "root");
 
         //Patrol leaf
         test.DynamicAddNode(new PatrolLeaf(2, "patrol", this), "root");
+
+        //Attack sequence
+        test.DynamicAddNode(new VisionLeaf(0, "vision", this), "attackSequence");
+        test.DynamicAddNode(new ChaseLeaf(1, "chase", this), "attackSequence");
+        test.DynamicAddNode(new AttackLeaf(2, "attack", this), "attackSequence");
+
+        //Second sequence
+        test.DynamicAddNode(new SequenceSelector(1, "doorSequence", this), "root");
+
     }
 
     private void Update()
