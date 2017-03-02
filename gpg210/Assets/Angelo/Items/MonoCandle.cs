@@ -14,6 +14,7 @@ public class MonoCandle : MonoItem
     private State currentState;
 
     private ParticleSystem fire;
+    private ParticleSystem.EmissionModule emissionModuleForFire;
 
     public override void CurrentBehavior()
     {
@@ -27,18 +28,19 @@ public class MonoCandle : MonoItem
     {
         currentState = State.on;
         fire = gameObject.GetComponentInChildren<ParticleSystem>();
-    }
+        emissionModuleForFire = fire.emission;
+}
 
     private void Update()
     {
         if(currentState == State.on)
         {
-            fire.Play();
+            emissionModuleForFire.enabled = true;
             Debug.Log("is working");
         }
         else if(currentState == State.off)
         {
-            fire.Stop();
+            emissionModuleForFire.enabled = false;
         }
     }
 }
