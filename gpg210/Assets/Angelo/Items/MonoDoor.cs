@@ -11,14 +11,30 @@ public class MonoDoor : MonoItem
     }
     //States for the door
 
+    public enum DoorType
+    {
+        front,
+        side
+    }
+
+    public DoorType thisDoorType;
+
     private State currentState;
     //Track the current state of the door
 
-    private float doorOpenValue = 90f;
+    private float frontDoorOpenValue = 90f;
     //Desired angle for door open
 
-    private float doorCloseValue = 0f;
+    private float frontDoorCloseValue = 0f;
     //Desired angle for door close
+
+    private float sideDoorOpenValue = 0f;
+
+    private float sideDoorClosedValue = 90f;
+
+    private float doorOpenValue;
+
+    private float doorClosedValue;
 
     private float smoothing = 2f;
     //Desired smoothing value
@@ -38,6 +54,17 @@ public class MonoDoor : MonoItem
     private void Awake()
     {
         currentState = State.closed;
+
+        if (thisDoorType == DoorType.front)
+        {
+            doorOpenValue = frontDoorOpenValue;
+            doorClosedValue = frontDoorCloseValue;
+        }
+        else if (thisDoorType == DoorType.side)
+        {
+            doorOpenValue = sideDoorOpenValue;
+            doorClosedValue = sideDoorClosedValue;
+        }
     }
 
     private void Update()
@@ -49,7 +76,7 @@ public class MonoDoor : MonoItem
         }
         else if (currentState == State.closed)
         {
-            Quaternion target2 = Quaternion.Euler(0, doorCloseValue, 0);
+            Quaternion target2 = Quaternion.Euler(0, doorClosedValue, 0);
             transform.localRotation = Quaternion.Slerp(transform.localRotation, target2, Time.deltaTime * smoothing);
         }
     }
