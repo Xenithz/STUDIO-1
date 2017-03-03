@@ -5,7 +5,7 @@ using UnityEngine;
 public class AttackLeaf : Node
 {
     /*
-         
+         The attack leaf will be used to handle the attack behavior of the A.I. When the A.I is within a certain range of the player, it will kill the player instantly.
     */
 
     public AttackLeaf(int desiredPriority, string desiredName, Handler desiredHandler) : base(desiredPriority, desiredName, desiredHandler)
@@ -17,15 +17,19 @@ public class AttackLeaf : Node
 
     public override void NodeBehavior()
     {
+        //Check if the distance is smaller than float 2
         if(this.NodeHandler.DistanceToPlayer < 2f)
         {
+            //Trigger the die function attached to the player
             this.NodeHandler.Player.GetComponent<PlayerControl>().Die();
-            base.BoolCheckNodeState(NodeStates.success);
+
+            //Set the node state to success
+            base.SetNodeStatus(NodeStates.success);
         }
         else
         {
-            base.BoolCheckNodeState(NodeStates.failed);
-            return;
+            //Set the node state to failed
+            base.SetNodeStatus(NodeStates.failed);
         }
     }
 }

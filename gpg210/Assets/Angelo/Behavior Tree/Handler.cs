@@ -164,8 +164,10 @@ public class Handler : MonoBehaviour
         }
     }
 
+    //The maximum velocity to be used for clamping 
     private float maxVelocityForPatrol = 5;
 
+    //allows the maxVelocityForPatrol to be kept private
     public float MaxVelocityForPatrol
     {
         get
@@ -179,8 +181,10 @@ public class Handler : MonoBehaviour
         }
     }
 
+    //distanceFromAgentToWaypoint will store the distance from the agent to the waypoint in the patrol leaf
     private float distanceFromAgentToWaypoint;
 
+    //allows the distanceFromAgentToWaypoint to be kept private
     public float DistanceFromAgentToWaypoint
     {
         get
@@ -228,8 +232,11 @@ public class Handler : MonoBehaviour
         }
     }
 
+
+    //steeringForPatrol stores the steering force as a vector3, to be used inside the patrol leaf
     private Vector3 steeringForPatrol;
 
+    //allows the steeringForPatrol variable to be kept private
     public Vector3 SteeringForPatrol
     {
         get
@@ -243,8 +250,10 @@ public class Handler : MonoBehaviour
         }
     }
 
+    //desiredVelocityForPatrolling stores the desired velocity for patrolling (normalization of magnitude of direction multiplied by the max velocity)
     private Vector3 desiredVelocityForPatrolling;
 
+    //allows the desiredVelocityForPatrolling variable to be kept private
     public Vector3 DesiredVelocityForPatrolling
     {
         get
