@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Angelo/TestingScenes/PatrolTest.unity
+- path: Assets/Scenes/Camera_Effects_Test.unity
   isLoaded: 1
   isActive: 1
