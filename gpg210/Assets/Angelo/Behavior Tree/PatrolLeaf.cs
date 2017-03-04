@@ -47,5 +47,19 @@ public class PatrolLeaf : Node
 
         //Clamp the magnitude of the velocity so that it does not exceed the maximum velocity
         this.NodeHandler.AgentRigidBody.velocity = Vector3.ClampMagnitude(this.NodeHandler.AgentRigidBody.velocity, this.NodeHandler.MaxVelocityForPatrol);
+
+        //Check if the Agent is close to the waypoint
+        if(this.NodeHandler.DistanceFromAgentToWaypoint < 2f)
+        {
+            //Move to the next waypoint
+            this.NodeHandler.PatrolIncrementer++;
+        }
+
+        //Check if the incrementer is at the last waypoint
+        if(this.NodeHandler.PatrolIncrementer >= this.NodeHandler.patrolWaypoints.Count)
+        {
+            //Reset it
+            this.NodeHandler.PatrolIncrementer = 0;
+        }
     }
 }

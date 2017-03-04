@@ -17,23 +17,31 @@ public class VisionLeaf : Node
 
     public override void NodeBehavior()
     {
-        //Calculate the magnitude and then normalize to get the direction
-        this.NodeHandler.DirectionBetweenEnemyAndPlayer = (this.NodeHandler.Player.transform.position - this.NodeHandler.transform.position).normalized;
-
-        //calculate the angle between the direction of the agent to the target, and the forward direction of the agent
-        this.NodeHandler.Angle = Vector3.Angle(this.NodeHandler.DirectionBetweenEnemyAndPlayer, this.NodeHandler.transform.forward);
-
         //Set the distance of the player and update accordingly
         this.NodeHandler.DistanceToPlayer = Vector3.Distance(this.NodeHandler.gameObject.transform.position, this.NodeHandler.Player.transform.position);
 
-        if (this.NodeHandler.Angle < this.NodeHandler.EnemyFieldOfView * 0.5)
+        if (this.NodeHandler.DistanceToPlayer < 10f)
         {
-            Debug.Log("NOW MOVE");
-            SetNodeStatus(NodeStates.success);
-        }
-        else
-        {
+            //Calculate the magnitude and then normalize to get the direction
+            this.NodeHandler.DirectionBetweenEnemyAndPlayer = (this.NodeHandler.Player.transform.position - this.NodeHandler.transform.position).normalized;
+
+            //calculate the angle between the direction of the agent to the target, and the forward direction of the agent
+            this.NodeHandler.Angle = Vector3.Angle(this.NodeHandler.DirectionBetweenEnemyAndPlayer, this.NodeHandler.transform.forward);
+
             SetNodeStatus(NodeStates.running);
+
+            if (this.NodeHandler)
+
+                if (this.NodeHandler.Angle < this.NodeHandler.EnemyFieldOfView * 0.5)
+                {
+                    this.NodeHandler.AgentHasSightOfPlayer = true;
+                    SetNodeStatus(NodeStates.success);
+                }
+                else
+                {
+                    this.NodeHandler.AgentHasSightOfPlayer = false;
+                    SetNodeStatus(NodeStates.failed);
+                }
         }
     }
 }

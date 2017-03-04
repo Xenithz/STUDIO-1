@@ -23,12 +23,12 @@ public class SequenceSelector : Node
 
             if (this.Children[i].BoolCheckNodeState(NodeStates.failed))
             {
-                SetNodeStatus(NodeStates.failed);
+                base.SetNodeStatus(NodeStates.failed);
                 return;
             }
             else if (this.Children[i].BoolCheckNodeState(NodeStates.running))
             {
-                SetNodeStatus(NodeStates.running);
+                base.SetNodeStatus(NodeStates.running);
                 return;
             }
             else if (this.Children[i].BoolCheckNodeState(NodeStates.success))

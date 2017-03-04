@@ -6,6 +6,8 @@ public class MonoAudioManager : MonoBehaviour
 {
     public AudioClip[] footstepAudioClips;
 
+    public AudioClip[] environmentAudioClips;
+
     private AudioSource audio;
 
     private bool keyIsDown;
@@ -90,5 +92,23 @@ public class MonoAudioManager : MonoBehaviour
             this.keyIsDown = false;
             this.keyAlreadyDown = false;
         }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.tag == "audioTrigger")
+        {
+            Debug.Log("troll");
+            EnvironmentCue(0, other);
+        }
+    }
+
+    public void EnvironmentCue(int environmentSoundIndex, Collider audioCollider)
+    {
+        AudioSource temporaryAudioSource;
+
+        temporaryAudioSource = audioCollider.gameObject.GetComponent<AudioSource>();
+        temporaryAudioSource.clip = environmentAudioClips[environmentSoundIndex];
+        temporaryAudioSource.Play();
     }
 }

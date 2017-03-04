@@ -62,6 +62,23 @@ public class Handler : MonoBehaviour
         }
     }
 
+    private bool agentHasSightOfPlayer;
+
+    public bool AgentHasSightOfPlayer
+    {
+        get
+        {
+            return agentHasSightOfPlayer;
+        }
+
+        set
+        {
+            agentHasSightOfPlayer = value;
+        }
+    }
+
+
+
     //Get a reference for the collider of the door
     private Collider doorCollider;
 
@@ -165,7 +182,7 @@ public class Handler : MonoBehaviour
     }
 
     //The maximum velocity to be used for clamping 
-    private float maxVelocityForPatrol = 5;
+    private float maxVelocityForPatrol = 3;
 
     //allows the maxVelocityForPatrol to be kept private
     public float MaxVelocityForPatrol
@@ -317,21 +334,22 @@ public class Handler : MonoBehaviour
 
         //Add the root to the behavior tree
         test.AddRoot();
-        
+
         //Add Sequence selector to handle the attack sequence
         test.DynamicAddNode(new SequenceSelector(0, "attackSequence", this), "root");
 
-        //Patrol leaf
-        test.DynamicAddNode(new PatrolLeaf(2, "patrol", this), "root");
-
-        //Attack sequence
+        //Attack Sequence Leaf Nodes
         test.DynamicAddNode(new VisionLeaf(0, "vision", this), "attackSequence");
         test.DynamicAddNode(new ChaseLeaf(1, "chase", this), "attackSequence");
-        test.DynamicAddNode(new AttackLeaf(2, "attack", this), "attackSequence");
+        test.DynamicAddNode(new OpenDoorLeaf(2, "doorAttack", this), "attackSequence");
+        test.DynamicAddNode(new AttackLeaf(3, "attack", this), "attackSequence");
 
-        //Second sequence
-        test.DynamicAddNode(new SequenceSelector(1, "doorSequence", this), "root");
+        //Patrol Sequence
+        test.DynamicAddNode(new SequenceSelector(1, "patrolSequence", this), "root");
 
+        //Patrol Sequence Leaf Nodes
+        test.DynamicAddNode(new PatrolLeaf(1, "patrol", this), "patrolSequence");
+        //test.DynamicAddNode(new OpenDoorLeaf(2, "doorPatrol", this), "patrolSequence");
     }
 
     private void Update()

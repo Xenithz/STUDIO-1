@@ -17,26 +17,34 @@ public class ChaseLeaf : Node
 
     public override void NodeBehavior()
     {
-        //Continously update the speed
-        this.NodeHandler.RotationSpeed = 3f * Time.deltaTime;
-
-        //Create a new quaternion with the specified direction
-        Quaternion lookAt = Quaternion.LookRotation(this.NodeHandler.DirectionBetweenEnemyAndPlayer);
-
-        //Lerp the rotation of the NodeHandler towards the lookAt quaternion using the specified RotationSpeed
-        this.NodeHandler.transform.rotation = Quaternion.Lerp(this.NodeHandler.transform.rotation, lookAt, this.NodeHandler.RotationSpeed);
-
-        //PLACEHOLDER MOVEMENT
-        this.NodeHandler.transform.position = Vector3.MoveTowards(this.NodeHandler.transform.position, this.NodeHandler.Player.transform.position, 0.3f * Time.deltaTime);
-
-        //Set the node status to running
-        SetNodeStatus(NodeStates.running);
-
-        //Check if the distance to the player is under 2f
-        if (this.NodeHandler.DistanceToPlayer <= 2f)
+        if (this.NodeHandler.AgentHasSightOfPlayer == true)
         {
-            //Set the nodestatus to success
-            SetNodeStatus(NodeStates.success);
+            //Continously update the speed
+            this.NodeHandler.RotationSpeed = 3f * Time.deltaTime;
+
+            //Create a new quaternion with the specified direction
+            Quaternion lookAt = Quaternion.LookRotation(this.NodeHandler.DirectionBetweenEnemyAndPlayer);
+
+            //Lerp the rotation of the NodeHandler towards the lookAt quaternion using the specified RotationSpeed
+            this.NodeHandler.transform.rotation = Quaternion.Lerp(this.NodeHandler.transform.rotation, lookAt, this.NodeHandler.RotationSpeed);
+
+            //PLACEHOLDER MOVEMENT
+            this.NodeHandler.transform.position = Vector3.MoveTowards(this.NodeHandler.transform.position, this.NodeHandler.Player.transform.position, 5f * Time.deltaTime);
+
+            //Set the node status to running
+            SetNodeStatus(NodeStates.running);
+
+            //Check if the distance to the player is under 2f
+            if (this.NodeHandler.DistanceToPlayer <= 2f)
+            {
+                //Set the nodestatus to success
+                SetNodeStatus(NodeStates.success);
+            }
+        }
+
+        else
+        {
+            SetNodeStatus(NodeStates.failed);
         }
     }
 }

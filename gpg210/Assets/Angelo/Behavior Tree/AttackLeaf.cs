@@ -22,6 +22,7 @@ public class AttackLeaf : Node
         {
             //Trigger the die function attached to the player
             this.NodeHandler.Player.GetComponent<PlayerControl>().Die();
+            Debug.Log("DIE");
 
             //Set the node state to success
             base.SetNodeStatus(NodeStates.success);

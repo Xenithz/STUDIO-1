@@ -30,7 +30,7 @@ public class PrioritySelector : Node
             if (this.Children[i].BoolCheckNodeState(NodeStates.success))
             {
                 //Set the priority selector's state to successs
-                SetNodeStatus(NodeStates.success);
+                base.SetNodeStatus(NodeStates.success);
                 return;
             }
 
@@ -38,7 +38,7 @@ public class PrioritySelector : Node
             else if (this.Children[i].BoolCheckNodeState(NodeStates.running))
             {
                 //Set the priority selector's state to runnning
-                SetNodeStatus(NodeStates.running);
+                base.SetNodeStatus(NodeStates.running);
                 return;
             }
 

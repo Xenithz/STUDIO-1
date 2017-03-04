@@ -64,7 +64,7 @@ public class MonoHand : MonoBehaviour
         if(distanceFromPlayerToItem < 4f && angle <= 40f)
         {
             //CHeck if the player presses the left click
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.I))
             {
                 //Call the currentBehavior of the item
                 targetTransform.gameObject.GetComponent<MonoItem>().CurrentBehavior();
