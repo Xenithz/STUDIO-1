@@ -61,10 +61,10 @@ public class MonoHand : MonoBehaviour
         Debug.DrawLine(transform.position, transform.position + directionFromPlayerToItem * 5, Color.red, 0.5f);
 
         //Check if the distance is smaller than 4, and the angle is smaller than 40
-        if(distanceFromPlayerToItem < 4f && angle <= 40f)
+        if(distanceFromPlayerToItem < 5f && angle <= 40f)
         {
             //CHeck if the player presses the left click
-            if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.I))
+            if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.E))
             {
                 //Call the currentBehavior of the item
                 targetTransform.gameObject.GetComponent<MonoItem>().CurrentBehavior();
