@@ -8,7 +8,7 @@ public class MonoAudioManager : MonoBehaviour
 
     public AudioClip[] environmentAudioClips;
 
-    private AudioSource audio;
+    private AudioSource audioSourceForPlayer;
 
     private bool keyIsDown;
 
@@ -28,7 +28,7 @@ public class MonoAudioManager : MonoBehaviour
 
     private void Awake()
     {
-        audio = gameObject.GetComponent<AudioSource>();
+        audioSourceForPlayer = gameObject.GetComponent<AudioSource>();
 
         this.soundType = SoundType.gravel;
         if (this.soundType == SoundType.gravel)
@@ -39,8 +39,8 @@ public class MonoAudioManager : MonoBehaviour
         {
             this.audioIndex = 4;
         }
-        this.audio = base.GetComponent<AudioSource>();
-        this.audio.clip = this.footstepAudioClips[this.audioIndex];
+        this.audioSourceForPlayer = base.GetComponent<AudioSource>();
+        this.audioSourceForPlayer.clip = this.footstepAudioClips[this.audioIndex];
     }
 
     private void Update()
@@ -55,7 +55,7 @@ public class MonoAudioManager : MonoBehaviour
         if (this.keys[0] || this.keys[1] || this.keys[2] || this.keys[3])
         {
             this.keyIsDown = true;
-            if (!this.audio.isPlaying)
+            if (!this.audioSourceForPlayer.isPlaying)
             {
                 if (this.soundType == SoundType.gravel)
                 {
@@ -68,8 +68,8 @@ public class MonoAudioManager : MonoBehaviour
                 {
                     this.audioIndex = 4;
                 }
-                this.audio.clip = this.footstepAudioClips[this.audioIndex];
-                this.audio.Play();
+                this.audioSourceForPlayer.clip = this.footstepAudioClips[this.audioIndex];
+                this.audioSourceForPlayer.Play();
                 this.audioIndex++;
             }
         }
@@ -79,7 +79,7 @@ public class MonoAudioManager : MonoBehaviour
         }
         if (!this.keys[0] && !this.keys[1] && !this.keys[2] && !this.keys[3] && this.keyAlreadyDown)
         {
-            this.audio.Stop();
+            this.audioSourceForPlayer.Stop();
             if (this.soundType == SoundType.gravel)
             {
                 this.audioIndex = 0;
@@ -88,7 +88,7 @@ public class MonoAudioManager : MonoBehaviour
             {
                 this.audioIndex = 4;
             }
-            this.audio.clip = this.footstepAudioClips[this.audioIndex];
+            this.audioSourceForPlayer.clip = this.footstepAudioClips[this.audioIndex];
             this.keyIsDown = false;
             this.keyAlreadyDown = false;
         }

@@ -17,7 +17,7 @@ public class ChaseLeaf : Node
 
     public override void NodeBehavior()
     {
-        if (this.NodeHandler.AgentHasSightOfPlayer == true)
+        if (this.NodeHandler.AgentHasSightOfPlayer == true && this.NodeHandler.IsInTrigger == false)
         {
             //Continously update the speed
             this.NodeHandler.RotationSpeed = 3f * Time.deltaTime;

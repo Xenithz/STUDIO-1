@@ -25,5 +25,10 @@ public class GameManagerHandler : MonoBehaviour
     {
         //Check every frame for pause
         gameManagerInstance.PauseCheck();
+
+        if(gameManagerInstance.isPlayerAlive == true)
+        {
+            Debug.Log("FINISHED");
+        }
     }
 }
