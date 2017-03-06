@@ -348,6 +348,7 @@ public class Handler : MonoBehaviour
         test.DynamicAddNode(new SequenceSelector(1, "patrolSequence", this), "root");
 
         //Patrol Sequence Leaf Nodes
+        test.DynamicAddNode(new OpenDoorLeaf(0, "doorPatrol", this), "patrolSequence");
         test.DynamicAddNode(new PatrolLeaf(1, "patrol", this), "patrolSequence");
         //test.DynamicAddNode(new OpenDoorLeaf(2, "doorPatrol", this), "patrolSequence");
     }
@@ -378,6 +379,14 @@ public class Handler : MonoBehaviour
             doorCollider = null;
             
             //Set the intrigger variable to false
+            isInTrigger = false;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if(other.gameObject.tag == "doorSpace")
+        {
             isInTrigger = false;
         }
     }

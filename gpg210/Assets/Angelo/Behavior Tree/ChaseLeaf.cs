@@ -19,6 +19,7 @@ public class ChaseLeaf : Node
     {
         if (this.NodeHandler.AgentHasSightOfPlayer == true && this.NodeHandler.IsInTrigger == false)
         {
+            Debug.Log("CAN SEE");
             //Continously update the speed
             this.NodeHandler.RotationSpeed = 3f * Time.deltaTime;
 
@@ -28,8 +29,17 @@ public class ChaseLeaf : Node
             //Lerp the rotation of the NodeHandler towards the lookAt quaternion using the specified RotationSpeed
             this.NodeHandler.transform.rotation = Quaternion.Lerp(this.NodeHandler.transform.rotation, lookAt, this.NodeHandler.RotationSpeed);
 
-            //PLACEHOLDER MOVEMENT
-            this.NodeHandler.transform.position = Vector3.MoveTowards(this.NodeHandler.transform.position, this.NodeHandler.Player.transform.position, 5f * Time.deltaTime);
+            //The desired velocity is calculated by normalizing the magnitude and multiplying it by the maximum velocity
+            this.NodeHandler.DesiredVelocityForPatrolling = Vector3.Normalize(this.NodeHandler.Player.transform.position - this.NodeHandler.transform.position) * this.NodeHandler.MaxVelocityForPatrol;
+
+            //Create the steering force by minusing the current velocity from the desired velocity
+            this.NodeHandler.SteeringForPatrol = this.NodeHandler.DesiredVelocityForPatrolling - this.NodeHandler.AgentRigidBody.velocity;
+
+            //Add the force to the rigid body to get movemement
+            this.NodeHandler.AgentRigidBody.AddForce(this.NodeHandler.SteeringForPatrol);
+
+            //Clamp the magnitude of the velocity so that it does not exceed the maximum velocity
+            this.NodeHandler.AgentRigidBody.velocity = Vector3.ClampMagnitude(this.NodeHandler.AgentRigidBody.velocity, this.NodeHandler.MaxVelocityForPatrol);
 
             //Set the node status to running
             SetNodeStatus(NodeStates.running);
@@ -40,10 +50,17 @@ public class ChaseLeaf : Node
                 //Set the nodestatus to success
                 SetNodeStatus(NodeStates.success);
             }
+
+            if(this.NodeHandler.AgentHasSightOfPlayer == true && this.NodeHandler.IsInTrigger == true)
+            {
+                Debug.Log("using this");
+                SetNodeStatus(NodeStates.success);
+            }
         }
 
         else
         {
+            Debug.Log("this is failing");
             SetNodeStatus(NodeStates.failed);
         }
     }
