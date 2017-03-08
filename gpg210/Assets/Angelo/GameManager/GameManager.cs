@@ -66,7 +66,7 @@ public class GameManager
     //Function to set the isPlayerAlive bool to false
     public void PlayerHasDied()
     {
-        isPlayerAlive = false;
+        isPlayerAlive = true;
     }
 
     //Set the current GameState of the player

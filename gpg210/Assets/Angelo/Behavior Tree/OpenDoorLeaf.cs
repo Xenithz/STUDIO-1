@@ -17,6 +17,7 @@ public class OpenDoorLeaf : Node
         {
             //Update the door timer
             this.NodeHandler.DoorOpenTimer += Time.deltaTime;
+
             SetNodeStatus(NodeStates.running);
 
             if (this.NodeHandler.DoorOpenTimer >= 3)
@@ -27,9 +28,9 @@ public class OpenDoorLeaf : Node
             }
         }
 
-        else
-        {
+       else
+       {
             SetNodeStatus(NodeStates.success);
-        }
+       }
     }
 }

@@ -6,21 +6,6 @@ using UnityEngine;
 [RequireComponent(typeof(AudioSource))]
 public class PlayerControl : MonoBehaviour
 {
-    private enum SoundType
-    {
-        gravel,
-        metal
-    }
-
-    private PlayerControl.SoundType soundType;
-    public AudioClip[] footstepAudioClips;
-    private AudioSource audio;
-
-    private bool[] keys;
-    bool keyIsDown;
-    bool keyAlreadyDown;
-    int audioIndex;
-
     private GameObject gameManager;
 
     // Simple Walk
@@ -46,32 +31,12 @@ public class PlayerControl : MonoBehaviour
     public float cameraRange = 80.0f;
     public GameObject cameraRotate;
 
-    public AudioManagerHandler amH;
-
-
     // Use this for initialization
     void Start()
     {
-        gameManager = GameObject.Find("GameManager"); 
+        gameManager = GameObject.Find("GameManager");
 
         rb = GetComponent<Rigidbody>();
-
-        this.soundType = PlayerControl.SoundType.gravel;
-        if (this.soundType == PlayerControl.SoundType.gravel)
-        {
-            this.audioIndex = 0;
-        }
-        else if (this.soundType == PlayerControl.SoundType.metal)
-        {
-            this.audioIndex = 4;
-        }
-        this.audio = base.GetComponent<AudioSource>();
-        this.audio.clip = this.footstepAudioClips[this.audioIndex];
-
-        //amH = GameObject.FindGameObjectWithTag("audioManagerHandler").GetComponent<AudioManagerHandler>();
-        //amH.audioManagerInstance.audioSource = gameObject.GetComponent<AudioSource>();
-        //amH.audioManagerInstance.SetCurrentFootSteps(AudioManager.FootStepTypes.gravel);
-        //amH.audioManagerInstance.audioSource.clip = amH.audioManagerInstance.footStepAudioClips[amH.audioManagerInstance.audioIndex];
     }
 
     // Update is called once per frame
@@ -123,8 +88,6 @@ public class PlayerControl : MonoBehaviour
 
         transform.Rotate(0, Xaxis, 0);
         cameraRotate.transform.localEulerAngles = new Vector3(Yaxis, 0, 0);
-
-        tempAudio();
     }
 
     // Setting jump if player is on ground or not
@@ -143,57 +106,6 @@ public class PlayerControl : MonoBehaviour
         {
 
             grounded = false;
-        }
-    }
-
-    void tempAudio()
-    {
-        this.keys = new bool[]
-            {
-                Input.GetKey(KeyCode.W),
-                Input.GetKey(KeyCode.A),
-                Input.GetKey(KeyCode.S),
-                Input.GetKey(KeyCode.D)
-            };
-        if (this.keys[0] || this.keys[1] || this.keys[2] || this.keys[3])
-        {
-            this.keyIsDown = true;
-            if (!this.audio.isPlaying)
-            {
-                if (this.soundType == PlayerControl.SoundType.gravel)
-                {
-                    if (this.audioIndex > 3)
-                    {
-                        this.audioIndex = 0;
-                    }
-                }
-                else if (this.soundType == PlayerControl.SoundType.metal && this.audioIndex > 7)
-                {
-                    this.audioIndex = 4;
-                }
-                this.audio.clip = this.footstepAudioClips[this.audioIndex];
-                this.audio.Play();
-                this.audioIndex++;
-            }
-        }
-        if (this.keyIsDown && !this.keyAlreadyDown)
-        {
-            this.keyAlreadyDown = true;
-        }
-        if (!this.keys[0] && !this.keys[1] && !this.keys[2] && !this.keys[3] && this.keyAlreadyDown)
-        {
-            this.audio.Stop();
-            if (this.soundType == PlayerControl.SoundType.gravel)
-            {
-                this.audioIndex = 0;
-            }
-            else if (this.soundType == PlayerControl.SoundType.metal)
-            {
-                this.audioIndex = 4;
-            }
-            this.audio.clip = this.footstepAudioClips[this.audioIndex];
-            this.keyIsDown = false;
-            this.keyAlreadyDown = false;
         }
     }
 
