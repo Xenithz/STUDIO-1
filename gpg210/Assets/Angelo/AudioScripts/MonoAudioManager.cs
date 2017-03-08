@@ -45,6 +45,7 @@ public class MonoAudioManager : MonoBehaviour
 
     private void Update()
     {
+        //Bool array to track key presses
         this.keys = new bool[]
             {
                 Input.GetKey(KeyCode.W),
@@ -52,18 +53,25 @@ public class MonoAudioManager : MonoBehaviour
                 Input.GetKey(KeyCode.S),
                 Input.GetKey(KeyCode.D)
             };
+        //If pressing key
         if (this.keys[0] || this.keys[1] || this.keys[2] || this.keys[3])
         {
+            //Set bool for checking if the key is down to true
             this.keyIsDown = true;
+            
+            //Check if the audio is not playing
             if (!this.audioSourceForPlayer.isPlaying)
             {
+                //if its gravel
                 if (this.soundType == SoundType.gravel)
                 {
+                    //set to hardcoded value
                     if (this.audioIndex > 3)
                     {
                         this.audioIndex = 0;
                     }
                 }
+
                 else if (this.soundType == SoundType.metal && this.audioIndex > 7)
                 {
                     this.audioIndex = 4;

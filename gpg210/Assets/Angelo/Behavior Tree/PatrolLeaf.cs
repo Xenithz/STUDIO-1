@@ -18,6 +18,7 @@ public class PatrolLeaf : Node
 
     public override void NodeBehavior()
     {
+        Debug.Log("I am patrolling");
         //Update the rotation speed for smoothness
         this.NodeHandler.RotationSpeed = 3f * Time.deltaTime;
 
@@ -61,5 +62,7 @@ public class PatrolLeaf : Node
             //Reset it
             this.NodeHandler.PatrolIncrementer = 0;
         }
+
+        this.SetNodeStatus(NodeStates.running);
     }
 }

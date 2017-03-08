@@ -20,6 +20,7 @@ public class ChaseLeaf : Node
         if (this.NodeHandler.AgentHasSightOfPlayer == true && this.NodeHandler.IsInTrigger == false)
         {
             Debug.Log("CAN SEE");
+            Debug.Log(this.NodeHandler.AgentHasSightOfPlayer);
             //Continously update the speed
             this.NodeHandler.RotationSpeed = 3f * Time.deltaTime;
 

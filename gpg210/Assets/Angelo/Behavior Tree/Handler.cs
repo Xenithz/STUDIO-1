@@ -372,6 +372,7 @@ public class Handler : MonoBehaviour
 
             //Set the intrigger variable to true
             isInTrigger = true;
+            Debug.Log("IM IN");
         }
         else
         {
