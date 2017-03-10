@@ -19,28 +19,27 @@ public class ChaseLeaf : Node
     {
         if (this.NodeHandler.AgentHasSightOfPlayer == true && this.NodeHandler.IsInTrigger == false)
         {
-            Debug.Log("CAN SEE");
-            Debug.Log(this.NodeHandler.AgentHasSightOfPlayer);
-            //Continously update the speed
-            this.NodeHandler.RotationSpeed = 3f * Time.deltaTime;
+            this.NodeHandler.DesiredVelocityForChasing = Vector3.Normalize(this.NodeHandler.Player.transform.position - this.NodeHandler.transform.position) * this.NodeHandler.MaxVelocityForChase;
 
-            //Create a new quaternion with the specified direction
-            Quaternion lookAt = Quaternion.LookRotation(this.NodeHandler.DirectionBetweenEnemyAndPlayer);
+            this.NodeHandler.SteeringForChase = this.NodeHandler.DesiredVelocityForChasing - this.NodeHandler.AgentRigidBody.velocity;
 
-            //Lerp the rotation of the NodeHandler towards the lookAt quaternion using the specified RotationSpeed
-            this.NodeHandler.transform.rotation = Quaternion.Lerp(this.NodeHandler.transform.rotation, lookAt, this.NodeHandler.RotationSpeed);
+            this.NodeHandler.SteeringForChase = Vector3.ClampMagnitude(this.NodeHandler.SteeringForChase, this.NodeHandler.MaxForceForChase);
 
-            //The desired velocity is calculated by normalizing the magnitude and multiplying it by the maximum velocity
-            this.NodeHandler.DesiredVelocityForPatrolling = Vector3.Normalize(this.NodeHandler.Player.transform.position - this.NodeHandler.transform.position) * this.NodeHandler.MaxVelocityForPatrol;
+            this.NodeHandler.SteeringForChase = this.NodeHandler.SteeringForChase / this.NodeHandler.AgentRigidBody.mass;
 
-            //Create the steering force by minusing the current velocity from the desired velocity
-            this.NodeHandler.SteeringForPatrol = this.NodeHandler.DesiredVelocityForPatrolling - this.NodeHandler.AgentRigidBody.velocity;
+            this.NodeHandler.AgentRigidBody.velocity = Vector3.ClampMagnitude(this.NodeHandler.AgentRigidBody.velocity + this.NodeHandler.SteeringForChase, this.NodeHandler.MaxSpeedForChase);
 
-            //Add the force to the rigid body to get movemement
-            this.NodeHandler.AgentRigidBody.AddForce(this.NodeHandler.SteeringForPatrol);
+            this.NodeHandler.transform.position = this.NodeHandler.transform.position + this.NodeHandler.AgentRigidBody.velocity;
 
-            //Clamp the magnitude of the velocity so that it does not exceed the maximum velocity
-            this.NodeHandler.AgentRigidBody.velocity = Vector3.ClampMagnitude(this.NodeHandler.AgentRigidBody.velocity, this.NodeHandler.MaxVelocityForPatrol);
+            this.NodeHandler.DirectionForRotation = this.NodeHandler.Player.transform.position - this.NodeHandler.transform.position;
+
+            this.NodeHandler.RotationSpeed = 2f * Time.deltaTime;
+
+            this.NodeHandler.DirectionForRotationToSet = Vector3.RotateTowards(this.NodeHandler.transform.forward, this.NodeHandler.DirectionForRotation, this.NodeHandler.RotationSpeed, 0);
+
+            Quaternion lookAt = Quaternion.LookRotation(this.NodeHandler.DirectionForRotationToSet);
+
+            this.NodeHandler.transform.rotation = lookAt;
 
             //Set the node status to running
             SetNodeStatus(NodeStates.running);

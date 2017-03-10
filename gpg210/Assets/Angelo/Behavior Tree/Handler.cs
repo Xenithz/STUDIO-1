@@ -9,6 +9,7 @@ public class Handler : MonoBehaviour
         All nodes will be added in the awake function. After all nodes are added, the class will be added to the enemy prefab
     */
 
+    #region All variables
     //Create an object of class BehaviorTree
     private BehaviorTree test;
 
@@ -30,8 +31,10 @@ public class Handler : MonoBehaviour
         }
     }
 
+    //agentRigidBody stores a reference for the rigidbody attached to the handler gameobject
     private Rigidbody agentRigidBody;
 
+    //AgentRigidbody allows agentRigidBody to stay as a private variable
     public Rigidbody AgentRigidBody
     {
         get
@@ -62,8 +65,10 @@ public class Handler : MonoBehaviour
         }
     }
 
+    //Used to check if the agent has sight of the player
     private bool agentHasSightOfPlayer;
 
+    //Property to keep agentHasSightOfPlayer private
     public bool AgentHasSightOfPlayer
     {
         get
@@ -198,6 +203,81 @@ public class Handler : MonoBehaviour
         }
     }
 
+    private float maxVelocityForChase;
+
+    public float MaxVelocityForChase
+    {
+        get
+        {
+            return maxVelocityForChase;
+        }
+
+        set
+        {
+            maxVelocityForChase = value;
+        }
+    }
+
+    private float maxForceForChase;
+
+    public float MaxForceForChase
+    {
+        get
+        {
+            return maxForceForChase;
+        }
+
+        set
+        {
+            maxForceForChase = value;
+        }
+    }
+
+    private float maxForceForPatrol;
+
+    public float MaxForceForPatrol
+    {
+        get
+        {
+            return maxForceForPatrol;
+        }
+
+        set
+        {
+            maxForceForPatrol = value;
+        }
+    }
+
+    private float maxSpeedForChase;
+
+    public float MaxSpeedForChase
+    {
+        get
+        {
+            return maxSpeedForChase;
+        }
+
+        set
+        {
+            maxSpeedForChase = value;
+        }
+    }
+
+    private float maxSpeedForPatrol;
+
+    public float MaxSpeedForPatrol
+    {
+        get
+        {
+            return maxSpeedForPatrol;
+        }
+
+        set
+        {
+            maxSpeedForPatrol = value;
+        }
+    }
+
     //distanceFromAgentToWaypoint will store the distance from the agent to the waypoint in the patrol leaf
     private float distanceFromAgentToWaypoint;
 
@@ -267,6 +347,21 @@ public class Handler : MonoBehaviour
         }
     }
 
+    private Vector3 steeringForChase;
+
+    public Vector3 SteeringForChase
+    {
+        get
+        {
+            return steeringForChase;
+        }
+
+        set
+        {
+            steeringForChase = value;
+        }
+    }
+
     //desiredVelocityForPatrolling stores the desired velocity for patrolling (normalization of magnitude of direction multiplied by the max velocity)
     private Vector3 desiredVelocityForPatrolling;
 
@@ -281,6 +376,51 @@ public class Handler : MonoBehaviour
         set
         {
             desiredVelocityForPatrolling = value;
+        }
+    }
+
+    private Vector3 desiredVelocityForChasing;
+
+    public Vector3 DesiredVelocityForChasing
+    {
+        get
+        {
+            return desiredVelocityForChasing;
+        }
+
+        set
+        {
+            desiredVelocityForChasing = value;
+        }
+    }
+
+    private Vector3 directionForRotation;
+
+    public Vector3 DirectionForRotation
+    {
+        get
+        {
+            return directionForRotation;
+        }
+
+        set
+        {
+            directionForRotation = value;
+        }
+    }
+
+    private Vector3 directionForRotationToSet;
+
+    public Vector3 DirectionForRotationToSet
+    {
+        get
+        {
+            return directionForRotationToSet;
+        }
+
+        set
+        {
+            directionForRotationToSet = value;
         }
     }
 
@@ -320,6 +460,7 @@ public class Handler : MonoBehaviour
 
     //patrolWaypoints list will store all the waypoints for the A.I
     public List<Transform> patrolWaypoints = new List<Transform>();
+    #endregion
 
     private void Awake()
     {
