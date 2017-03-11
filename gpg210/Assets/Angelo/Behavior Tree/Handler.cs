@@ -187,7 +187,7 @@ public class Handler : MonoBehaviour
     }
 
     //The maximum velocity to be used for clamping 
-    private float maxVelocityForPatrol = 3;
+    private float maxVelocityForPatrol = 0.1f;
 
     //allows the maxVelocityForPatrol to be kept private
     public float MaxVelocityForPatrol
@@ -203,7 +203,7 @@ public class Handler : MonoBehaviour
         }
     }
 
-    private float maxVelocityForChase;
+    private float maxVelocityForChase = 0.1f;
 
     public float MaxVelocityForChase
     {
@@ -218,7 +218,7 @@ public class Handler : MonoBehaviour
         }
     }
 
-    private float maxForceForChase;
+    private float maxForceForChase = 0.1f;
 
     public float MaxForceForChase
     {
@@ -233,7 +233,7 @@ public class Handler : MonoBehaviour
         }
     }
 
-    private float maxForceForPatrol;
+    private float maxForceForPatrol = 0.1f;
 
     public float MaxForceForPatrol
     {
@@ -248,7 +248,7 @@ public class Handler : MonoBehaviour
         }
     }
 
-    private float maxSpeedForChase;
+    private float maxSpeedForChase = 0.1f;
 
     public float MaxSpeedForChase
     {
@@ -263,7 +263,7 @@ public class Handler : MonoBehaviour
         }
     }
 
-    private float maxSpeedForPatrol;
+    private float maxSpeedForPatrol = 0.1f;
 
     public float MaxSpeedForPatrol
     {
@@ -513,7 +513,6 @@ public class Handler : MonoBehaviour
 
             //Set the intrigger variable to true
             isInTrigger = true;
-            Debug.Log("IM IN");
         }
         else
         {

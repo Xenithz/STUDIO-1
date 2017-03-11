@@ -20,6 +20,8 @@ public class PatrolLeaf : Node
     {
         this.NodeHandler.PatrolTargetTransform = this.NodeHandler.patrolWaypoints[this.NodeHandler.PatrolIncrementer];
 
+        this.NodeHandler.DistanceFromAgentToWaypoint = Vector3.Distance(this.NodeHandler.transform.position, this.NodeHandler.PatrolTargetTransform.position);
+
         this.NodeHandler.DesiredVelocityForPatrolling = Vector3.Normalize(this.NodeHandler.PatrolTargetTransform.position - this.NodeHandler.transform.position) * this.NodeHandler.MaxVelocityForPatrol;
 
         this.NodeHandler.SteeringForPatrol = this.NodeHandler.DesiredVelocityForPatrolling - this.NodeHandler.AgentRigidBody.velocity;
@@ -43,7 +45,7 @@ public class PatrolLeaf : Node
         this.NodeHandler.transform.rotation = lookAt;
 
         //Check if the Agent is close to the waypoint
-        if (this.NodeHandler.DistanceFromAgentToWaypoint < 2f)
+        if (this.NodeHandler.DistanceFromAgentToWaypoint < 1f )
         {
             //Move to the next waypoint
             this.NodeHandler.PatrolIncrementer++;

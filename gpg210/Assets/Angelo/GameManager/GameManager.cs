@@ -44,6 +44,8 @@ public class GameManager
         phase4
     }
 
+    public List<GameObject> eventList = new List<GameObject>();
+
     //Tracks the current player state
     public PlayerGameState currentPlayerState;
 
@@ -75,6 +77,7 @@ public class GameManager
         this.currentPlayerState = desiredState;
     }
 
+    #region Pause Functions
     //Set the pause state
     public void SetPauseState(PauseState desiredPauseState)
     {
@@ -130,4 +133,5 @@ public class GameManager
         //Deactivate the pause menu canvas
         pauseMenuCanvas.SetActive(false);
     }
+    #endregion
 }

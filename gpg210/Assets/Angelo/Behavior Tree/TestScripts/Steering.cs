@@ -20,6 +20,8 @@ public class Steering : MonoBehaviour
     public List<Transform> wayPoints = new List<Transform>();
     public int i = 0;
 
+    public float distanceFromAgentToWaypoint;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -28,10 +30,11 @@ public class Steering : MonoBehaviour
     private void FixedUpdate()
     {
         currentTarget = wayPoints[i];
+        distanceFromAgentToWaypoint = Vector3.Distance(this.transform.position, currentTarget.position);
         Move();
         Rotate();
 
-        if (Input.GetKeyDown(KeyCode.I))
+        if (distanceFromAgentToWaypoint < 2)
         {
             i++;
         }
@@ -56,7 +59,7 @@ public class Steering : MonoBehaviour
     private void Rotate()
     {
         direction = currentTarget.position - transform.position;
-        rotationSpeed = 2 * Time.deltaTime ;
+        rotationSpeed = 2.5f * Time.deltaTime ;
         directionToSet = Vector3.RotateTowards(transform.forward, direction, rotationSpeed, 0);
         Quaternion lookAt = Quaternion.LookRotation(directionToSet);
         transform.rotation = lookAt;

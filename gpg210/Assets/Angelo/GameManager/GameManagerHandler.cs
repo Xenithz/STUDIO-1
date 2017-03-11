@@ -12,6 +12,8 @@ public class GameManagerHandler : MonoBehaviour
     //Create object of the game manager class
     public GameManager gameManagerInstance;
 
+    public List<GameObject> handlerEventList = new List<GameObject>();
+
     private void Awake()
     {
         //Set this object to the static instance of the game manager
@@ -19,6 +21,8 @@ public class GameManagerHandler : MonoBehaviour
         
         //Unpause the game when starting the game
         gameManagerInstance.SetPauseState(GameManager.PauseState.unpaused);
+
+        gameManagerInstance.eventList.AddRange(handlerEventList);
     }
 
     private void Update()

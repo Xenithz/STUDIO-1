@@ -15,7 +15,6 @@ public class OpenDoorLeaf : Node
     {
        if(this.NodeHandler.IsInTrigger == true)
         {
-            //Update the door timer
             this.NodeHandler.DoorOpenTimer += Time.deltaTime;
 
             SetNodeStatus(NodeStates.running);
@@ -24,6 +23,9 @@ public class OpenDoorLeaf : Node
             {
                 this.NodeHandler.DoorCollider.gameObject.GetComponentInParent<MonoItem>().CurrentBehavior();
                 this.NodeHandler.DoorOpenTimer = 0f;
+                this.NodeHandler.DoorCollider.gameObject.SetActive(false);
+                this.NodeHandler.IsInTrigger = false;
+
                 SetNodeStatus(NodeStates.success);
             }
         }

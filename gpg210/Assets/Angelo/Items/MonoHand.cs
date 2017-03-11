@@ -27,6 +27,16 @@ public class MonoHand : MonoBehaviour
     //itemList will store all the items inside the game scene
     public List<GameObject> itemList;
 
+    public Transform targetEventTransform;
+
+    public Vector3 directionFromPlayerToEvent;
+
+    public float angleEvent;
+
+    public float distanceFromPlayerToEvent;
+
+    public List<GameObject> handEventList;
+
     private void Awake()
     {
         //On awake instantiate the itemList as a list of GameObjects
@@ -34,6 +44,8 @@ public class MonoHand : MonoBehaviour
 
         //Add all the GameObjects with the tag item to the itemList
         itemList.AddRange(GameObject.FindGameObjectsWithTag("item"));
+
+        handEventList.AddRange(GameObject.FindGameObjectsWithTag("handEvent"));
     }
 
     private void Update()
@@ -42,6 +54,12 @@ public class MonoHand : MonoBehaviour
         itemList.Sort(delegate (GameObject a, GameObject b)
         {
             //Compare the distance of object A (relative to the transform of the hand) to the distance of object b (relative to the distance of the transform of the hand)
+            return Vector3.Distance(this.transform.position, a.transform.position)
+            .CompareTo(Vector3.Distance(this.transform.position, b.transform.position));
+        });
+
+        handEventList.Sort(delegate (GameObject a, GameObject b)
+        {
             return Vector3.Distance(this.transform.position, a.transform.position)
             .CompareTo(Vector3.Distance(this.transform.position, b.transform.position));
         });
@@ -61,7 +79,6 @@ public class MonoHand : MonoBehaviour
         //Debug for line
         Debug.DrawLine(transform.position, transform.position + directionFromPlayerToItem * 5, Color.red, 0.5f);
 
-        Debug.Log(angle);
         //Check if the distance is smaller than 4, and the angle is smaller than 40
         if(distanceFromPlayerToItem < 3.5f && angle <= 60f)
         {
@@ -70,6 +87,27 @@ public class MonoHand : MonoBehaviour
             {
                 //Call the currentBehavior of the item
                 targetTransform.gameObject.GetComponent<MonoItem>().CurrentBehavior();
+
+                if(targetTransform.FindChild("Cube").gameObject.activeInHierarchy == false)
+                {
+                    targetTransform.Find("Cube").gameObject.SetActive(true);
+                }
+            }
+        }
+
+        targetEventTransform = handEventList[0].transform;
+
+        directionFromPlayerToEvent = Vector3.Normalize(targetEventTransform.position - transform.position);
+
+        distanceFromPlayerToEvent = Vector3.Distance(targetEventTransform.position, transform.position);
+
+        angleEvent = Vector3.Angle(directionFromPlayerToEvent, transform.forward);
+
+        if(distanceFromPlayerToEvent < 2.5f && angle <= 60f)
+        {
+            if(Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.E))
+            {
+                targetEventTransform.gameObject.GetComponent<MonoEvent>().EventBehavior();
             }
         }
     }

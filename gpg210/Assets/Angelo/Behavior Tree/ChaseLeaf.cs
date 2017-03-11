@@ -53,14 +53,12 @@ public class ChaseLeaf : Node
 
             if(this.NodeHandler.AgentHasSightOfPlayer == true && this.NodeHandler.IsInTrigger == true)
             {
-                Debug.Log("using this");
                 SetNodeStatus(NodeStates.success);
             }
         }
 
         else
         {
-            Debug.Log("this is failing");
             SetNodeStatus(NodeStates.failed);
         }
     }
