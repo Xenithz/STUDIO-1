@@ -153,7 +153,7 @@ public class Handler : MonoBehaviour
     }
 
     //enemyFieldOfView will contain the fixed FOV of the enemy(can only see the player in that angle)
-    private float enemyFieldOfView = 100f;
+    private float enemyFieldOfView = 114f;
 
     //allows the enemyFieldOfView variable to be kept private
     public float EnemyFieldOfView

@@ -17,7 +17,7 @@ public class ChaseLeaf : Node
 
     public override void NodeBehavior()
     {
-        if (this.NodeHandler.AgentHasSightOfPlayer == true && this.NodeHandler.IsInTrigger == false)
+        if (this.NodeHandler.AgentHasSightOfPlayer == true && this.NodeHandler.IsInTrigger == false && this.NodeHandler.DistanceToPlayer < 5f)
         {
             this.NodeHandler.DesiredVelocityForChasing = Vector3.Normalize(this.NodeHandler.Player.transform.position - this.NodeHandler.transform.position) * this.NodeHandler.MaxVelocityForChase;
 
