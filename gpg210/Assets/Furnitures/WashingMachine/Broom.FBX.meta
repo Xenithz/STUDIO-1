@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: a488ccb57e173d34ea5df8952ca9546e
-timeCreated: 1486258467
+guid: f273766b35533c54da0f65ee2c6e5baf
+timeCreated: 1489284435
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -9,7 +9,8 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Box028
+    4300000: Broom
+    9500000: //RootNode
   materials:
     importMaterials: 1
     materialName: 0
@@ -72,7 +73,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 0
+  animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
