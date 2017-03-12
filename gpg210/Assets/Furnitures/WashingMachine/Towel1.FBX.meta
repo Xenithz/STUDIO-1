@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 4e937a733d9ba1a4aa3cb2842bc3c429
-timeCreated: 1486258491
+guid: b0223d36d26d8f54389ffae16e53f411
+timeCreated: 1489283813
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -9,7 +9,8 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Line002
+    4300000: towel1
+    9500000: //RootNode
   materials:
     importMaterials: 1
     materialName: 0
@@ -72,7 +73,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 0
+  animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
   userData: 

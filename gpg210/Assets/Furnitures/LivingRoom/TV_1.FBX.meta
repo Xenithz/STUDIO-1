@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 03eb4e6d43cea464c8ff47174555d463
-timeCreated: 1486501385
+guid: 8646b5d0b4e2d4644a24d6c71f690e65
+timeCreated: 1489268090
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -9,7 +9,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Cylinder003
+    4300000: TV_2
   materials:
     importMaterials: 1
     materialName: 0
