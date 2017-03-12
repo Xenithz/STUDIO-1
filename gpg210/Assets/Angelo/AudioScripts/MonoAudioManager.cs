@@ -18,13 +18,13 @@ public class MonoAudioManager : MonoBehaviour
 
     private int audioIndex;
 
-    private enum SoundType
+    public enum SoundType
     {
         gravel,
         metal
     }
 
-    private SoundType soundType;
+    public SoundType soundType;
 
     private void Awake()
     {
