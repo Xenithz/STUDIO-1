@@ -106,7 +106,6 @@ public class MonoAudioManager : MonoBehaviour
     {
         if(other.gameObject.tag == "audioTrigger")
         {
-            Debug.Log("troll");
             EnvironmentCue(0, other);
         }
     }
