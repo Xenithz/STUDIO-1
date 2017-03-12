@@ -18,13 +18,13 @@ public class MonoAudioManager : MonoBehaviour
 
     private int audioIndex;
 
-    private enum SoundType
+    public enum SoundType
     {
         gravel,
         metal
     }
 
-    private SoundType soundType;
+    public SoundType soundType;
 
     private void Awake()
     {
@@ -106,7 +106,6 @@ public class MonoAudioManager : MonoBehaviour
     {
         if(other.gameObject.tag == "audioTrigger")
         {
-            Debug.Log("troll");
             EnvironmentCue(0, other);
         }
     }
