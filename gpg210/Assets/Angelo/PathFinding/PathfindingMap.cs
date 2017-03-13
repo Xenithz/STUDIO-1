@@ -2,15 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PathfindingMap : MonoBehaviour {
+public class PathfindingMap : MonoBehaviour
+{
+    public List<GameObject> map = new List<GameObject>();
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    private void Awake()
+    {
+        CreateMap();
+    }
+
+    private void CreateMap()
+    {
+        map.AddRange(GameObject.FindGameObjectsWithTag("node"));
+    }
+
+    private void Update()
+    {
+
+    }
 }

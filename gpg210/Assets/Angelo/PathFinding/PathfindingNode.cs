@@ -2,15 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PathfindingNode : MonoBehaviour {
+public class PathfindingNode : MonoBehaviour
+{
+    public int gCost;
+    public int hCost;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public int fCost
+    {
+        get
+        {
+            return gCost + hCost;
+        }
+    }
+
+    public List<GameObject> linkedNodes = new List<GameObject>();
 }
