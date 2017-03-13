@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PathfindingNode : MonoBehaviour
+public class PathfindingNode
 {
     public int gCost;
     public int hCost;
@@ -15,5 +15,20 @@ public class PathfindingNode : MonoBehaviour
         }
     }
 
-    public List<GameObject> linkedNodes = new List<GameObject>();
+    public List<PathfindingNode> linkedNodes = new List<PathfindingNode>();
+
+    public Transform nodeTransform;
+
+    public string nodeName;
+
+    public PathfindingNode(Transform setNodeTransform)
+    {
+        this.nodeTransform = setNodeTransform;
+        this.nodeName = setNodeTransform.gameObject.name;
+    }
+
+    public void AddLinkedNode(PathfindingNode nodeToAdd)
+    {
+        this.linkedNodes.Add(nodeToAdd);
+    }
 }
