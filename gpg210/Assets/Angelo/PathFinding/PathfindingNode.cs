@@ -19,12 +19,11 @@ public class PathfindingNode
 
     public Transform nodeTransform;
 
-    public string nodeName;
+    public PathfindingNode parent;
 
     public PathfindingNode(Transform setNodeTransform)
     {
         this.nodeTransform = setNodeTransform;
-        this.nodeName = setNodeTransform.gameObject.name;
     }
 
     public void AddLinkedNode(PathfindingNode nodeToAdd)
