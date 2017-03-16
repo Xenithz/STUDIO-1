@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class PathfindingNode
 {
-    public int gCost;
-    public int hCost;
+    public float gCost;
+    public float hCost;
 
-    public int fCost
+    public float fCost
     {
         get
         {
