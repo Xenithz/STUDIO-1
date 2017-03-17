@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Angelo/TestingScenes/PathFindingTest.unity
+- path: Assets/Angelo/TestingScenes/BehaviorTreeFinalTest.unity
   isLoaded: 1
   isActive: 1

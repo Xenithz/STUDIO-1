@@ -13,6 +13,22 @@ public class Handler : MonoBehaviour
     //Create an object of class BehaviorTree
     private BehaviorTree test;
 
+    [SerializeField]
+    private Animator anim;
+
+    public Animator Anim
+    {
+        get
+        {
+            return anim;
+        }
+
+        set
+        {
+            anim = value;
+        }
+    }
+
     //Get a reference for the player in the scene
     [SerializeField]
     private GameObject player;

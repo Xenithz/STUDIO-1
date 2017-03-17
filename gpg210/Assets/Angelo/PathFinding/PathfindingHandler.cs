@@ -96,7 +96,6 @@ public class PathfindingHandler : MonoBehaviour
                     u = u.parent;
                 }
 
-                Debug.Log(transforms.Peek());
                 return transforms.Peek();
             }
 
@@ -141,25 +140,4 @@ public class PathfindingHandler : MonoBehaviour
 
         return temporaryList[0];
     }
-
-    //public bool AmIAtNode(Transform desiredTransform)
-    //{
-    //    List<PathfindingNode> listForSorting = new List<PathfindingNode>();
-    //    listForSorting.AddRange(map);
-
-    //    listForSorting.Sort(delegate (PathfindingNode a, PathfindingNode b)
-    //    {
-    //        return Vector3.Distance(desiredTransform.position, a.nodeTransform.position).CompareTo(Vector3.Distance(desiredTransform.position, b.nodeTransform.position));
-    //    });
-
-    //    if(Vector3.Distance(desiredTransform.position, listForSorting[0].nodeTransform.position) < 1)
-    //    {
-    //        return true;
-    //    }
-
-    //    else
-    //    {
-    //        return false;
-    //    }
-    //}
 }
