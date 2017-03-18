@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/Final_Complete_Build.unity
+- path: Assets/Scenes/Global_Illumination_Test.unity
   isLoaded: 1
   isActive: 1
