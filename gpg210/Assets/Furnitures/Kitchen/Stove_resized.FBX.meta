@@ -1,0 +1,144 @@
+fileFormatVersion: 2
+guid: f09cf13c7cd3adf428ec6e152e371bdd
+timeCreated: 1489777813
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: burner 1
+    100002: burner 2
+    100004: burner 3
+    100006: burner 4
+    100008: nob 1
+    100010: nob 2
+    100012: nob 3
+    100014: nob 4
+    100016: nob 5
+    100018: nob 6
+    100020: oven glass
+    100022: oven handle
+    100024: stove 1
+    100026: stove machine
+    100028: //RootNode
+    400000: burner 1
+    400002: burner 2
+    400004: burner 3
+    400006: burner 4
+    400008: nob 1
+    400010: nob 2
+    400012: nob 3
+    400014: nob 4
+    400016: nob 5
+    400018: nob 6
+    400020: oven glass
+    400022: oven handle
+    400024: stove 1
+    400026: stove machine
+    400028: //RootNode
+    2300000: burner 1
+    2300002: burner 2
+    2300004: burner 3
+    2300006: burner 4
+    2300008: nob 1
+    2300010: nob 2
+    2300012: nob 3
+    2300014: nob 4
+    2300016: nob 5
+    2300018: nob 6
+    2300020: oven glass
+    2300022: oven handle
+    2300024: stove machine
+    3300000: burner 1
+    3300002: burner 2
+    3300004: burner 3
+    3300006: burner 4
+    3300008: nob 1
+    3300010: nob 2
+    3300012: nob 3
+    3300014: nob 4
+    3300016: nob 5
+    3300018: nob 6
+    3300020: oven glass
+    3300022: oven handle
+    3300024: stove machine
+    4300000: oven glass
+    4300002: stove machine
+    4300004: oven handle
+    4300006: nob 2
+    4300008: nob 1
+    4300010: nob 3
+    4300012: nob 4
+    4300014: nob 5
+    4300016: nob 6
+    4300018: burner 4
+    4300020: burner 3
+    4300022: burner 1
+    4300024: burner 2
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
