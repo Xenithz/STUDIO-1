@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/Global_Illumination_Test.unity
+- path: Assets/Angelo/TestingScenes/EventsTestingScene.unity
   isLoaded: 1
   isActive: 1

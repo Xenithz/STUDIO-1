@@ -19,6 +19,7 @@ public class ChaseLeaf : Node
     {
         if (this.NodeHandler.AgentHasSightOfPlayer == true && this.NodeHandler.IsInTrigger == false && this.NodeHandler.DistanceToPlayer < 5f)
         {
+            Debug.Log("chasing");
             this.NodeHandler.Anim.SetBool("iswWalking", true);
 
             this.NodeHandler.DesiredVelocityForChasing = Vector3.Normalize(this.NodeHandler.Player.transform.position - this.NodeHandler.transform.position) * this.NodeHandler.MaxVelocityForChase;
