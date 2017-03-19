@@ -31,8 +31,10 @@ public class PathfindingTest : MonoBehaviour
     {
         speed = 2 * Time.deltaTime;
         road = path.CreateAPath(transform, target);
-        Move();
-        Rotate();
+        //Move();
+        //Rotate();
+        Debug.DrawLine(transform.position, road.position, Color.red);
+        transform.Translate((road.position - transform.position).normalized * 0.1f);
     }
 
     private void Move()

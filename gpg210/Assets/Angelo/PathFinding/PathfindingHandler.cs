@@ -61,58 +61,82 @@ public class PathfindingHandler : MonoBehaviour
         //Getting closest node to start transform
         PathfindingNode startingNode = GetClosestNode(start);
 
+        Debug.Log(startingNode.nodeTransform);
+
         //Getting closest node to the end transform
         PathfindingNode endingNode = GetClosestNode(end);
 
         //Open list
-        List<PathfindingNode> q = new List<PathfindingNode>();
+        List<PathfindingNode> openList = new List<PathfindingNode>();
 
-        foreach(PathfindingNode v in map)
+        foreach(PathfindingNode node in map)
         {
             //Set the g cost to infinity
-            v.gCost = Mathf.Infinity;
+            node.gCost = Mathf.Infinity;
 
             //set the parent to null
-            v.parent = null;
+            node.parent = null;
 
             //add all the nodes to the open list
-            q.Add(v);
+            openList.Add(node);
         }
 
+
+        //Set the starting node g cost to 0
         startingNode.gCost = 0;
 
-        while(q.Count > 0)
+        while(openList.Count > 0)
         {
-            PathfindingNode u = GiveMeAnImportantNode(q);
-            q.Remove(u);
+            //Get the node with the lowest g cost inside the open list
+            PathfindingNode currentNode = GiveMeAnImportantNode(openList);
 
-            if(u == endingNode)
+            //Remove it from the open list because it is visited
+            openList.Remove(currentNode);
+
+            //Check if the node is the ending node
+            if(currentNode == endingNode)
             {
-                Stack<Transform> transforms = new Stack<Transform>();
+                //create new list for the path
+                List<Transform> path = new List<Transform>();
 
-                while(u.parent != null)
+                //If the current node is not null
+                while(currentNode != null)
                 {
-                    transforms.Push(u.nodeTransform);
-                    u = u.parent;
+                    //Add the current node to the path
+                    path.Add(currentNode.nodeTransform);
+
+                    //Retrace by going back to the parent of the current node
+                    currentNode = currentNode.parent;
                 }
 
-                return transforms.Peek();
+                //Reverse the list
+                path.Reverse();
+                float distance = Vector3.Distance(path[1].position, start.position);
+
+                if (!Physics.Raycast(start.position, Vector3.Normalize(path[1].position - start.position), distance, layer))
+                {
+                    path.Remove(path[0]);
+                }
+
+                return path[0];
             }
 
-            foreach(PathfindingNode v in u.linkedNodes)
+            foreach(PathfindingNode v in currentNode.linkedNodes)
             {
-                float alt = u.gCost + (u.nodeTransform.position - v.nodeTransform.position).magnitude;
+                float alt = currentNode.gCost + (currentNode.nodeTransform.position - v.nodeTransform.position).magnitude;
 
                 if (alt < v.gCost)
                 {
                     v.gCost = alt;
-                    v.parent = u;
+                    v.parent = currentNode;
                 }
             }
         }
 
         return null;
     }
+
+    //TODO OPTIMIZE CODE BY GETTING MIN
 
     public PathfindingNode GetClosestNode(Transform desiredTransform)
     {
@@ -126,6 +150,19 @@ public class PathfindingHandler : MonoBehaviour
 
         return listForSorting[0];
     }
+
+    //public PathfindingNode GetClosestNode2(Transform desiredTransform)
+    //{
+    //    List<PathfindingNode> listForSorting = new List<PathfindingNode>();
+    //    listForSorting.AddRange(map);
+
+    //    listForSorting.Sort(delegate (PathfindingNode a, PathfindingNode b)
+    //    {
+    //        return Vector3.Distance(desiredTransform.position, a.nodeTransform.position).CompareTo(Vector3.Distance(desiredTransform.position, b.nodeTransform.position));
+    //    });
+
+    //    return listForSorting[1];
+    //}
 
     public PathfindingNode GiveMeAnImportantNode(List<PathfindingNode> listToSort)
     {

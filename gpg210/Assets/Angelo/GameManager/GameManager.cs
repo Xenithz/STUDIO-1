@@ -105,6 +105,8 @@ public class GameManager
     //Private function to pause the game
     private void PauseGame()
     {
+        currentPauseState = PauseState.paused;
+
         //Freeze time completely
         Time.timeScale = 0;
         
@@ -115,12 +117,15 @@ public class GameManager
         Cursor.lockState = CursorLockMode.Confined;
 
         //Set the pause menu canvas to active
-        pauseMenuCanvas.SetActive(true);
+        //pauseMenuCanvas.SetActive(true);
     }
 
     //Private function to unpause the game
     private void UnPauseGame()
     {
+        currentPauseState = PauseState.unpaused;
+
+        Debug.Log("GO");
         //Continue time
         Time.timeScale = 1;
 
@@ -131,7 +136,7 @@ public class GameManager
         Cursor.lockState = CursorLockMode.Locked;
 
         //Deactivate the pause menu canvas
-        pauseMenuCanvas.SetActive(false);
+        //pauseMenuCanvas.SetActive(false);
     }
     #endregion
 }
