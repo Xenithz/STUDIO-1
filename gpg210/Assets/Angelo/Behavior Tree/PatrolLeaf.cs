@@ -18,7 +18,7 @@ public class PatrolLeaf : Node
 
     public override void NodeBehavior()
     {
-        this.NodeHandler.Anim.SetBool("isWalking", true);
+        //this.NodeHandler.Anim.SetBool("isWalking", true);
 
         this.NodeHandler.PatrolTargetTransform = this.NodeHandler.patrolWaypoints[this.NodeHandler.PatrolIncrementer];
 

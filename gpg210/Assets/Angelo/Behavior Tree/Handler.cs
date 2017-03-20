@@ -14,6 +14,21 @@ public class Handler : MonoBehaviour
     private BehaviorTree test;
 
     [SerializeField]
+    private GameManagerHandler gameMng;
+
+    public GameManagerHandler GameMng
+    {
+        get
+        {
+            return gameMng;     
+        }
+
+        set
+        {
+            gameMng = value;
+        }
+    }
+
     private Animator anim;
 
     public Animator Anim
@@ -61,6 +76,21 @@ public class Handler : MonoBehaviour
         set
         {
             agentRigidBody = value;
+        }
+    }
+
+    private bool isPaused;
+
+    public bool IsPaused
+    {
+        get
+        {
+            return isPaused;
+        }
+
+        set
+        {
+            isPaused = value;
         }
     }
 
@@ -483,6 +513,8 @@ public class Handler : MonoBehaviour
         //Set the player variable to the player in the scene
         player = GameObject.FindGameObjectWithTag("player");
 
+        gameMng = GameObject.Find("GameManager").GetComponent<GameManagerHandler>();
+
         //Set the agentRigidBody variable to the rigidbody attached to the gameobject which the handler is attached to
         agentRigidBody = gameObject.GetComponent<Rigidbody>();
 
@@ -511,11 +543,30 @@ public class Handler : MonoBehaviour
 
     private void Update()
     {
-        //Reset the nodes in the tree
-        test.MassNodeReset();
+        if(GameMng.gameManagerInstance.currentPauseState == GameManager.PauseState.paused)
+        {
+            isPaused = true;
+        }
 
-        //Run through the behaviors of the tree
-        test.RunThroughTree();
+        else if(GameMng.gameManagerInstance.currentPauseState == GameManager.PauseState.unpaused)
+        {
+            isPaused = false;
+        }
+
+        if(isPaused == false)
+        {
+            Debug.Log("working");
+            //Reset the nodes in the tree
+            test.MassNodeReset();
+
+            //Run through the behaviors of the tree
+            test.RunThroughTree();
+        }
+
+        else if (isPaused == true)
+        {
+            Debug.Log("Paused");
+        }
     }
 
     private void OnTriggerStay(Collider other)
