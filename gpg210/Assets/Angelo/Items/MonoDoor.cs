@@ -11,49 +11,13 @@ public class MonoDoor : MonoItem
     }
     //States for the door
 
-    public enum DoorType
-    {
-        front,
-        side,
-        front2,
-        side2,
-        front3,
-        side3
-    }
-
-    public DoorType thisDoorType;
-
     private State currentState;
     //Track the current state of the door
 
-    private float frontDoorOpenValue = 90f;
-    //Desired angle for door open
-
-    private float frontDoorCloseValue = 0f;
-    //Desired angle for door close
-
-    private float sideDoorOpenValue = 0f;
-
-    private float sideDoorClosedValue = 90f;
-
-    private float frontDoor2OpenValue = -90f;
-
-    private float frontDoor2CloseValue = 0;
-
-    private float sideDoor2OpenValue = 0;
-
-    private float sideDoor2CloseValue = -90;
-
-    private float frontDoor3OpenValue = 90;
-
-    private float frontDoor3CloseValue = 180;
-
-    private float sideDoor3CloseValue = -90f;
-
-    private float sideDoor3OpenValue = -180f;
-
+    [SerializeField]
     private float doorOpenValue;
 
+    [SerializeField]
     private float doorClosedValue;
 
     private float smoothing = 2f;
@@ -90,37 +54,6 @@ public class MonoDoor : MonoItem
     private void Awake()
     {
         currentState = State.closed;
-
-        if (thisDoorType == DoorType.front)
-        {
-            doorOpenValue = frontDoorOpenValue;
-            doorClosedValue = frontDoorCloseValue;
-        }
-        else if (thisDoorType == DoorType.side)
-        {
-            doorOpenValue = sideDoorOpenValue;
-            doorClosedValue = sideDoorClosedValue;
-        }
-        else if(thisDoorType == DoorType.front2)
-        {
-            doorOpenValue = frontDoor2OpenValue;
-            doorClosedValue = frontDoor2CloseValue;
-        }
-        else if(thisDoorType == DoorType.side2)
-        {
-            doorOpenValue = sideDoor2OpenValue;
-            doorClosedValue = sideDoor2CloseValue;
-        }
-        else if(thisDoorType == DoorType.front3)
-        {
-            doorOpenValue = frontDoor3OpenValue;
-            doorClosedValue = frontDoor3CloseValue;
-        }
-        else if(thisDoorType == DoorType.side3)
-        {
-            doorOpenValue = sideDoor3OpenValue;
-            doorClosedValue = sideDoor3CloseValue;
-        }
     }
 
     private void Update()

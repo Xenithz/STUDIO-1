@@ -34,20 +34,6 @@ public class GameManager
             return gameManagerInstance;
         }
     }
-    
-    //Enum to track the different states of the player for the scripted portion of the ganme
-    public enum PlayerGameState
-    {
-        phase1,
-        phase2,
-        phase3,
-        phase4
-    }
-
-    public List<GameObject> eventList = new List<GameObject>();
-
-    //Tracks the current player state
-    public PlayerGameState currentPlayerState;
 
     //Enum to contain the different states of game with relation to pausing
     public enum PauseState
@@ -55,6 +41,23 @@ public class GameManager
         unpaused,
         paused
     }
+
+    public enum GameState
+    {
+        phase1,
+        phase2,
+        phase3,
+    }
+
+    public enum ActionGate
+    {
+        shouldDo,
+        shouldNotDo
+    }
+
+    public ActionGate currentActionGate;
+
+    public GameState currentGameState;
 
     //Tracks if the game is paused or not
     public PauseState currentPauseState;
@@ -71,11 +74,33 @@ public class GameManager
         isPlayerAlive = true;
     }
 
-    //Set the current GameState of the player
-    public void SetPlayerGameState(PlayerGameState desiredState)
+    public void SetGameState(GameState desiredGameState)
     {
-        this.currentPlayerState = desiredState;
+        this.currentGameState = desiredGameState;
     }
+
+    #region ScriptedEvents Functions
+
+    public void SetGateState(ActionGate desiredGate)
+    {
+        this.currentActionGate = desiredGate;
+    }
+
+    public void FirstEvent()
+    {
+        Debug.Log("this works");
+        SetGateState(ActionGate.shouldNotDo);
+        SetGameState(GameState.phase2);
+    }
+
+    public void SecondEvent()
+    {
+        Debug.Log("I moved");
+        SetGateState(ActionGate.shouldNotDo);
+        SetGameState(GameState.phase3);
+    }
+
+    #endregion
 
     #region Pause Functions
     //Set the pause state

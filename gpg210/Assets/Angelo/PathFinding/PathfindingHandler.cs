@@ -111,12 +111,14 @@ public class PathfindingHandler : MonoBehaviour
 
                 //Reverse the list
                 path.Reverse();
+                path.Add(end);
                 float distance = Vector3.Distance(path[1].position, start.position);
 
                 if (!Physics.Raycast(start.position, Vector3.Normalize(path[1].position - start.position), distance, layer))
                 {
                     path.Remove(path[0]);
                 }
+
 
                 return path[0];
             }
