@@ -20,7 +20,8 @@ public class MonoDoor : MonoItem
     [SerializeField]
     private float doorClosedValue;
 
-    private float smoothing = 2f;
+    [SerializeField]
+    private float smoothing;
     //Desired smoothing value
 
     [SerializeField]

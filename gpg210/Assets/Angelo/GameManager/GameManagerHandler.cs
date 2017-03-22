@@ -23,7 +23,7 @@ public class GameManagerHandler : MonoBehaviour
 
         gameManagerInstance.SetGameState(GameManager.GameState.phase1);
 
-        gameManagerInstance.SetGateState(GameManager.ActionGate.shouldNotDo);
+        gameManagerInstance.SetGateState(GameManager.ActionGate.shouldDo);
     }
 
     private void Update()
@@ -39,6 +39,11 @@ public class GameManagerHandler : MonoBehaviour
         if(gameManagerInstance.currentGameState == GameManager.GameState.phase1 && gameManagerInstance.currentActionGate == GameManager.ActionGate.shouldDo)
         {
             gameManagerInstance.FirstEvent();
+        }
+
+        else if(gameManagerInstance.currentGameState == GameManager.GameState.phase2 && gameManagerInstance.currentActionGate == GameManager.ActionGate.shouldDo)
+        {
+            gameManagerInstance.SecondEvent();
         }
     }
 }

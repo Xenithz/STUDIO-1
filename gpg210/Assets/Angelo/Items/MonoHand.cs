@@ -69,11 +69,6 @@ public class MonoHand : MonoBehaviour
             {
                 //Call the currentBehavior of the item
                 targetTransform.gameObject.GetComponent<MonoItem>().CurrentBehavior();
-
-                if(targetTransform.FindChild("Cube").gameObject.activeInHierarchy == false)
-                {
-                    targetTransform.Find("Cube").gameObject.SetActive(true);
-                }
             }
         }
     }
