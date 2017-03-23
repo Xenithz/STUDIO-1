@@ -35,6 +35,8 @@ public class GameManager
         }
     }
 
+    public List<GameObject> FirstEvents = new List<GameObject>();
+
     //Enum to contain the different states of game with relation to pausing
     public enum PauseState
     {

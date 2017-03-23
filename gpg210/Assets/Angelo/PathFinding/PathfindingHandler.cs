@@ -111,18 +111,24 @@ public class PathfindingHandler : MonoBehaviour
 
                 //Reverse the list
                 path.Reverse();
+
+                //Add the target to the list
                 path.Add(end);
+
+                //Calculate the distance between the second node in the path, and the start position
                 float distance = Vector3.Distance(path[1].position, start.position);
 
+                //If the raycast returns false then remove the node from the path as it is not a viable node to be placed inside the path
                 if (!Physics.Raycast(start.position, Vector3.Normalize(path[1].position - start.position), distance, layer))
                 {
                     path.Remove(path[0]);
                 }
 
-
+                //Return the first one in the path
                 return path[0];
             }
 
+            //Iterate through the whole list of linked nodes inside each node
             foreach(PathfindingNode v in currentNode.linkedNodes)
             {
                 float alt = currentNode.gCost + (currentNode.nodeTransform.position - v.nodeTransform.position).magnitude;

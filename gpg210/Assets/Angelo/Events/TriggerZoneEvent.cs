@@ -15,7 +15,7 @@ public class TriggerZoneEvent : MonoBehaviour
 
     public void EventTrigger()
     {
-        if (doOnce == false)
+        if (doOnce == false)    
         {
             gameManager.gameManagerInstance.SetGateState(GameManager.ActionGate.shouldDo);
             doOnce = true;

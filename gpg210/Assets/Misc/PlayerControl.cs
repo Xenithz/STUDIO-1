@@ -107,6 +107,14 @@ public class PlayerControl : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("triggerEvent"))
+        {
+            other.gameObject.GetComponent<TriggerZoneEvent>().EventTrigger();
+        }
+    }
+
     public void Die()
     {
         gameManager.GetComponent<GameManagerHandler>().gameManagerInstance.PlayerHasDied();
