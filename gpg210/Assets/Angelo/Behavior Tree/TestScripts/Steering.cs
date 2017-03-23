@@ -59,7 +59,7 @@ public class Steering : MonoBehaviour
     private void Rotate()
     {
         direction = currentTarget.position - transform.position;
-        rotationSpeed = 2.5f * Time.deltaTime ;
+        rotationSpeed = 2.5f * Time.deltaTime;
         directionToSet = Vector3.RotateTowards(transform.forward, direction, rotationSpeed, 0);
         Quaternion lookAt = Quaternion.LookRotation(directionToSet);
         transform.rotation = lookAt;

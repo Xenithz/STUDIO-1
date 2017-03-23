@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManagerHandler : MonoBehaviour
 {
@@ -12,8 +13,6 @@ public class GameManagerHandler : MonoBehaviour
     //Create object of the game manager class
     public GameManager gameManagerInstance;
 
-    public List<GameObject> handlerEventList = new List<GameObject>();
-
     private void Awake()
     {
         //Set this object to the static instance of the game manager
@@ -22,7 +21,9 @@ public class GameManagerHandler : MonoBehaviour
         //Unpause the game when starting the game
         gameManagerInstance.SetPauseState(GameManager.PauseState.unpaused);
 
-        gameManagerInstance.eventList.AddRange(handlerEventList);
+        gameManagerInstance.SetGameState(GameManager.GameState.phase1);
+
+        gameManagerInstance.SetGateState(GameManager.ActionGate.shouldDo);
     }
 
     private void Update()
@@ -33,6 +34,16 @@ public class GameManagerHandler : MonoBehaviour
         if(gameManagerInstance.isPlayerAlive == true)
         {
             Debug.Log("FINISHED");
+        }
+
+        if(gameManagerInstance.currentGameState == GameManager.GameState.phase1 && gameManagerInstance.currentActionGate == GameManager.ActionGate.shouldDo)
+        {
+            gameManagerInstance.FirstEvent();
+        }
+
+        else if(gameManagerInstance.currentGameState == GameManager.GameState.phase2 && gameManagerInstance.currentActionGate == GameManager.ActionGate.shouldDo)
+        {
+            gameManagerInstance.SecondEvent();
         }
     }
 }

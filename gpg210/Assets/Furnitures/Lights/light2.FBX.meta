@@ -1,22 +1,22 @@
 fileFormatVersion: 2
-guid: 687105f070ea2e14e85943c230545027
-timeCreated: 1489285951
+guid: 605d2cb0445769446b45eb2e03bbdfff
+timeCreated: 1489887331
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: bedroom light
-    100002: bedroom light steel
-    100004: //RootNode
-    400000: bedroom light
-    400002: bedroom light steel
-    400004: //RootNode
-    2300000: bedroom light
-    2300002: bedroom light steel
-    3300000: bedroom light
-    3300002: bedroom light steel
+    100000: bedroom light steel
+    100002: //RootNode
+    100004: Object026
+    400000: bedroom light steel
+    400002: //RootNode
+    400004: Object026
+    2300000: bedroom light steel
+    2300002: Object026
+    3300000: bedroom light steel
+    3300002: Object026
     4300000: bedroom light steel
-    4300002: bedroom light
+    4300002: Object026
     9500000: //RootNode
   materials:
     importMaterials: 1

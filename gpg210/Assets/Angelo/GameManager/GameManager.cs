@@ -34,20 +34,6 @@ public class GameManager
             return gameManagerInstance;
         }
     }
-    
-    //Enum to track the different states of the player for the scripted portion of the ganme
-    public enum PlayerGameState
-    {
-        phase1,
-        phase2,
-        phase3,
-        phase4
-    }
-
-    public List<GameObject> eventList = new List<GameObject>();
-
-    //Tracks the current player state
-    public PlayerGameState currentPlayerState;
 
     //Enum to contain the different states of game with relation to pausing
     public enum PauseState
@@ -55,6 +41,23 @@ public class GameManager
         unpaused,
         paused
     }
+
+    public enum GameState
+    {
+        phase1,
+        phase2,
+        phase3,
+    }
+
+    public enum ActionGate
+    {
+        shouldDo,
+        shouldNotDo
+    }
+
+    public ActionGate currentActionGate;
+
+    public GameState currentGameState;
 
     //Tracks if the game is paused or not
     public PauseState currentPauseState;
@@ -71,11 +74,33 @@ public class GameManager
         isPlayerAlive = true;
     }
 
-    //Set the current GameState of the player
-    public void SetPlayerGameState(PlayerGameState desiredState)
+    public void SetGameState(GameState desiredGameState)
     {
-        this.currentPlayerState = desiredState;
+        this.currentGameState = desiredGameState;
     }
+
+    #region ScriptedEvents Functions
+
+    public void SetGateState(ActionGate desiredGate)
+    {
+        this.currentActionGate = desiredGate;
+    }
+
+    public void FirstEvent()
+    {
+        Debug.Log("this works");
+        SetGateState(ActionGate.shouldNotDo);
+        SetGameState(GameState.phase2);
+    }
+
+    public void SecondEvent()
+    {
+        Debug.Log("I moved");
+        SetGateState(ActionGate.shouldNotDo);
+        SetGameState(GameState.phase3);
+    }
+
+    #endregion
 
     #region Pause Functions
     //Set the pause state
@@ -105,6 +130,8 @@ public class GameManager
     //Private function to pause the game
     private void PauseGame()
     {
+        currentPauseState = PauseState.paused;
+
         //Freeze time completely
         Time.timeScale = 0;
         
@@ -115,12 +142,15 @@ public class GameManager
         Cursor.lockState = CursorLockMode.Confined;
 
         //Set the pause menu canvas to active
-        pauseMenuCanvas.SetActive(true);
+        //pauseMenuCanvas.SetActive(true);
     }
 
     //Private function to unpause the game
     private void UnPauseGame()
     {
+        currentPauseState = PauseState.unpaused;
+
+        Debug.Log("GO");
         //Continue time
         Time.timeScale = 1;
 
@@ -131,7 +161,7 @@ public class GameManager
         Cursor.lockState = CursorLockMode.Locked;
 
         //Deactivate the pause menu canvas
-        pauseMenuCanvas.SetActive(false);
+        //pauseMenuCanvas.SetActive(false);
     }
     #endregion
 }

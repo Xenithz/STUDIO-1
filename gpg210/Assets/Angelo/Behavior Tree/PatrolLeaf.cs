@@ -18,6 +18,8 @@ public class PatrolLeaf : Node
 
     public override void NodeBehavior()
     {
+        //this.NodeHandler.Anim.SetBool("isWalking", true);
+
         this.NodeHandler.PatrolTargetTransform = this.NodeHandler.patrolWaypoints[this.NodeHandler.PatrolIncrementer];
 
         this.NodeHandler.DistanceFromAgentToWaypoint = Vector3.Distance(this.NodeHandler.transform.position, this.NodeHandler.PatrolTargetTransform.position);
@@ -36,7 +38,7 @@ public class PatrolLeaf : Node
 
         this.NodeHandler.DirectionForRotation = this.NodeHandler.PatrolTargetTransform.position - this.NodeHandler.transform.position;
 
-        this.NodeHandler.RotationSpeed = 2f * Time.deltaTime;
+        this.NodeHandler.RotationSpeed = 4f * Time.deltaTime;
 
         this.NodeHandler.DirectionForRotationToSet = Vector3.RotateTowards(this.NodeHandler.transform.forward, this.NodeHandler.DirectionForRotation, this.NodeHandler.RotationSpeed, 0);
 
@@ -45,7 +47,7 @@ public class PatrolLeaf : Node
         this.NodeHandler.transform.rotation = lookAt;
 
         //Check if the Agent is close to the waypoint
-        if (this.NodeHandler.DistanceFromAgentToWaypoint < 1f )
+        if (this.NodeHandler.DistanceFromAgentToWaypoint < 0.5f )
         {
             //Move to the next waypoint
             this.NodeHandler.PatrolIncrementer++;

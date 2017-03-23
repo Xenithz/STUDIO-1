@@ -20,6 +20,9 @@ public class AttackLeaf : Node
         //Check if the distance is smaller than float 2
         if(this.NodeHandler.DistanceToPlayer < 2f)
         {
+            Debug.Log("access");
+            //this.NodeHandler.Anim.SetTrigger("shouldAttack");
+
             //Trigger the die function attached to the player
             this.NodeHandler.Player.GetComponent<PlayerControl>().Die();
             Debug.Log("DIE");
@@ -29,6 +32,7 @@ public class AttackLeaf : Node
         }
         else
         {
+            Debug.Log("cant attack");
             //Set the node state to failed
             base.SetNodeStatus(NodeStates.failed);
         }

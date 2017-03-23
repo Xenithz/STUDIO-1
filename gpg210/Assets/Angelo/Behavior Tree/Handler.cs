@@ -13,6 +13,37 @@ public class Handler : MonoBehaviour
     //Create an object of class BehaviorTree
     private BehaviorTree test;
 
+    [SerializeField]
+    private GameManagerHandler gameMng;
+
+    public GameManagerHandler GameMng
+    {
+        get
+        {
+            return gameMng;     
+        }
+
+        set
+        {
+            gameMng = value;
+        }
+    }
+
+    private Animator anim;
+
+    public Animator Anim
+    {
+        get
+        {
+            return anim;
+        }
+
+        set
+        {
+            anim = value;
+        }
+    }
+
     //Get a reference for the player in the scene
     [SerializeField]
     private GameObject player;
@@ -45,6 +76,21 @@ public class Handler : MonoBehaviour
         set
         {
             agentRigidBody = value;
+        }
+    }
+
+    private bool isPaused;
+
+    public bool IsPaused
+    {
+        get
+        {
+            return isPaused;
+        }
+
+        set
+        {
+            isPaused = value;
         }
     }
 
@@ -153,7 +199,7 @@ public class Handler : MonoBehaviour
     }
 
     //enemyFieldOfView will contain the fixed FOV of the enemy(can only see the player in that angle)
-    private float enemyFieldOfView = 114f;
+    private float enemyFieldOfView = 150f;
 
     //allows the enemyFieldOfView variable to be kept private
     public float EnemyFieldOfView
@@ -467,6 +513,8 @@ public class Handler : MonoBehaviour
         //Set the player variable to the player in the scene
         player = GameObject.FindGameObjectWithTag("player");
 
+        gameMng = GameObject.Find("GameManager").GetComponent<GameManagerHandler>();
+
         //Set the agentRigidBody variable to the rigidbody attached to the gameobject which the handler is attached to
         agentRigidBody = gameObject.GetComponent<Rigidbody>();
 
@@ -491,16 +539,34 @@ public class Handler : MonoBehaviour
         //Patrol Sequence Leaf Nodes
         test.DynamicAddNode(new OpenDoorLeaf(0, "doorPatrol", this), "patrolSequence");
         test.DynamicAddNode(new PatrolLeaf(1, "patrol", this), "patrolSequence");
-        //test.DynamicAddNode(new OpenDoorLeaf(2, "doorPatrol", this), "patrolSequence");
     }
 
     private void Update()
     {
-        //Reset the nodes in the tree
-        test.MassNodeReset();
+        if(GameMng.gameManagerInstance.currentPauseState == GameManager.PauseState.paused)
+        {
+            isPaused = true;
+        }
 
-        //Run through the behaviors of the tree
-        test.RunThroughTree();
+        else if(GameMng.gameManagerInstance.currentPauseState == GameManager.PauseState.unpaused)
+        {
+            isPaused = false;
+        }
+
+        if(isPaused == false)
+        {
+            Debug.Log("working");
+            //Reset the nodes in the tree
+            test.MassNodeReset();
+
+            //Run through the behaviors of the tree
+            test.RunThroughTree();
+        }
+
+        else if (isPaused == true)
+        {
+            Debug.Log("Paused");
+        }
     }
 
     private void OnTriggerStay(Collider other)
