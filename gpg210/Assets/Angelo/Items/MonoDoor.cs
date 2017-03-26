@@ -24,6 +24,19 @@ public class MonoDoor : MonoItem
     private float smoothing;
     //Desired smoothing value
 
+    public float Smoothing
+    {
+        get
+        {
+            return smoothing;
+        }
+
+        set
+        {
+            smoothing = value;
+        }
+    }
+
     [SerializeField]
     private bool doorIsLocked;
 
@@ -42,13 +55,16 @@ public class MonoDoor : MonoItem
 
     public override void CurrentBehavior()
     {
-        if(currentState == State.closed)
+        if(doorIsLocked == false)
         {
-            currentState = State.open;
-        }
-        else if(currentState == State.open)
-        {
-            currentState = State.closed;
+            if (currentState == State.closed)
+            {
+                currentState = State.open;
+            }
+            else if (currentState == State.open)
+            {
+                currentState = State.closed;
+            }
         }
     }
 
@@ -59,18 +75,15 @@ public class MonoDoor : MonoItem
 
     private void Update()
     {
-       if(doorIsLocked == false)
+        if (currentState == State.open)
         {
-            if (currentState == State.open)
-            {
-                Quaternion target = Quaternion.Euler(0, doorOpenValue, 0);
-                transform.localRotation = Quaternion.Slerp(transform.localRotation, target, Time.deltaTime * smoothing);
-            }
-            else if (currentState == State.closed)
-            {
-                Quaternion target2 = Quaternion.Euler(0, doorClosedValue, 0);
-                transform.localRotation = Quaternion.Slerp(transform.localRotation, target2, Time.deltaTime * smoothing);
-            }
+            Quaternion target = Quaternion.Euler(0, doorOpenValue, 0);
+            transform.localRotation = Quaternion.Slerp(transform.localRotation, target, Time.deltaTime * smoothing);
+        }
+        else if (currentState == State.closed)
+        {
+            Quaternion target2 = Quaternion.Euler(0, doorClosedValue, 0);
+            transform.localRotation = Quaternion.Slerp(transform.localRotation, target2, Time.deltaTime * smoothing);
         }
     }
 }

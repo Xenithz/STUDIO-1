@@ -13,6 +13,21 @@ public class Handler : MonoBehaviour
     //Create an object of class BehaviorTree
     private BehaviorTree test;
 
+    private PathfindingHandler pathHnd;
+
+    public PathfindingHandler PathHnd
+    {
+        get
+        {
+            return pathHnd;
+        }
+
+        set
+        {
+            pathHnd = value;
+        }
+    }
+
     [SerializeField]
     private GameManagerHandler gameMng;
 
@@ -514,6 +529,7 @@ public class Handler : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("player");
 
         gameMng = GameObject.Find("GameManager").GetComponent<GameManagerHandler>();
+        pathHnd = GameObject.Find("Pathfinder").GetComponent<PathfindingHandler>();
 
         //Set the agentRigidBody variable to the rigidbody attached to the gameobject which the handler is attached to
         agentRigidBody = gameObject.GetComponent<Rigidbody>();

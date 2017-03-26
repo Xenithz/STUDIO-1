@@ -9,8 +9,6 @@ public class PathfindingHandler : MonoBehaviour
     public List<GameObject> nodes = new List<GameObject>();
     public LayerMask layer;
 
-    public Transform test;
-
     private void Awake()
     {
         CreateMap();

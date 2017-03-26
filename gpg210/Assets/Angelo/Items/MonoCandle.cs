@@ -9,14 +9,14 @@ public class MonoCandle : MonoItem
     */
 
     //The states that the candle can be in
-    private enum State
+    public enum State
     {
         on,
         off
     }
 
     //Track the current state of the candle
-    private State currentState;
+    public State currentState;
 
     //Reference for the fire particle system
     private ParticleSystem fire;
@@ -24,26 +24,34 @@ public class MonoCandle : MonoItem
     //Reference for the emission of the fire particle system
     private ParticleSystem.EmissionModule emissionModuleForFire;
 
+    private GameManagerHandler gameManager;
+
     public override void CurrentBehavior()
     {
-        //Check if it's on
-        if(currentState == State.on)
+        if(gameManager.gameManagerInstance.currentGameState == GameManager.GameState.phase6)
         {
-            //Turn it off
-            currentState = State.off;
+            //Check if it's on
+            if (currentState == State.on)
+            {
+                //Turn it off
+                currentState = State.off;
+                gameManager.gameManagerInstance.candleCount++;
+            }
         }
     }
 
     private void Awake()
     {
         //Set it on
-        currentState = State.on;
+        currentState = State.off;
         
         //Set the fire variable
         fire = gameObject.GetComponentInChildren<ParticleSystem>();
 
         //Set the emission module
         emissionModuleForFire = fire.emission;
+
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManagerHandler>();
 }
 
     private void Update()
@@ -55,10 +63,8 @@ public class MonoCandle : MonoItem
             emissionModuleForFire.enabled = true;
         }
 
-        //Check if it's current state is off
-        else if(currentState == State.off)
+        if(currentState == State.off)
         {
-            //Set thye emission enabled bool to false
             emissionModuleForFire.enabled = false;
         }
     }

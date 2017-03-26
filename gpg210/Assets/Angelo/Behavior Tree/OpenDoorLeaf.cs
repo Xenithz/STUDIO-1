@@ -17,7 +17,7 @@ public class OpenDoorLeaf : Node
         {
             this.NodeHandler.DoorOpenTimer += Time.deltaTime;
 
-            this.NodeHandler.Anim.SetBool("isWalking", false);
+            //this.NodeHandler.Anim.SetBool("isWalking", false);
 
             SetNodeStatus(NodeStates.running);
 

@@ -22,6 +22,8 @@ public class PatrolLeaf : Node
 
         this.NodeHandler.PatrolTargetTransform = this.NodeHandler.patrolWaypoints[this.NodeHandler.PatrolIncrementer];
 
+        this.NodeHandler.PatrolTargetTransform = this.NodeHandler.PathHnd.CreateAPath(this.NodeHandler.transform, this.NodeHandler.PatrolTargetTransform);
+
         this.NodeHandler.DistanceFromAgentToWaypoint = Vector3.Distance(this.NodeHandler.transform.position, this.NodeHandler.PatrolTargetTransform.position);
 
         this.NodeHandler.DesiredVelocityForPatrolling = Vector3.Normalize(this.NodeHandler.PatrolTargetTransform.position - this.NodeHandler.transform.position) * this.NodeHandler.MaxVelocityForPatrol;

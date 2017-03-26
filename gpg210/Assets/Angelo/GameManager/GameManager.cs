@@ -36,6 +36,13 @@ public class GameManager
     }
 
     public List<GameObject> FirstEvents = new List<GameObject>();
+    public List<GameObject> SecondEvents = new List<GameObject>();
+    public List<GameObject> ThirdEvents = new List<GameObject>();
+    public List<GameObject> FourthEvents = new List<GameObject>();
+    public List<GameObject> FifthEvents = new List<GameObject>();
+
+    public GameObject AI;
+    public GameObject frontDoor;
 
     //Enum to contain the different states of game with relation to pausing
     public enum PauseState
@@ -49,6 +56,10 @@ public class GameManager
         phase1,
         phase2,
         phase3,
+        phase4,
+        phase5,
+        phase6,
+        phase7,
     }
 
     public enum ActionGate
@@ -70,6 +81,8 @@ public class GameManager
     //Canvas access
     public GameObject pauseMenuCanvas;
 
+    public int candleCount;
+
     //Function to set the isPlayerAlive bool to false
     public void PlayerHasDied()
     {
@@ -90,16 +103,88 @@ public class GameManager
 
     public void FirstEvent()
     {
-        Debug.Log("this works");
+        FirstEvents[0].GetComponent<MonoDoor>().DoorIsLocked = false;
+        FirstEvents[2].GetComponent<MonoDoor>().DoorIsLocked = false;
+        FirstEvents[1].GetComponent<MonoDoor>().DoorIsLocked = true;
+        FirstEvents[3].GetComponent<MonoDoor>().DoorIsLocked = true;
+        FirstEvents[4].GetComponent<MonoDoor>().DoorIsLocked = true;
+        FirstEvents[5].GetComponent<MonoDoor>().DoorIsLocked = true;
+        FirstEvents[6].GetComponent<MonoDoor>().DoorIsLocked = true;
+        FirstEvents[7].GetComponent<MonoDoor>().DoorIsLocked = true;
+        FirstEvents[8].GetComponent<MonoDoor>().DoorIsLocked = true;
         SetGateState(ActionGate.shouldNotDo);
         SetGameState(GameState.phase2);
     }
 
     public void SecondEvent()
     {
-        Debug.Log("I moved");
+        SecondEvents[0].GetComponent<MonoDoor>().DoorIsLocked = false;
+        SecondEvents[0].GetComponent<MonoDoor>().Smoothing = 0.2f;
+        SecondEvents[0].GetComponent<MonoItem>().CurrentBehavior();
+        SecondEvents[1].GetComponent<MonoDoor>().DoorIsLocked = false;
+        SecondEvents[1].GetComponent<MonoItem>().CurrentBehavior();
         SetGateState(ActionGate.shouldNotDo);
         SetGameState(GameState.phase3);
+    }
+
+    public void ThirdEvent()
+    {
+        ThirdEvents[0].GetComponent<MonoDoor>().Smoothing = 4f;
+        ThirdEvents[0].GetComponent<MonoItem>().CurrentBehavior();
+        ThirdEvents[0].GetComponent<MonoDoor>().DoorIsLocked = true;
+        SetGateState(ActionGate.shouldNotDo);
+        SetGameState(GameState.phase4);
+    }
+
+    public void FourthEvent()
+    {
+        FourthEvents[0].GetComponent<MonoDoor>().DoorIsLocked = false;
+        FourthEvents[0].GetComponent<MonoDoor>().Smoothing = 4f;
+        FourthEvents[1].GetComponent<MonoDoor>().DoorIsLocked = false;
+        FourthEvents[1].GetComponent<MonoDoor>().Smoothing = 4f;
+        FourthEvents[2].GetComponent<MonoDoor>().DoorIsLocked = false;
+        FourthEvents[2].GetComponent<MonoDoor>().Smoothing = 4f;
+        FourthEvents[3].GetComponent<MonoDoor>().DoorIsLocked = false;
+        FourthEvents[3].GetComponent<MonoDoor>().Smoothing = 4f;
+        FourthEvents[4].GetComponent<MonoDoor>().DoorIsLocked = false;
+        FourthEvents[4].GetComponent<MonoDoor>().Smoothing = 4f;
+        FourthEvents[5].GetComponent<MonoDoor>().DoorIsLocked = false;
+        FourthEvents[5].GetComponent<MonoDoor>().Smoothing = 4f;
+        FourthEvents[6].GetComponent<MonoDoor>().DoorIsLocked = false;
+        FourthEvents[6].GetComponent<MonoDoor>().Smoothing = 4f;
+        FourthEvents[7].GetComponent<MonoDoor>().DoorIsLocked = false;
+        FourthEvents[7].GetComponent<MonoDoor>().Smoothing = 4f;
+        FourthEvents[8].GetComponent<MonoDoor>().DoorIsLocked = false;
+        FourthEvents[8].GetComponent<MonoDoor>().Smoothing = 4f;
+        AI.SetActive(true);
+        SetGateState(ActionGate.shouldDo);
+        SetGameState(GameState.phase5);
+    }
+
+    public void FifthEvent()
+    {
+        FifthEvents[0].GetComponent<MonoCandle>().currentState = MonoCandle.State.on;
+        FifthEvents[1].GetComponent<MonoCandle>().currentState = MonoCandle.State.on;
+        FifthEvents[2].GetComponent<MonoCandle>().currentState = MonoCandle.State.on;
+        FifthEvents[3].GetComponent<MonoCandle>().currentState = MonoCandle.State.on;
+        SetGateState(ActionGate.shouldDo);
+        SetGameState(GameState.phase6);
+    }
+
+    public void SixthEvent()
+    {
+        if(candleCount == 4)
+        {
+            GameObject.Destroy(AI);
+            frontDoor.GetComponent<MonoHandEvent>().doOnce = false;
+            SetGateState(ActionGate.shouldNotDo);
+            SetGameState(GameState.phase7);
+        }
+    }
+
+    public void SeventhEvent()
+    {
+        Debug.Log("DONE");
     }
 
     #endregion

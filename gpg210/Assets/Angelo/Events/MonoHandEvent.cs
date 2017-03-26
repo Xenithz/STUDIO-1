@@ -5,7 +5,7 @@ using UnityEngine;
 public class MonoHandEvent : MonoItem
 {
     GameManagerHandler gameManager;
-    bool doOnce;
+    public bool doOnce;
 
     private void Awake()
     {

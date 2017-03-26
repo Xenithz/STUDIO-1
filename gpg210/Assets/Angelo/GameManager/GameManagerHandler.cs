@@ -13,6 +13,15 @@ public class GameManagerHandler : MonoBehaviour
     //Create object of the game manager class
     public GameManager gameManagerInstance;
 
+    public List<GameObject> Event1 = new List<GameObject>();
+    public List<GameObject> Event2 = new List<GameObject>();
+    public List<GameObject> Event3 = new List<GameObject>();
+    public List<GameObject> Event4 = new List<GameObject>();
+    public List<GameObject> Event5 = new List<GameObject>();
+
+    public GameObject ai;
+    public GameObject frontDoor;
+
     private void Awake()
     {
         //Set this object to the static instance of the game manager
@@ -24,6 +33,14 @@ public class GameManagerHandler : MonoBehaviour
         gameManagerInstance.SetGameState(GameManager.GameState.phase1);
 
         gameManagerInstance.SetGateState(GameManager.ActionGate.shouldDo);
+
+        gameManagerInstance.FirstEvents.AddRange(Event1);
+        gameManagerInstance.SecondEvents.AddRange(Event2);
+        gameManagerInstance.ThirdEvents.AddRange(Event3);
+        gameManagerInstance.FourthEvents.AddRange(Event4);
+        gameManagerInstance.FifthEvents.AddRange(Event5);
+        gameManagerInstance.AI = ai;
+        gameManagerInstance.frontDoor = frontDoor;
     }
 
     private void Update()
@@ -44,6 +61,31 @@ public class GameManagerHandler : MonoBehaviour
         else if(gameManagerInstance.currentGameState == GameManager.GameState.phase2 && gameManagerInstance.currentActionGate == GameManager.ActionGate.shouldDo)
         {
             gameManagerInstance.SecondEvent();
+        }
+
+        else if(gameManagerInstance.currentGameState == GameManager.GameState.phase3 && gameManagerInstance.currentActionGate == GameManager.ActionGate.shouldDo)
+        {
+            gameManagerInstance.ThirdEvent();
+        }
+
+        else if(gameManagerInstance.currentGameState == GameManager.GameState.phase4 && gameManagerInstance.currentActionGate == GameManager.ActionGate.shouldDo)
+        {
+            gameManagerInstance.FourthEvent();
+        }
+
+        else if(gameManagerInstance.currentGameState == GameManager.GameState.phase5 && gameManagerInstance.currentActionGate == GameManager.ActionGate.shouldDo)
+        {
+            gameManagerInstance.FifthEvent();
+        }
+
+        else if(gameManagerInstance.currentGameState == GameManager.GameState.phase6 && gameManagerInstance.currentActionGate == GameManager.ActionGate.shouldDo)
+        {
+            gameManagerInstance.SixthEvent();
+        }
+
+        else if(gameManagerInstance.currentGameState == GameManager.GameState.phase7 && gameManagerInstance.currentActionGate == GameManager.ActionGate.shouldDo)
+        {
+            gameManagerInstance.SeventhEvent();
         }
     }
 }

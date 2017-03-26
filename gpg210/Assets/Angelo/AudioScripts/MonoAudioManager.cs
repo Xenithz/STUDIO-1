@@ -108,6 +108,12 @@ public class MonoAudioManager : MonoBehaviour
         {
             EnvironmentCue(0, other);
         }
+
+        if(other.gameObject.tag == "audioTriggerOneShot")
+        {
+            EnvironmentCue(0, other);
+            Destroy(other.gameObject);
+        }
     }
 
     public void EnvironmentCue(int environmentSoundIndex, Collider audioCollider)
@@ -117,5 +123,6 @@ public class MonoAudioManager : MonoBehaviour
         temporaryAudioSource = audioCollider.gameObject.GetComponent<AudioSource>();
         temporaryAudioSource.clip = environmentAudioClips[environmentSoundIndex];
         temporaryAudioSource.Play();
+        Destroy(audioCollider.gameObject);
     }
 }

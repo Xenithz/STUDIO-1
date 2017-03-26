@@ -17,12 +17,14 @@ public class ChaseLeaf : Node
 
     public override void NodeBehavior()
     {
-        if (this.NodeHandler.AgentHasSightOfPlayer == true && this.NodeHandler.IsInTrigger == false && this.NodeHandler.DistanceToPlayer < 5f)
+        if (this.NodeHandler.AgentHasSightOfPlayer == true && this.NodeHandler.IsInTrigger == false && this.NodeHandler.DistanceToPlayer < 5.5f)
         {
             Debug.Log("chasing");
             //this.NodeHandler.Anim.SetBool("iswWalking", true);
 
-            this.NodeHandler.DesiredVelocityForChasing = Vector3.Normalize(this.NodeHandler.Player.transform.position - this.NodeHandler.transform.position) * this.NodeHandler.MaxVelocityForChase;
+            Transform target = this.NodeHandler.PathHnd.CreateAPath(this.NodeHandler.transform, this.NodeHandler.Player.transform);
+
+            this.NodeHandler.DesiredVelocityForChasing = Vector3.Normalize(target.position - this.NodeHandler.transform.position) * this.NodeHandler.MaxVelocityForChase;
 
             this.NodeHandler.SteeringForChase = this.NodeHandler.DesiredVelocityForChasing - this.NodeHandler.AgentRigidBody.velocity;
 
