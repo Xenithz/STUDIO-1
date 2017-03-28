@@ -26,6 +26,10 @@ public class MonoCandle : MonoItem
 
     private GameManagerHandler gameManager;
 
+    public AudioClip candleClip;
+
+    public AudioSource candleAudioSource;
+
     public override void CurrentBehavior()
     {
         if(gameManager.gameManagerInstance.currentGameState == GameManager.GameState.phase6)
@@ -35,6 +39,8 @@ public class MonoCandle : MonoItem
             {
                 //Turn it off
                 currentState = State.off;
+                candleAudioSource.clip = candleClip;
+                candleAudioSource.Play();
                 gameManager.gameManagerInstance.candleCount++;
             }
         }

@@ -123,14 +123,17 @@ public class GameManager
         SecondEvents[0].GetComponent<MonoItem>().CurrentBehavior();
         SecondEvents[1].GetComponent<MonoDoor>().DoorIsLocked = false;
         SecondEvents[1].GetComponent<MonoItem>().CurrentBehavior();
+        SecondEvents[1].GetComponent<AudioSource>().time = 0.2f;
+        SecondEvents[1].GetComponent<AudioSource>().Play();
         SetGateState(ActionGate.shouldNotDo);
         SetGameState(GameState.phase3);
     }
 
     public void ThirdEvent()
     {
-        ThirdEvents[0].GetComponent<MonoDoor>().Smoothing = 4f;
+        ThirdEvents[0].GetComponent<MonoDoor>().Smoothing = 6f;
         ThirdEvents[0].GetComponent<MonoItem>().CurrentBehavior();
+        ThirdEvents[0].GetComponent<DoorFast>().fastAudio.Play();
         ThirdEvents[0].GetComponent<MonoDoor>().DoorIsLocked = true;
         SetGateState(ActionGate.shouldNotDo);
         SetGameState(GameState.phase4);
@@ -139,23 +142,23 @@ public class GameManager
     public void FourthEvent()
     {
         FourthEvents[0].GetComponent<MonoDoor>().DoorIsLocked = false;
-        FourthEvents[0].GetComponent<MonoDoor>().Smoothing = 4f;
+        FourthEvents[0].GetComponent<MonoDoor>().Smoothing = 1f;
         FourthEvents[1].GetComponent<MonoDoor>().DoorIsLocked = false;
-        FourthEvents[1].GetComponent<MonoDoor>().Smoothing = 4f;
+        FourthEvents[1].GetComponent<MonoDoor>().Smoothing = 1f;
         FourthEvents[2].GetComponent<MonoDoor>().DoorIsLocked = false;
-        FourthEvents[2].GetComponent<MonoDoor>().Smoothing = 4f;
+        FourthEvents[2].GetComponent<MonoDoor>().Smoothing = 1f;
         FourthEvents[3].GetComponent<MonoDoor>().DoorIsLocked = false;
-        FourthEvents[3].GetComponent<MonoDoor>().Smoothing = 4f;
+        FourthEvents[3].GetComponent<MonoDoor>().Smoothing = 1f;
         FourthEvents[4].GetComponent<MonoDoor>().DoorIsLocked = false;
-        FourthEvents[4].GetComponent<MonoDoor>().Smoothing = 4f;
+        FourthEvents[4].GetComponent<MonoDoor>().Smoothing = 1f;
         FourthEvents[5].GetComponent<MonoDoor>().DoorIsLocked = false;
-        FourthEvents[5].GetComponent<MonoDoor>().Smoothing = 4f;
+        FourthEvents[5].GetComponent<MonoDoor>().Smoothing = 1f;
         FourthEvents[6].GetComponent<MonoDoor>().DoorIsLocked = false;
-        FourthEvents[6].GetComponent<MonoDoor>().Smoothing = 4f;
+        FourthEvents[6].GetComponent<MonoDoor>().Smoothing = 1f;
         FourthEvents[7].GetComponent<MonoDoor>().DoorIsLocked = false;
-        FourthEvents[7].GetComponent<MonoDoor>().Smoothing = 4f;
+        FourthEvents[7].GetComponent<MonoDoor>().Smoothing = 1f;
         FourthEvents[8].GetComponent<MonoDoor>().DoorIsLocked = false;
-        FourthEvents[8].GetComponent<MonoDoor>().Smoothing = 4f;
+        FourthEvents[8].GetComponent<MonoDoor>().Smoothing = 1f;
         AI.SetActive(true);
         SetGateState(ActionGate.shouldDo);
         SetGameState(GameState.phase5);

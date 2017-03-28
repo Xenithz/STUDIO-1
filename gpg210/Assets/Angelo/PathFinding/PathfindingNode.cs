@@ -7,14 +7,6 @@ public class PathfindingNode
     public float gCost;
     public float hCost;
 
-    public float fCost
-    {
-        get
-        {
-            return gCost + hCost;
-        }
-    }
-
     public List<PathfindingNode> linkedNodes = new List<PathfindingNode>();
 
     public Transform nodeTransform;

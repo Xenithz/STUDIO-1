@@ -13,6 +13,12 @@ public class Handler : MonoBehaviour
     //Create an object of class BehaviorTree
     private BehaviorTree test;
 
+    public AudioSource scream;
+
+    public AudioSource footsteps;
+
+    public AudioClip[] footstepArray;
+
     private PathfindingHandler pathHnd;
 
     public PathfindingHandler PathHnd

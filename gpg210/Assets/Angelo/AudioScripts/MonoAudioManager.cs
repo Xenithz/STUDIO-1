@@ -20,8 +20,8 @@ public class MonoAudioManager : MonoBehaviour
 
     public enum SoundType
     {
-        gravel,
-        metal
+        wood,
+        ceramic,
     }
 
     public SoundType soundType;
@@ -30,14 +30,14 @@ public class MonoAudioManager : MonoBehaviour
     {
         audioSourceForPlayer = gameObject.GetComponent<AudioSource>();
 
-        this.soundType = SoundType.gravel;
-        if (this.soundType == SoundType.gravel)
+        this.soundType = SoundType.wood;
+        if (this.soundType == SoundType.wood)
         {
             this.audioIndex = 0;
         }
-        else if (this.soundType == SoundType.metal)
+        else if (this.soundType == SoundType.ceramic)
         {
-            this.audioIndex = 4;
+            this.audioIndex = 2;
         }
         this.audioSourceForPlayer = base.GetComponent<AudioSource>();
         this.audioSourceForPlayer.clip = this.footstepAudioClips[this.audioIndex];
@@ -63,7 +63,7 @@ public class MonoAudioManager : MonoBehaviour
             if (!this.audioSourceForPlayer.isPlaying)
             {
                 //if its gravel
-                if (this.soundType == SoundType.gravel)
+                if (this.soundType == SoundType.wood)
                 {
                     //set to hardcoded value
                     if (this.audioIndex > 3)
@@ -72,9 +72,9 @@ public class MonoAudioManager : MonoBehaviour
                     }
                 }
 
-                else if (this.soundType == SoundType.metal && this.audioIndex > 7)
+                else if (this.soundType == SoundType.ceramic && this.audioIndex > 3)
                 {
-                    this.audioIndex = 4;
+                    this.audioIndex = 2;
                 }
                 this.audioSourceForPlayer.clip = this.footstepAudioClips[this.audioIndex];
                 this.audioSourceForPlayer.Play();
@@ -88,13 +88,13 @@ public class MonoAudioManager : MonoBehaviour
         if (!this.keys[0] && !this.keys[1] && !this.keys[2] && !this.keys[3] && this.keyAlreadyDown)
         {
             this.audioSourceForPlayer.Stop();
-            if (this.soundType == SoundType.gravel)
+            if (this.soundType == SoundType.wood)
             {
                 this.audioIndex = 0;
             }
-            else if (this.soundType == SoundType.metal)
+            else if (this.soundType == SoundType.ceramic)
             {
-                this.audioIndex = 4;
+                this.audioIndex = 2;
             }
             this.audioSourceForPlayer.clip = this.footstepAudioClips[this.audioIndex];
             this.keyIsDown = false;

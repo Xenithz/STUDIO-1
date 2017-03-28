@@ -15,15 +15,7 @@ public class FloorWood : MonoBehaviour
     {
         if(other.gameObject.tag == "foot")
         {
-            monoAudio.soundType = MonoAudioManager.SoundType.metal;
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if(other.gameObject.tag == "foot")
-        {
-            monoAudio.soundType = MonoAudioManager.SoundType.gravel;
+            monoAudio.soundType = MonoAudioManager.SoundType.wood;
         }
     }
 }
