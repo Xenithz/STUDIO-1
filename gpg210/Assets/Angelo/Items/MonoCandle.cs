@@ -30,6 +30,10 @@ public class MonoCandle : MonoItem
 
     public AudioSource candleAudioSource;
 
+    public bool test;
+
+    public GameObject testObj;
+
     public override void CurrentBehavior()
     {
         if(gameManager.gameManagerInstance.currentGameState == GameManager.GameState.phase6)
@@ -44,12 +48,24 @@ public class MonoCandle : MonoItem
                 gameManager.gameManagerInstance.candleCount++;
             }
         }
+
+        if(test == true)
+        {
+            if (currentState == State.on)
+            {
+                Debug.Log("working1");
+                currentState = State.off;
+                candleAudioSource.clip = candleClip;
+                candleAudioSource.Play();
+                testObj.GetComponent<CandleTest>().candleCount++;
+            }
+        }
     }
 
     private void Awake()
     {
         //Set it on
-        currentState = State.off;
+        currentState = State.on;
         
         //Set the fire variable
         fire = gameObject.GetComponentInChildren<ParticleSystem>();
