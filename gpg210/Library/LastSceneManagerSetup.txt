@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/Mechanics_Playtest.unity
+- path: Assets/Angelo/TestingScenes/ItemTest.unity
   isLoaded: 1
   isActive: 1
