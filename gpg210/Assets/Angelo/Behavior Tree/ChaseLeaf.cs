@@ -5,9 +5,10 @@ using UnityEngine;
 public class ChaseLeaf : Node
 {
     /*
-        The chase leaf class will be used to make the A.I chase the player 
+        The chase leaf class will be used to make the A.I chase the player. The Chase leaf makes usage of pathfinding and steering behaviors.
     */
 
+    //ChaseLeaf constructor
     public ChaseLeaf(int desiredPriority, string desiredName, Handler desiredHandler) : base(desiredPriority, desiredName, desiredHandler)
     {
         this.NodePriority = desiredPriority;
@@ -15,12 +16,14 @@ public class ChaseLeaf : Node
         this.NodeHandler = desiredHandler;
     }
 
+    //Override the NodeBehavior function to implement the ChaseLeaf behavior
     public override void NodeBehavior()
     {
         if (this.NodeHandler.AgentHasSightOfPlayer == true && this.NodeHandler.IsInTrigger == false && this.NodeHandler.DistanceToPlayer < 5.5f)
         {
             Debug.Log("chasing");
             //this.NodeHandler.Anim.SetBool("iswWalking", true);
+
 
             Transform target = this.NodeHandler.PathHnd.CreateAPath(this.NodeHandler.transform, this.NodeHandler.Player.transform);
 

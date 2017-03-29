@@ -14,6 +14,14 @@ public class MonoDoor : MonoItem
     private State currentState;
     //Track the current state of the door
 
+    public enum DoorType
+    {
+        wood,
+        nonwood
+    }
+
+    public DoorType currentDoorType;
+
     [SerializeField]
     private float doorOpenValue;
 
@@ -23,6 +31,10 @@ public class MonoDoor : MonoItem
     [SerializeField]
     private float smoothing;
     //Desired smoothing value
+
+    public AudioClip[] doorClips;
+
+    public AudioSource doorAudioSource;
 
     public float Smoothing
     {
@@ -57,14 +69,46 @@ public class MonoDoor : MonoItem
     {
         if(doorIsLocked == false)
         {
-            if (currentState == State.closed)
+            if(currentDoorType == DoorType.wood)
             {
-                currentState = State.open;
+                if (currentState == State.closed)
+                {
+                    doorAudioSource.clip = doorClips[0];
+                    doorAudioSource.time = 1.7f;
+                    doorAudioSource.Play();
+                    currentState = State.open;
+                }
+                else if (currentState == State.open)
+                {
+                    doorAudioSource.clip = doorClips[1];
+                    doorAudioSource.time = 0.1f;
+                    doorAudioSource.Play();
+                    currentState = State.closed;
+                }
             }
-            else if (currentState == State.open)
+
+            else if(currentDoorType == DoorType.nonwood)
             {
-                currentState = State.closed;
+                if (currentState == State.closed)
+                {
+                    doorAudioSource.clip = doorClips[3];
+                    doorAudioSource.Play();
+                    currentState = State.open;
+                }
+                else if (currentState == State.open)
+                {
+                    doorAudioSource.clip = doorClips[3];
+                    doorAudioSource.Play();
+                    currentState = State.closed;
+                }
             }
+        }
+
+        if(doorIsLocked == true)
+        {
+            doorAudioSource.clip = doorClips[2];
+            doorAudioSource.time = 0.3f;
+            doorAudioSource.Play();
         }
     }
 
