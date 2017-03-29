@@ -16,7 +16,7 @@ public class PlayerControllerV5 : MonoBehaviour
     // jump
 
     public float jumpspeed;
-    public bool grounded = false;
+    public bool grounded;
 
     // Rotation
     // Mouse Movement
@@ -52,22 +52,14 @@ public class PlayerControllerV5 : MonoBehaviour
 
 
     public float rotationspeed = 10.0f;
+    Vector3 eulll;
 
 
     // Update is called once per frame
     void Update()
     {
 
-        if (grounded)
-        {
-            // Simple Walking
-            RightLeft = Input.GetAxis("Horizontal");
-            FrontBack = Input.GetAxis("Vertical");
 
-            Vector3 movement = new Vector3(RightLeft, 0.0f, FrontBack);
-            rb.velocity = movement *= speed * Time.deltaTime;
-
-        }
 
         if (Input.GetKey(KeyCode.LeftShift))
         {
@@ -109,10 +101,26 @@ public class PlayerControllerV5 : MonoBehaviour
         Xaxis = Input.GetAxis("Mouse X") * rotationspeed * Time.deltaTime;
         Yaxis -= Input.GetAxis("Mouse Y") * rotationSpeed;
 
+        Xaxis = Mathf.Clamp(Xaxis, -90, 90);
         Yaxis = Mathf.Clamp(Yaxis, -cameraRange, cameraRange);
 
-        transform.Rotate(0, Xaxis, 0);
+        //rb.MoveRotation = new Vector3(0, Xaxis, 0);
+        Quaternion roating = Quaternion.Euler(0, Xaxis, 0);
+        rb.MoveRotation(rb.rotation * roating);
+
+
         cameraRotate.transform.localEulerAngles = new Vector3(Yaxis, 0, 0);
+
+        if (grounded)
+        {
+            // Simple Walking
+            RightLeft = Input.GetAxis("Horizontal") * speed * Time.deltaTime;
+            FrontBack = Input.GetAxis("Vertical") * speed * Time.deltaTime;
+
+            transform.Translate(RightLeft * Time.deltaTime, 0.0f, FrontBack * Time.deltaTime);
+            // rb.velocity = movement *= speed * Time.deltaTime; 
+
+        }
 
 
     }
@@ -125,15 +133,12 @@ public class PlayerControllerV5 : MonoBehaviour
         staminaRect.width = rectWidth;
 
         GUI.DrawTexture(staminaRect, staminaTexture);
-
-
     }
 
     void SetRunning(bool isRunning)
     {
         this.isRunning = isRunning;
 
-        //isRunning ? runSpeed : walkSpeed;  
 
     }
     // Setting jump if player is on ground or not

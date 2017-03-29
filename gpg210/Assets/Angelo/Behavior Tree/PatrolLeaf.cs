@@ -20,6 +20,9 @@ public class PatrolLeaf : Node
     {
         //this.NodeHandler.Anim.SetBool("isWalking", true);
 
+        //Play the scream
+        this.NodeHandler.scream.Play();
+
         //Set the current target transform according to the incrementer's value relative to the index of the patrol waypoints array
         this.NodeHandler.PatrolTargetTransform = this.NodeHandler.patrolWaypoints[this.NodeHandler.PatrolIncrementer];
 
