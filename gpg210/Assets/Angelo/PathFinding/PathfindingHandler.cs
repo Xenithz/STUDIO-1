@@ -59,8 +59,6 @@ public class PathfindingHandler : MonoBehaviour
         //Getting closest node to start transform
         PathfindingNode startingNode = GetClosestNode(start);
 
-        Debug.Log(startingNode.nodeTransform);
-
         //Getting closest node to the end transform
         PathfindingNode endingNode = GetClosestNode(end);
 

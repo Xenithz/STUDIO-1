@@ -23,6 +23,8 @@ public class OpenDoorLeaf : Node
         //Check if the node handler is inside the trigger
        if(this.NodeHandler.IsInTrigger == true)
         {
+            this.NodeHandler.Anim.SetBool("isWalking", false);
+            
             //Update the timer by time.delta time so that it increases by 1 second per real time
             this.NodeHandler.DoorOpenTimer += Time.deltaTime;
 

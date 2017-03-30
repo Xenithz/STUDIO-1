@@ -21,7 +21,7 @@ public class AttackLeaf : Node
         if(this.NodeHandler.DistanceToPlayer < 2f)
         {
             Debug.Log("access");
-            //this.NodeHandler.Anim.SetTrigger("shouldAttack");
+            this.NodeHandler.Anim.SetTrigger("shouldAttack");
 
             //Trigger the die function attached to the player
             this.NodeHandler.Player.GetComponent<PlayerControl>().Die();

@@ -50,6 +50,7 @@ public class Handler : MonoBehaviour
         }
     }
 
+    [SerializeField]
     private Animator anim;
 
     public Animator Anim
@@ -254,6 +255,7 @@ public class Handler : MonoBehaviour
     }
 
     //The maximum velocity to be used for clamping 
+    [SerializeField]
     private float maxVelocityForPatrol = 0.1f;
 
     //allows the maxVelocityForPatrol to be kept private
@@ -270,6 +272,7 @@ public class Handler : MonoBehaviour
         }
     }
 
+    [SerializeField]
     private float maxVelocityForChase = 0.1f;
 
     public float MaxVelocityForChase
@@ -285,6 +288,7 @@ public class Handler : MonoBehaviour
         }
     }
 
+    [SerializeField]
     private float maxForceForChase = 0.1f;
 
     public float MaxForceForChase
@@ -300,6 +304,7 @@ public class Handler : MonoBehaviour
         }
     }
 
+    [SerializeField]
     private float maxForceForPatrol = 0.1f;
 
     public float MaxForceForPatrol
@@ -315,6 +320,7 @@ public class Handler : MonoBehaviour
         }
     }
 
+    [SerializeField]
     private float maxSpeedForChase = 0.1f;
 
     public float MaxSpeedForChase
@@ -330,6 +336,7 @@ public class Handler : MonoBehaviour
         }
     }
 
+    [SerializeField]
     private float maxSpeedForPatrol = 0.1f;
 
     public float MaxSpeedForPatrol
