@@ -40,6 +40,7 @@ public class GameManager
     public List<GameObject> ThirdEvents = new List<GameObject>();
     public List<GameObject> FourthEvents = new List<GameObject>();
     public List<GameObject> FifthEvents = new List<GameObject>();
+    public List<GameObject> Writing = new List<GameObject>();
 
     public GameObject AI;
     public GameObject frontDoor;
@@ -131,6 +132,11 @@ public class GameManager
 
     public void ThirdEvent()
     {
+        foreach (GameObject v in Writing)
+        {
+            v.SetActive(true);
+        }
+
         ThirdEvents[0].GetComponent<MonoDoor>().Smoothing = 6f;
         ThirdEvents[0].GetComponent<MonoItem>().CurrentBehavior();
         ThirdEvents[0].GetComponent<DoorFast>().fastAudio.Play();

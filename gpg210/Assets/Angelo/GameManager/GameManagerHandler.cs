@@ -18,6 +18,7 @@ public class GameManagerHandler : MonoBehaviour
     public List<GameObject> Event3 = new List<GameObject>();
     public List<GameObject> Event4 = new List<GameObject>();
     public List<GameObject> Event5 = new List<GameObject>();
+    public List<GameObject> Writing = new List<GameObject>();
 
     public GameObject ai;
     public GameObject frontDoor;
@@ -39,6 +40,8 @@ public class GameManagerHandler : MonoBehaviour
         gameManagerInstance.ThirdEvents.AddRange(Event3);
         gameManagerInstance.FourthEvents.AddRange(Event4);
         gameManagerInstance.FifthEvents.AddRange(Event5);
+        gameManagerInstance.Writing.AddRange(Writing);
+
         gameManagerInstance.AI = ai;
         gameManagerInstance.frontDoor = frontDoor;
     }

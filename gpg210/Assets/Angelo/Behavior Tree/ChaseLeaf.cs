@@ -21,9 +21,8 @@ public class ChaseLeaf : Node
     {
         if (this.NodeHandler.AgentHasSightOfPlayer == true && this.NodeHandler.IsInTrigger == false && this.NodeHandler.DistanceToPlayer < 5.5f)
         {
-            Debug.Log("chasing");
-            //this.NodeHandler.Anim.SetBool("iswWalking", true);
-
+            this.NodeHandler.Anim.SetFloat("walkSpeed", 3);
+            this.NodeHandler.Anim.SetBool("iswWalking", true);
 
             Transform target = this.NodeHandler.PathHnd.CreateAPath(this.NodeHandler.transform, this.NodeHandler.Player.transform);
 
@@ -48,6 +47,7 @@ public class ChaseLeaf : Node
             Quaternion lookAt = Quaternion.LookRotation(this.NodeHandler.DirectionForRotationToSet);
 
             this.NodeHandler.transform.rotation = lookAt;
+
             this.NodeHandler.transform.rotation = Quaternion.Euler(0, this.NodeHandler.transform.rotation.eulerAngles.y, 0);
 
             //Set the node status to running

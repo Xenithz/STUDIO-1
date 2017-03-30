@@ -21,7 +21,10 @@ public class PatrolLeaf : Node
         //this.NodeHandler.Anim.SetBool("isWalking", true);
 
         //Play the scream
-        this.NodeHandler.scream.Play();
+        //this.NodeHandler.scream.PlayOneShot(this.NodeHandler.scream.clip, 1);
+
+        this.NodeHandler.Anim.SetFloat("walkSpeed", 1);
+        this.NodeHandler.Anim.SetBool("isWalking", true);
 
         //Set the current target transform according to the incrementer's value relative to the index of the patrol waypoints array
         this.NodeHandler.PatrolTargetTransform = this.NodeHandler.patrolWaypoints[this.NodeHandler.PatrolIncrementer];
@@ -64,6 +67,10 @@ public class PatrolLeaf : Node
 
         //Make the rotation set itself to lookAt
         this.NodeHandler.transform.rotation = lookAt;
+
+        float rotationX = this.NodeHandler.gameObject.transform.eulerAngles.x;
+
+        rotationX = Mathf.Clamp(rotationX, 0, 0);
 
         //Check if the Agent is close to the waypoint
         if (this.NodeHandler.DistanceFromAgentToWaypoint < 0.5f )
