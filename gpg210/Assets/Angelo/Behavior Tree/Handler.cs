@@ -238,6 +238,7 @@ public class Handler : MonoBehaviour
     }
 
     //speed will store the desired rotation speed
+    [SerializeField]
     private float rotationSpeed;
 
     //allows the rotationSpeed variable to be kept private

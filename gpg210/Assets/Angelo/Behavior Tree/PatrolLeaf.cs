@@ -57,23 +57,30 @@ public class PatrolLeaf : Node
         this.NodeHandler.DirectionForRotation = Vector3.Normalize(this.NodeHandler.PatrolTargetTransform.position - this.NodeHandler.transform.position);
 
         //Update the rotation speed by using delta time for smooth movement
-        this.NodeHandler.RotationSpeed = 4f * Time.deltaTime;
+        this.NodeHandler.RotationSpeed = 3f * Time.deltaTime;
 
-        //Create a vector 3 for the agent to rotate towards
-        this.NodeHandler.DirectionForRotationToSet = Vector3.RotateTowards(this.NodeHandler.transform.forward, this.NodeHandler.DirectionForRotation, this.NodeHandler.RotationSpeed, 0);
+        ////Create a vector 3 for the agent to rotate towards
+        //this.NodeHandler.DirectionForRotationToSet = Vector3.RotateTowards(this.NodeHandler.transform.forward, this.NodeHandler.DirectionForRotation, this.NodeHandler.RotationSpeed, 0);
 
-        //Quaternion to turn to
-        Quaternion lookAt = Quaternion.LookRotation(this.NodeHandler.DirectionForRotationToSet);
+        //Vector3 temp = this.NodeHandler.DirectionForRotation;
+
+        //if(temp.y > 0)
+        //{
+        //    temp.y = 0;
+        //}
+
+        ////Quaternion to turn to
+        //Quaternion lookAt = Quaternion.LookRotation(temp);
+
+        Quaternion lookAt = Quaternion.LookRotation(this.NodeHandler.DirectionForRotation);
+
+        this.NodeHandler.transform.rotation = Quaternion.Lerp(this.NodeHandler.transform.rotation, lookAt, this.NodeHandler.RotationSpeed);
 
         //Make the rotation set itself to lookAt
-        this.NodeHandler.transform.rotation = lookAt;
-
-        float rotationX = this.NodeHandler.gameObject.transform.eulerAngles.x;
-
-        rotationX = Mathf.Clamp(rotationX, 0, 0);
+        //this.NodeHandler.transform.rotation = lookAt;
 
         //Check if the Agent is close to the waypoint
-        if (this.NodeHandler.DistanceFromAgentToWaypoint < 0.5f )
+        if (this.NodeHandler.DistanceFromAgentToWaypoint < 0.5f)
         {
             //Move to the next waypoint
             this.NodeHandler.PatrolIncrementer++;
