@@ -5,12 +5,24 @@ using UnityEngine;
 
 public class PathfindingHandler : MonoBehaviour
 {
+    /*
+         The pathfinding handler class will contain all functions relevant to the pathfinding system inside the game. When the scene starts, 
+         the map will be created. The pathfinding function is called in all relevant scripts via a reference.
+    */
+
+    //List to hold the map
     public List<PathfindingNode> map = new List<PathfindingNode>();
+
+    //List to hold all nodes
     public List<GameObject> nodes = new List<GameObject>();
+
+    //Layer to decide which layer to look for in raycasts
     public LayerMask layer;
 
+    
     private void Awake()
     {
+        //Create the map when the instance of the script is activated
         CreateMap();
     }
 
@@ -27,8 +39,10 @@ public class PathfindingHandler : MonoBehaviour
 
     private void CreateMap()
     {
+        //Add all objects tagged with "node" to the node list
         nodes.AddRange(GameObject.FindGameObjectsWithTag("node"));
 
+        //Loop through the whole node list and add a node to the map for each object in the node list
         foreach (GameObject v in nodes)
         {
             map.Add(new PathfindingNode(v.transform));
@@ -124,7 +138,7 @@ public class PathfindingHandler : MonoBehaviour
                 return path[0];
             }
 
-            //Iterate through the whole list of linked nodes inside each node
+            //Calculate the G costs
             foreach(PathfindingNode v in currentNode.linkedNodes)
             {
                 float alt = currentNode.gCost + (currentNode.nodeTransform.position - v.nodeTransform.position).magnitude;
