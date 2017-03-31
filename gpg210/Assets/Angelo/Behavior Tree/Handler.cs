@@ -186,6 +186,22 @@ public class Handler : MonoBehaviour
         }
     }
 
+
+    private float attackTimer;
+
+    public float AttackTimer
+    {
+        get
+        {
+            return attackTimer;
+        }
+
+        set
+        {
+            attackTimer = value;
+        }
+
+    }
     //track the distance to the player
     private float distanceToPlayer;
 

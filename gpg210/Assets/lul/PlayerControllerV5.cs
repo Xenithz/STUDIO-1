@@ -4,19 +4,17 @@ using UnityEngine;
 
 public class PlayerControllerV5 : MonoBehaviour
 {
+    private GameObject gameManager;
+
     // Simple Walk
     public float speed;
-    public float run;
-
     Rigidbody rb;
-
     float FrontBack;
     float RightLeft;
 
     // jump
-
     public float jumpspeed;
-    public bool grounded;
+    public bool grounded = false;
 
     // Rotation
     // Mouse Movement
@@ -29,134 +27,172 @@ public class PlayerControllerV5 : MonoBehaviour
 
     //Stamina
 
-    float presentStamina = 2;
-    float maxStamina = 2;
+    float presentStamina = 1;
+    float maxStamina = 1;
     bool isRunning;
 
+    //Stamina Bar
     Rect staminaRect;
     Texture2D staminaTexture;
+
+    public bool isDead;
+
+    public Handler handle;
 
     // Use this for initialization
     void Start()
     {
+        // Calling Component from the root of the object (Rigibody) 
         rb = GetComponent<Rigidbody>();
 
 
+        // Setting Stamina Bar 
+
+        // Stamina Bar (adjusting the size and shape of bar)
         staminaRect = new Rect(Screen.width / 10, Screen.height * 9 / 10, Screen.width / 3, Screen.height / 50);
+
+        // 2D texture 
         staminaTexture = new Texture2D(1, 1);
+
+        //setting pixel color black 
         staminaTexture.SetPixel(0, 0, Color.black);
 
+        // Appling the color to the pixels 
         staminaTexture.Apply();
 
+        isDead = false;
+
+        gameManager = GameObject.Find("GameManager");
+
+        handle = GameObject.Find("AIFINAL").GetComponent<Handler>();
+
     }
-
-
-    public float rotationspeed = 10.0f;
-    Vector3 eulll;
-
 
     // Update is called once per frame
     void Update()
     {
-
-
-
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            speed = 200.0f;
-            isRunning = true;
-        }
-        else
-        {
-            speed = 100.0f;
-            isRunning = false;
-        }
-
-        if (isRunning)
-        {
-            presentStamina -= Time.deltaTime;
-            if (presentStamina < 0)
-            {
-                presentStamina = 0;
-                speed = 100.0f;
-                isRunning = false;
-            }
-        }
-        else if (presentStamina < maxStamina)
-        {
-            presentStamina += Time.deltaTime;
-        }
-
-
-
-
-        // Jump 
-        if (Input.GetKeyDown(KeyCode.Space) && grounded == true)
-        {
-            rb.AddForce(0, jumpspeed, 0);
-        }
-
-
-        //Mouse Rotation 
-        Xaxis = Input.GetAxis("Mouse X") * rotationspeed * Time.deltaTime;
-        Yaxis -= Input.GetAxis("Mouse Y") * rotationSpeed;
-
-        Xaxis = Mathf.Clamp(Xaxis, -90, 90);
-        Yaxis = Mathf.Clamp(Yaxis, -cameraRange, cameraRange);
-
-        //rb.MoveRotation = new Vector3(0, Xaxis, 0);
-        Quaternion roating = Quaternion.Euler(0, Xaxis, 0);
-        rb.MoveRotation(rb.rotation * roating);
-
-
-        cameraRotate.transform.localEulerAngles = new Vector3(Yaxis, 0, 0);
-
-        if (grounded)
+        if(isDead != true)
         {
             // Simple Walking
+
+            // Setting simple walk system multiplying by speed per second 
             RightLeft = Input.GetAxis("Horizontal") * speed * Time.deltaTime;
             FrontBack = Input.GetAxis("Vertical") * speed * Time.deltaTime;
 
-            transform.Translate(RightLeft * Time.deltaTime, 0.0f, FrontBack * Time.deltaTime);
-            // rb.velocity = movement *= speed * Time.deltaTime; 
+            transform.Translate(RightLeft * Time.deltaTime, 0, FrontBack * Time.deltaTime);
 
+
+
+
+
+
+
+            // if and else for sprint 
+
+            // left shift for sprint 
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                // If pressed speed changes with isRunning set to true 
+                speed = 200.0f;
+                isRunning = true;
+            }
+            else
+            {
+                // Else speed remains same and isRunning remains false
+                speed = 100.0f;
+                isRunning = false;
+            }
+
+            // If is running is ture 
+            if (isRunning)
+            {
+                // Subtratcing present stamina per second 
+                presentStamina -= Time.deltaTime;
+
+                // IF present stamina is less than 0
+                if (presentStamina < 0)
+                {
+                    // Speed changes to the normal walk speed and isRunning goes to false
+                    presentStamina = 0;
+                    speed = 100.0f;
+                    isRunning = false;
+                }
+            }
+
+            // Genrating stamina bar again 
+            // IF present stamina is less than maxStamina anytime 
+            else if (presentStamina < maxStamina)
+            {
+                // increasing present stamina per second 
+                presentStamina += Time.deltaTime;
+            }
+
+
+            //Mouse Rotation 
+            Xaxis = Input.GetAxis("Mouse X") * rotationSpeed;
+            Yaxis -= Input.GetAxis("Mouse Y") * rotationSpeed;
+
+            // Claping yaxis range between max and minimum range 
+            Yaxis = Mathf.Clamp(Yaxis, -cameraRange, cameraRange);
+
+            transform.Rotate(0, Xaxis, 0);
+
+            // Rotating camera 
+            cameraRotate.transform.localEulerAngles = new Vector3(Yaxis, 0, 0);
         }
-
-
     }
 
 
     void OnGUI()
     {
+        // ratio of how much stamina bar is filled/empty
         float ratio = presentStamina / maxStamina;
+        //Calculating width of the texture taking the ratio of the stamina bar
         float rectWidth = ratio * Screen.width / 3;
+        //Setting width of stamina bar which is calculated taking the ratio of the stamina bar
         staminaRect.width = rectWidth;
 
+        // Drawing stamina bar in shape of rectangle 
         GUI.DrawTexture(staminaRect, staminaTexture);
-    }
-
-    void SetRunning(bool isRunning)
-    {
-        this.isRunning = isRunning;
 
 
     }
+
+
     // Setting jump if player is on ground or not
     void OnTriggerStay(Collider col)
     {
+        // Player collides with floor 
         if (col.gameObject.tag == "floor")
         {
+            // then grounded is true 
             grounded = true;
         }
     }
 
     void OnTriggerExit(Collider col)
     {
-
-        if (col.gameObject.tag == "floor")
+        // IF player is not colling with floor 
+        if (col.gameObject.tag != "floor")
         {
-
+            //then grounded is false
             grounded = false;
         }
     }
+
+    public void Die()
+    {
+        gameManager.GetComponent<GameManagerHandler>().gameManagerInstance.PlayerHasDied();
+    }
+
+    public void ForcedTurn()
+    {
+        Debug.Log("GO");
+        Vector3 direc = Vector3.Normalize(handle.transform.position - transform.position);
+
+        Quaternion lookAt = Quaternion.LookRotation(direc);
+
+        transform.rotation = Quaternion.Lerp(transform.rotation, lookAt, 2f * Time.deltaTime);
+    }
+
 }

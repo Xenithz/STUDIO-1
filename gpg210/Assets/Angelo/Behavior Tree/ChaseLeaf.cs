@@ -19,7 +19,7 @@ public class ChaseLeaf : Node
     //Override the NodeBehavior function to implement the ChaseLeaf behavior
     public override void NodeBehavior()
     {
-        if (this.NodeHandler.AgentHasSightOfPlayer == true && this.NodeHandler.IsInTrigger == false && this.NodeHandler.DistanceToPlayer < 5.5f)
+        if (this.NodeHandler.AgentHasSightOfPlayer == true && this.NodeHandler.IsInTrigger == false && this.NodeHandler.DistanceToPlayer < 5.5f && this.NodeHandler.Player.GetComponent<PlayerControllerV5>().isDead == false)
         {
             this.NodeHandler.Anim.SetFloat("walkSpeed", 3);
             this.NodeHandler.Anim.SetBool("iswWalking", true);
@@ -64,6 +64,11 @@ public class ChaseLeaf : Node
             {
                 SetNodeStatus(NodeStates.success);
             }
+        }
+
+        else if(this.NodeHandler.Player.GetComponent<PlayerControllerV5>().isDead == true)
+        {
+            SetNodeStatus(NodeStates.success);
         }
 
         else

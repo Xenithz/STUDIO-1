@@ -122,7 +122,7 @@ public class MonoDoor : MonoItem
         if (currentState == State.open)
         {
             Quaternion target = Quaternion.Euler(0, doorOpenValue, 0);
-            transform.localRotation = Quaternion.Slerp(transform.localRotation, target, Time.deltaTime * smoothing);
+            transform.localRotation = Quaternion.Lerp(transform.localRotation, target, Time.deltaTime * smoothing);
         }
         else if (currentState == State.closed)
         {

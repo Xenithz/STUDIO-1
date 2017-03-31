@@ -23,13 +23,48 @@ public class AttackLeaf : Node
             Debug.Log("access");
             this.NodeHandler.Anim.SetTrigger("shouldAttack");
 
-            //Trigger the die function attached to the player
-            this.NodeHandler.Player.GetComponent<PlayerControl>().Die();
-            Debug.Log("DIE");
+            if(this.NodeHandler.DistanceToPlayer < 1.5f)
+            {
+                this.NodeHandler.AgentRigidBody.velocity = Vector3.ClampMagnitude(this.NodeHandler.AgentRigidBody.velocity, 0);
 
-            //Set the node state to success
-            base.SetNodeStatus(NodeStates.success);
+                this.NodeHandler.Player.GetComponent<PlayerControllerV5>().isDead = true;
+
+                if(this.NodeHandler.Player.GetComponent<PlayerControllerV5>().isDead == true)
+                {
+                    this.NodeHandler.AttackTimer += Time.deltaTime;
+
+                    this.NodeHandler.Player.GetComponent<PlayerControllerV5>().ForcedTurn();
+
+                    if (this.NodeHandler.AttackTimer > 5f)
+                    {
+                        //Trigger the die function attached to the player
+                        this.NodeHandler.Player.GetComponent<PlayerControllerV5>().Die();
+                        Debug.Log("DIE");
+
+                        //Set the node state to success
+                        base.SetNodeStatus(NodeStates.success);
+                    }
+                }
+            }
         }
+
+        if (this.NodeHandler.Player.GetComponent<PlayerControllerV5>().isDead == true)
+        {
+            this.NodeHandler.AttackTimer += Time.deltaTime;
+
+            this.NodeHandler.Player.GetComponent<PlayerControllerV5>().ForcedTurn();
+
+            if (this.NodeHandler.AttackTimer > 5f)
+            {
+                //Trigger the die function attached to the player
+                this.NodeHandler.Player.GetComponent<PlayerControllerV5>().Die();
+                Debug.Log("DIE");
+
+                //Set the node state to success
+                base.SetNodeStatus(NodeStates.success);
+            }
+        }
+
         else
         {
             Debug.Log("cant attack");
