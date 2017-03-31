@@ -101,6 +101,21 @@ public class Handler : MonoBehaviour
         }
     }
 
+    private bool screamAudioCue;
+
+    public bool ScreamAudioCue
+    {
+        get
+        {
+            return screamAudioCue;
+        }
+
+        set
+        {
+            screamAudioCue = value;
+        }
+    }
+
     private bool isPaused;
 
     public bool IsPaused

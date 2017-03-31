@@ -39,6 +39,8 @@ public class PlayerControllerV5 : MonoBehaviour
 
     public Handler handle;
 
+    public GameObject head;
+
     // Use this for initialization
     void Start()
     {
@@ -66,6 +68,7 @@ public class PlayerControllerV5 : MonoBehaviour
 
         handle = GameObject.Find("AIFINAL").GetComponent<Handler>();
 
+        head = GameObject.Find("AIFINAL").transform.GetChild(2).gameObject;
     }
 
     // Update is called once per frame
@@ -188,11 +191,11 @@ public class PlayerControllerV5 : MonoBehaviour
     public void ForcedTurn()
     {
         Debug.Log("GO");
-        Vector3 direc = Vector3.Normalize(handle.transform.position - transform.position);
+        Vector3 direc = Vector3.Normalize(head.transform.position - cameraRotate.transform.position);
 
         Quaternion lookAt = Quaternion.LookRotation(direc);
 
-        transform.rotation = Quaternion.Lerp(transform.rotation, lookAt, 2f * Time.deltaTime);
+        transform.rotation = Quaternion.Lerp(cameraRotate.transform.rotation, lookAt, 2f * Time.deltaTime);
     }
 
 }

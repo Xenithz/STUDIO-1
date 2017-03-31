@@ -25,58 +25,77 @@ public class CollisionAvoid : MonoBehaviour
 
     // Update is called once per frame
     void FixedUpdate()
-    {   
-
-        RaycastHit hit;
-
+    {
 
         // Setting direction and distance
 
         Vector3 direction = (target.position - transform.position).normalized;
 
+        RaycastHit hit;
+
+
+        //  if shooting a raycats from all the three side of this object with distance to travel
+
+        if (Physics.Raycast(transform.position, transform.forward, out hit, rayRange))
+        {
+
+            // if ray not hitting this object and hitting the gameobjects with tag 
+            if (hit.collider.gameObject.CompareTag("obb"))
+            {
+                // startRay += Time.time * 1.0f; 
+                Debug.DrawLine(transform.position, transform.position + transform.forward * rayRange, Color.red);
+                Vector3 hitNormal = hit.point + hit.normal;
+                hitNormal.y = 0.0f;
+                //adding normalized hit direction with some pulling away type force
+                direction = transform.forward + hitNormal * 300.0f;
+                //transform.Rotate(Vector3.up * Time.deltaTime * 20);
 
 
 
 
-        RaycastHit hit2;
-        RaycastHit hit3;
+            }
+
+
+
+        }
+
+
+
 
         // To create two raycast left and rigth (to avoid corners
         Vector3 left = transform.position;
+
         Vector3 right = transform.position;
 
 
-
-
-        if (Physics.Raycast(right + (transform.right), transform.forward, out hit2, rayRange))
+        if (Physics.Raycast(right + (transform.right), transform.forward, out hit, rayRange))
         {
             // if ray not hitting this object and hitting the gameobjects with tag 
-            if (hit2.transform != transform && hit2.collider.gameObject.CompareTag("obb"))
+            if (hit.collider.gameObject.CompareTag("obb"))
             {
                 // startRay += Time.time * 1.0f; 
-                Debug.DrawRay(transform.position, hit2.point, Color.red);
+                Debug.DrawRay(transform.position, hit.point, Color.red);
 
-                Vector3 hitNormal = hit2.normal;
+                Vector3 hitNormal = hit.normal;
                 //adding normalized hit direction with some pulling away type force
-                direction += transform.forward + hitNormal * 100.0f;
+                direction += hitNormal * 30.0f;
 
 
 
             }
         }
 
-        if (Physics.Raycast(left - (transform.right), transform.forward, out hit3, rayRange))
+        if (Physics.Raycast(left - (transform.right), transform.forward, out hit, rayRange))
         {
             // if ray not hitting this object and hitting the gameobjects with tag 
-            if (hit2.transform != transform && hit3.collider.gameObject.CompareTag("obb"))
+            if (hit.collider.gameObject.CompareTag("obb"))
             {
                 // startRay += Time.time * 1.0f; 
-                Debug.DrawRay(transform.position, hit3.point, Color.red);
-                Vector3 hitNormal = hit3.normal;
-
+                Debug.DrawRay(transform.position, hit.point, Color.red);
+                Vector3 hitNormal = hit.normal;
 
                 //adding normalized hit direction with some pulling away type force
-                direction += transform.forward + hitNormal * 100.0f;
+                direction += hitNormal * 30.0f;
 
             }
         }

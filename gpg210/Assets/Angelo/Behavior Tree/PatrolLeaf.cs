@@ -21,7 +21,15 @@ public class PatrolLeaf : Node
         //this.NodeHandler.Anim.SetBool("isWalking", true);
 
         //Play the scream
-        //this.NodeHandler.scream.PlayOneShot(this.NodeHandler.scream.clip, 1);
+        if(this.NodeHandler.scream.isPlaying != true)
+        {
+            this.NodeHandler.ScreamAudioCue = true;
+        }
+        if (this.NodeHandler.ScreamAudioCue == true)
+        {
+            this.NodeHandler.scream.PlayOneShot(this.NodeHandler.scream.clip, 1);
+            this.NodeHandler.ScreamAudioCue = false;
+        }
 
         this.NodeHandler.Anim.SetFloat("walkSpeed", 1);
         this.NodeHandler.Anim.SetBool("isWalking", true);
