@@ -284,7 +284,7 @@ public class GameManager
 
     public void CameronFade()
     {
-
+        black.CrossFadeAlpha(1f, fadeTime, false);
     }
 
     public IEnumerator KitchenFlash()

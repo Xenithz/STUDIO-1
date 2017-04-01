@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManagerHandler : MonoBehaviour
 {
@@ -24,6 +25,10 @@ public class GameManagerHandler : MonoBehaviour
 
     public GameObject ai;
     public GameObject frontDoor;
+    public Image black;
+    public float fadeTime;
+    public int gameOverSceneIndex;
+
 
     private void Awake()
     {
@@ -48,20 +53,27 @@ public class GameManagerHandler : MonoBehaviour
 
         gameManagerInstance.AI = ai;
         gameManagerInstance.frontDoor = frontDoor;
+        gameManagerInstance.black = black;
+        gameManagerInstance.fadeTime = fadeTime;
+        gameManagerInstance.black.GetComponent<CanvasRenderer>().SetAlpha(0f);
     }
 
     private void Update()
     {
+        Debug.Log(gameManagerInstance.currentActionGate);
         //Check every frame for pause
         gameManagerInstance.PauseCheck();
 
        if(gameManagerInstance.currentPauseState != GameManager.PauseState.paused)
         {
-            gameManagerInstance.frontDoor.GetComponent<AudioSource>().enabled = true;
-
             if (gameManagerInstance.isPlayerAlive == true)
             {
-                Debug.Log("FINISHED");
+                gameManagerInstance.CameronFade();
+
+                if(gameManagerInstance.black.canvasRenderer.GetAlpha() == 1f)
+                {
+                    SceneManager.LoadScene(gameOverSceneIndex);
+                }
             }
 
             if (gameManagerInstance.currentGameState == GameManager.GameState.phase1 && gameManagerInstance.currentActionGate == GameManager.ActionGate.shouldDo)
@@ -101,11 +113,6 @@ public class GameManagerHandler : MonoBehaviour
             {
                 gameManagerInstance.SeventhEvent();
             }
-        }
-
-        else
-        {
-            gameManagerInstance.frontDoor.GetComponent<AudioSource>().enabled = false;
         }
     }
 }
