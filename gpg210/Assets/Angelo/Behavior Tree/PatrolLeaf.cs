@@ -27,7 +27,7 @@ public class PatrolLeaf : Node
         }
         if (this.NodeHandler.ScreamAudioCue == true)
         {
-            this.NodeHandler.scream.PlayOneShot(this.NodeHandler.scream.clip, 1);
+            this.NodeHandler.scream.PlayOneShot(this.NodeHandler.scream.clip, 2);
             this.NodeHandler.ScreamAudioCue = false;
         }
 

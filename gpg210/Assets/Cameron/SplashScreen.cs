@@ -13,7 +13,7 @@ public class SplashScreen : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
-        Logo.GetComponent<CanvasRenderer>().SetAlpha(1.0f);
+        //Logo.GetComponent<CanvasRenderer>().SetAlpha(1.0f);
         Background.GetComponent<CanvasRenderer>().SetAlpha(1.0f);
 
 
@@ -22,7 +22,7 @@ public class SplashScreen : MonoBehaviour {
     // Update is called once per frame
     void Update ()
     {
-        Logo.CrossFadeAlpha(0f, fadetimeLogo, false);
+        //Logo.CrossFadeAlpha(0f, fadetimeLogo, false);
         Background.CrossFadeAlpha(0f, fadetimeBackground, false);
 
     }
