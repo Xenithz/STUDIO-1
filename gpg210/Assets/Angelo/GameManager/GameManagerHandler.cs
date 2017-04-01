@@ -19,6 +19,8 @@ public class GameManagerHandler : MonoBehaviour
     public List<GameObject> Event4 = new List<GameObject>();
     public List<GameObject> Event5 = new List<GameObject>();
     public List<GameObject> Writing = new List<GameObject>();
+    public List<Light> Lights = new List<Light>();
+    public List<Light> KitchenLights = new List<Light>();
 
     public GameObject ai;
     public GameObject frontDoor;
@@ -41,6 +43,8 @@ public class GameManagerHandler : MonoBehaviour
         gameManagerInstance.FourthEvents.AddRange(Event4);
         gameManagerInstance.FifthEvents.AddRange(Event5);
         gameManagerInstance.Writing.AddRange(Writing);
+        gameManagerInstance.Lights.AddRange(Lights);
+        gameManagerInstance.KitchenLights.AddRange(KitchenLights);
 
         gameManagerInstance.AI = ai;
         gameManagerInstance.frontDoor = frontDoor;
@@ -51,44 +55,57 @@ public class GameManagerHandler : MonoBehaviour
         //Check every frame for pause
         gameManagerInstance.PauseCheck();
 
-        if(gameManagerInstance.isPlayerAlive == true)
+       if(gameManagerInstance.currentPauseState != GameManager.PauseState.paused)
         {
-            Debug.Log("FINISHED");
+            gameManagerInstance.frontDoor.GetComponent<AudioSource>().enabled = true;
+
+            if (gameManagerInstance.isPlayerAlive == true)
+            {
+                Debug.Log("FINISHED");
+            }
+
+            if (gameManagerInstance.currentGameState == GameManager.GameState.phase1 && gameManagerInstance.currentActionGate == GameManager.ActionGate.shouldDo)
+            {
+                gameManagerInstance.FirstEvent();
+            }
+
+            else if (gameManagerInstance.currentGameState == GameManager.GameState.phase2 && gameManagerInstance.currentActionGate == GameManager.ActionGate.shouldDo)
+            {
+                gameManagerInstance.SecondEvent();
+            }
+
+            else if (gameManagerInstance.currentGameState == GameManager.GameState.phase3 && gameManagerInstance.currentActionGate == GameManager.ActionGate.shouldDo)
+            {
+                gameManagerInstance.ThirdEvent();
+                StartCoroutine(gameManagerInstance.KitchenFlash());
+                StartCoroutine(gameManagerInstance.WritingOnWall());
+            }
+
+            else if (gameManagerInstance.currentGameState == GameManager.GameState.phase4 && gameManagerInstance.currentActionGate == GameManager.ActionGate.shouldDo)
+            {
+                gameManagerInstance.FourthEvent();
+                StopAllCoroutines();
+            }
+
+            else if (gameManagerInstance.currentGameState == GameManager.GameState.phase5 && gameManagerInstance.currentActionGate == GameManager.ActionGate.shouldDo)
+            {
+                gameManagerInstance.FifthEvent();
+            }
+
+            else if (gameManagerInstance.currentGameState == GameManager.GameState.phase6 && gameManagerInstance.currentActionGate == GameManager.ActionGate.shouldDo)
+            {
+                gameManagerInstance.SixthEvent();
+            }
+
+            else if (gameManagerInstance.currentGameState == GameManager.GameState.phase7 && gameManagerInstance.currentActionGate == GameManager.ActionGate.shouldDo)
+            {
+                gameManagerInstance.SeventhEvent();
+            }
         }
 
-        if(gameManagerInstance.currentGameState == GameManager.GameState.phase1 && gameManagerInstance.currentActionGate == GameManager.ActionGate.shouldDo)
+        else
         {
-            gameManagerInstance.FirstEvent();
-        }
-
-        else if(gameManagerInstance.currentGameState == GameManager.GameState.phase2 && gameManagerInstance.currentActionGate == GameManager.ActionGate.shouldDo)
-        {
-            gameManagerInstance.SecondEvent();
-        }
-
-        else if(gameManagerInstance.currentGameState == GameManager.GameState.phase3 && gameManagerInstance.currentActionGate == GameManager.ActionGate.shouldDo)
-        {
-            gameManagerInstance.ThirdEvent();
-        }
-
-        else if(gameManagerInstance.currentGameState == GameManager.GameState.phase4 && gameManagerInstance.currentActionGate == GameManager.ActionGate.shouldDo)
-        {
-            gameManagerInstance.FourthEvent();
-        }
-
-        else if(gameManagerInstance.currentGameState == GameManager.GameState.phase5 && gameManagerInstance.currentActionGate == GameManager.ActionGate.shouldDo)
-        {
-            gameManagerInstance.FifthEvent();
-        }
-
-        else if(gameManagerInstance.currentGameState == GameManager.GameState.phase6 && gameManagerInstance.currentActionGate == GameManager.ActionGate.shouldDo)
-        {
-            gameManagerInstance.SixthEvent();
-        }
-
-        else if(gameManagerInstance.currentGameState == GameManager.GameState.phase7 && gameManagerInstance.currentActionGate == GameManager.ActionGate.shouldDo)
-        {
-            gameManagerInstance.SeventhEvent();
+            gameManagerInstance.frontDoor.GetComponent<AudioSource>().enabled = false;
         }
     }
 }

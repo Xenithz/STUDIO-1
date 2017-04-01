@@ -41,6 +41,8 @@ public class GameManager
     public List<GameObject> FourthEvents = new List<GameObject>();
     public List<GameObject> FifthEvents = new List<GameObject>();
     public List<GameObject> Writing = new List<GameObject>();
+    public List<Light> Lights = new List<Light>();
+    public List<Light> KitchenLights = new List<Light>();
 
     public GameObject AI;
     public GameObject frontDoor;
@@ -61,6 +63,7 @@ public class GameManager
         phase5,
         phase6,
         phase7,
+        phase8
     }
 
     public enum ActionGate
@@ -83,6 +86,10 @@ public class GameManager
     public GameObject pauseMenuCanvas;
 
     public int candleCount;
+
+    public Image black;
+
+    public float fadeTime;
 
     //Function to set the isPlayerAlive bool to false
     public void PlayerHasDied()
@@ -119,23 +126,24 @@ public class GameManager
 
     public void SecondEvent()
     {
+        frontDoor.GetComponent<AudioSource>().Stop(); 
         SecondEvents[0].GetComponent<MonoDoor>().DoorIsLocked = false;
         SecondEvents[0].GetComponent<MonoDoor>().Smoothing = 0.2f;
-        SecondEvents[0].GetComponent<MonoItem>().CurrentBehavior();
+        SecondEvents[0].GetComponent<MonoDoor>().BehaviorNoAudio();
+        SecondEvents[0].GetComponent<MonoDoor>().Creak();
         SecondEvents[1].GetComponent<MonoDoor>().DoorIsLocked = false;
         SecondEvents[1].GetComponent<MonoItem>().CurrentBehavior();
         SecondEvents[1].GetComponent<AudioSource>().time = 0.2f;
-        SecondEvents[1].GetComponent<AudioSource>().Play();
         SetGateState(ActionGate.shouldNotDo);
         SetGameState(GameState.phase3);
     }
 
     public void ThirdEvent()
     {
-        foreach (GameObject v in Writing)
-        {
-            v.SetActive(true);
-        }
+        //foreach (GameObject v in Writing)
+        //{
+        //    v.SetActive(true);
+        //}
 
         ThirdEvents[0].GetComponent<MonoDoor>().Smoothing = 6f;
         ThirdEvents[0].GetComponent<MonoItem>().CurrentBehavior();
@@ -147,24 +155,29 @@ public class GameManager
 
     public void FourthEvent()
     {
+        foreach(Light v in Lights)
+        {
+            v.enabled = false;
+        }
+
         FourthEvents[0].GetComponent<MonoDoor>().DoorIsLocked = false;
-        FourthEvents[0].GetComponent<MonoDoor>().Smoothing = 1f;
+        FourthEvents[0].GetComponent<MonoDoor>().Smoothing = 2f;
         FourthEvents[1].GetComponent<MonoDoor>().DoorIsLocked = false;
-        FourthEvents[1].GetComponent<MonoDoor>().Smoothing = 1f;
+        FourthEvents[1].GetComponent<MonoDoor>().Smoothing = 2f;
         FourthEvents[2].GetComponent<MonoDoor>().DoorIsLocked = false;
-        FourthEvents[2].GetComponent<MonoDoor>().Smoothing = 1f;
+        FourthEvents[2].GetComponent<MonoDoor>().Smoothing = 2f;
         FourthEvents[3].GetComponent<MonoDoor>().DoorIsLocked = false;
-        FourthEvents[3].GetComponent<MonoDoor>().Smoothing = 1f;
+        FourthEvents[3].GetComponent<MonoDoor>().Smoothing = 2f;
         FourthEvents[4].GetComponent<MonoDoor>().DoorIsLocked = false;
-        FourthEvents[4].GetComponent<MonoDoor>().Smoothing = 1f;
+        FourthEvents[4].GetComponent<MonoDoor>().Smoothing = 2f;
         FourthEvents[5].GetComponent<MonoDoor>().DoorIsLocked = false;
-        FourthEvents[5].GetComponent<MonoDoor>().Smoothing = 1f;
+        FourthEvents[5].GetComponent<MonoDoor>().Smoothing = 2f;
         FourthEvents[6].GetComponent<MonoDoor>().DoorIsLocked = false;
-        FourthEvents[6].GetComponent<MonoDoor>().Smoothing = 1f;
+        FourthEvents[6].GetComponent<MonoDoor>().Smoothing = 2f;
         FourthEvents[7].GetComponent<MonoDoor>().DoorIsLocked = false;
-        FourthEvents[7].GetComponent<MonoDoor>().Smoothing = 1f;
+        FourthEvents[7].GetComponent<MonoDoor>().Smoothing = 2f;
         FourthEvents[8].GetComponent<MonoDoor>().DoorIsLocked = false;
-        FourthEvents[8].GetComponent<MonoDoor>().Smoothing = 1f;
+        FourthEvents[8].GetComponent<MonoDoor>().Smoothing = 2f;
         AI.SetActive(true);
         SetGateState(ActionGate.shouldDo);
         SetGameState(GameState.phase5);
@@ -186,14 +199,22 @@ public class GameManager
         {
             GameObject.Destroy(AI);
             frontDoor.GetComponent<MonoHandEvent>().doOnce = false;
-            SetGateState(ActionGate.shouldNotDo);
+            SetGateState(ActionGate.shouldDo);
             SetGameState(GameState.phase7);
         }
     }
 
     public void SeventhEvent()
     {
-        Debug.Log("DONE");
+        frontDoor.GetComponent<AudioSource>().Play();
+        frontDoor.GetComponent<AudioSource>().loop = true;
+        SetGateState(ActionGate.shouldNotDo);
+        SetGameState(GameState.phase8);
+    }
+
+    public void EightEvent()
+    {
+        Debug.Log("done");
     }
 
     #endregion
@@ -260,4 +281,29 @@ public class GameManager
         //pauseMenuCanvas.SetActive(false);
     }
     #endregion
+
+    public void CameronFade()
+    {
+
+    }
+
+    public IEnumerator KitchenFlash()
+    {
+        while(true)
+        {
+            yield return new WaitForSeconds(0.1f);
+            KitchenLights[0].enabled = !KitchenLights[0].enabled;
+            KitchenLights[1].enabled = !KitchenLights[1].enabled;
+        }
+    }
+
+    public IEnumerator WritingOnWall()
+    {
+        for(int i = 0; i < Writing.Count; i++)
+        {
+            yield return new WaitForSeconds(0.3f);
+            Writing[i].SetActive(true);
+            yield return null;
+        }
+    }
 }
