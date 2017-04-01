@@ -31,6 +31,16 @@ public class AttackLeaf : Node
 
                 if(this.NodeHandler.Player.GetComponent<PlayerControllerV5>().isDead == true)
                 {
+                    if (this.NodeHandler.scream.isPlaying != true)
+                    {
+                        this.NodeHandler.ScreamAudioCue = true;
+                    }
+                    if (this.NodeHandler.ScreamAudioCue == true)
+                    {
+                        this.NodeHandler.scream.PlayOneShot(this.NodeHandler.scream.clip, 5);
+                        this.NodeHandler.ScreamAudioCue = false;
+                    }
+
                     this.NodeHandler.AttackTimer += Time.deltaTime;
 
                     this.NodeHandler.Player.GetComponent<PlayerControllerV5>().ForcedTurn();

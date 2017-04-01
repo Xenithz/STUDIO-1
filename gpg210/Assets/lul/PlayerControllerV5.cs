@@ -37,7 +37,7 @@ public class PlayerControllerV5 : MonoBehaviour
 
     public bool isDead;
 
-    public Handler handle;
+    //public Handler handle;
 
     public GameObject head;
 
@@ -66,82 +66,85 @@ public class PlayerControllerV5 : MonoBehaviour
 
         gameManager = GameObject.Find("GameManager");
 
-        handle = GameObject.Find("AIFINAL").GetComponent<Handler>();
+        //handle = GameObject.Find("AIFINAL").GetComponent<Handler>();
 
-        head = GameObject.Find("AIFINAL").transform.GetChild(2).gameObject;
+       // head = GameObject.Find("AIFINAL").transform.GetChild(2).gameObject;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(isDead != true)
+       if(gameManager.GetComponent<GameManagerHandler>().gameManagerInstance.currentPauseState != GameManager.PauseState.paused)
         {
-            // Simple Walking
-
-            // Setting simple walk system multiplying by speed per second 
-            RightLeft = Input.GetAxis("Horizontal") * speed * Time.deltaTime;
-            FrontBack = Input.GetAxis("Vertical") * speed * Time.deltaTime;
-
-            transform.Translate(RightLeft * Time.deltaTime, 0, FrontBack * Time.deltaTime);
-
-
-
-
-
-
-
-            // if and else for sprint 
-
-            // left shift for sprint 
-            if (Input.GetKey(KeyCode.LeftShift))
+            if (isDead != true)
             {
-                // If pressed speed changes with isRunning set to true 
-                speed = 200.0f;
-                isRunning = true;
-            }
-            else
-            {
-                // Else speed remains same and isRunning remains false
-                speed = 100.0f;
-                isRunning = false;
-            }
+                // Simple Walking
 
-            // If is running is ture 
-            if (isRunning)
-            {
-                // Subtratcing present stamina per second 
-                presentStamina -= Time.deltaTime;
+                // Setting simple walk system multiplying by speed per second 
+                RightLeft = Input.GetAxis("Horizontal") * speed * Time.deltaTime;
+                FrontBack = Input.GetAxis("Vertical") * speed * Time.deltaTime;
 
-                // IF present stamina is less than 0
-                if (presentStamina < 0)
+                transform.Translate(RightLeft * Time.deltaTime, 0, FrontBack * Time.deltaTime);
+
+
+
+
+
+
+
+                // if and else for sprint 
+
+                // left shift for sprint 
+                if (Input.GetKey(KeyCode.LeftShift))
                 {
-                    // Speed changes to the normal walk speed and isRunning goes to false
-                    presentStamina = 0;
+                    // If pressed speed changes with isRunning set to true 
+                    speed = 200.0f;
+                    isRunning = true;
+                }
+                else
+                {
+                    // Else speed remains same and isRunning remains false
                     speed = 100.0f;
                     isRunning = false;
                 }
+
+                // If is running is ture 
+                if (isRunning)
+                {
+                    // Subtratcing present stamina per second 
+                    presentStamina -= Time.deltaTime;
+
+                    // IF present stamina is less than 0
+                    if (presentStamina < 0)
+                    {
+                        // Speed changes to the normal walk speed and isRunning goes to false
+                        presentStamina = 0;
+                        speed = 100.0f;
+                        isRunning = false;
+                    }
+                }
+
+                // Genrating stamina bar again 
+                // IF present stamina is less than maxStamina anytime 
+                else if (presentStamina < maxStamina)
+                {
+                    // increasing present stamina per second 
+                    presentStamina += Time.deltaTime;
+                }
+
+
+                //Mouse Rotation 
+                Xaxis = Input.GetAxis("Mouse X") * rotationSpeed;
+                Yaxis -= Input.GetAxis("Mouse Y") * rotationSpeed;
+
+                // Claping yaxis range between max and minimum range 
+                Yaxis = Mathf.Clamp(Yaxis, -cameraRange, cameraRange);
+
+                transform.Rotate(0, Xaxis, 0);
+
+                // Rotating camera 
+                cameraRotate.transform.localEulerAngles = new Vector3(Yaxis, 0, 0);
             }
-
-            // Genrating stamina bar again 
-            // IF present stamina is less than maxStamina anytime 
-            else if (presentStamina < maxStamina)
-            {
-                // increasing present stamina per second 
-                presentStamina += Time.deltaTime;
-            }
-
-
-            //Mouse Rotation 
-            Xaxis = Input.GetAxis("Mouse X") * rotationSpeed;
-            Yaxis -= Input.GetAxis("Mouse Y") * rotationSpeed;
-
-            // Claping yaxis range between max and minimum range 
-            Yaxis = Mathf.Clamp(Yaxis, -cameraRange, cameraRange);
-
-            transform.Rotate(0, Xaxis, 0);
-
-            // Rotating camera 
-            cameraRotate.transform.localEulerAngles = new Vector3(Yaxis, 0, 0);
         }
     }
 
@@ -180,6 +183,14 @@ public class PlayerControllerV5 : MonoBehaviour
         {
             //then grounded is false
             grounded = false;
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.tag == "triggerEvent")
+        {
+            other.gameObject.GetComponent<TriggerZoneEvent>().EventTrigger();
         }
     }
 

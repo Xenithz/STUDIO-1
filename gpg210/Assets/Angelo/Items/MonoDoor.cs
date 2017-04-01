@@ -130,4 +130,19 @@ public class MonoDoor : MonoItem
             transform.localRotation = Quaternion.Slerp(transform.localRotation, target2, Time.deltaTime * smoothing);
         }
     }
+
+    public void Creak()
+    {
+        doorAudioSource.clip = doorClips[4];
+        doorAudioSource.time = 0.4f;
+        doorAudioSource.Play();
+    }
+
+    public void BehaviorNoAudio()
+    {
+        if (currentState == State.closed)
+        {
+            currentState = State.open;
+        }
+    }
 }

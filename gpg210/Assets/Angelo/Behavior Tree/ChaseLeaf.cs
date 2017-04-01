@@ -21,6 +21,16 @@ public class ChaseLeaf : Node
     {
         if (this.NodeHandler.AgentHasSightOfPlayer == true && this.NodeHandler.IsInTrigger == false && this.NodeHandler.DistanceToPlayer < 5.5f && this.NodeHandler.Player.GetComponent<PlayerControllerV5>().isDead == false)
         {
+            if (this.NodeHandler.scream.isPlaying != true)
+            {
+                this.NodeHandler.ScreamAudioCue = true;
+            }
+            if (this.NodeHandler.ScreamAudioCue == true)
+            {
+                this.NodeHandler.scream.PlayOneShot(this.NodeHandler.scream.clip, 3.5f);
+                this.NodeHandler.ScreamAudioCue = false;
+            }
+
             this.NodeHandler.Anim.SetFloat("walkSpeed", 3);
             this.NodeHandler.Anim.SetBool("iswWalking", true);
 

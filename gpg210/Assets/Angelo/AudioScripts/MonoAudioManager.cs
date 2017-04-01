@@ -18,6 +18,8 @@ public class MonoAudioManager : MonoBehaviour
 
     private int audioIndex;
 
+    public GameObject gameManager;
+
     public enum SoundType
     {
         wood,
@@ -28,6 +30,8 @@ public class MonoAudioManager : MonoBehaviour
 
     private void Awake()
     {
+        gameManager = GameObject.Find("GameManager");
+
         audioSourceForPlayer = gameObject.GetComponent<AudioSource>();
 
         this.soundType = SoundType.wood;
@@ -45,60 +49,63 @@ public class MonoAudioManager : MonoBehaviour
 
     private void Update()
     {
-        //Bool array to track key presses
-        this.keys = new bool[]
-            {
+        if(gameManager.GetComponent<GameManagerHandler>().gameManagerInstance.currentPauseState != GameManager.PauseState.paused)
+        {
+            //Bool array to track key presses
+            this.keys = new bool[]
+                {
                 Input.GetKey(KeyCode.W),
                 Input.GetKey(KeyCode.A),
                 Input.GetKey(KeyCode.S),
                 Input.GetKey(KeyCode.D)
-            };
-        //If pressing key
-        if (this.keys[0] || this.keys[1] || this.keys[2] || this.keys[3])
-        {
-            //Set bool for checking if the key is down to true
-            this.keyIsDown = true;
-            
-            //Check if the audio is not playing
-            if (!this.audioSourceForPlayer.isPlaying)
+                };
+            //If pressing key
+            if (this.keys[0] || this.keys[1] || this.keys[2] || this.keys[3])
             {
-                //if its gravel
+                //Set bool for checking if the key is down to true
+                this.keyIsDown = true;
+
+                //Check if the audio is not playing
+                if (!this.audioSourceForPlayer.isPlaying)
+                {
+                    //if its gravel
+                    if (this.soundType == SoundType.wood)
+                    {
+                        //set to hardcoded value
+                        if (this.audioIndex > 3)
+                        {
+                            this.audioIndex = 0;
+                        }
+                    }
+
+                    else if (this.soundType == SoundType.ceramic && this.audioIndex > 3)
+                    {
+                        this.audioIndex = 2;
+                    }
+                    this.audioSourceForPlayer.clip = this.footstepAudioClips[this.audioIndex];
+                    this.audioSourceForPlayer.Play();
+                    this.audioIndex++;
+                }
+            }
+            if (this.keyIsDown && !this.keyAlreadyDown)
+            {
+                this.keyAlreadyDown = true;
+            }
+            if (!this.keys[0] && !this.keys[1] && !this.keys[2] && !this.keys[3] && this.keyAlreadyDown)
+            {
+                this.audioSourceForPlayer.Stop();
                 if (this.soundType == SoundType.wood)
                 {
-                    //set to hardcoded value
-                    if (this.audioIndex > 3)
-                    {
-                        this.audioIndex = 0;
-                    }
+                    this.audioIndex = 0;
                 }
-
-                else if (this.soundType == SoundType.ceramic && this.audioIndex > 3)
+                else if (this.soundType == SoundType.ceramic)
                 {
                     this.audioIndex = 2;
                 }
                 this.audioSourceForPlayer.clip = this.footstepAudioClips[this.audioIndex];
-                this.audioSourceForPlayer.Play();
-                this.audioIndex++;
+                this.keyIsDown = false;
+                this.keyAlreadyDown = false;
             }
-        }
-        if (this.keyIsDown && !this.keyAlreadyDown)
-        {
-            this.keyAlreadyDown = true;
-        }
-        if (!this.keys[0] && !this.keys[1] && !this.keys[2] && !this.keys[3] && this.keyAlreadyDown)
-        {
-            this.audioSourceForPlayer.Stop();
-            if (this.soundType == SoundType.wood)
-            {
-                this.audioIndex = 0;
-            }
-            else if (this.soundType == SoundType.ceramic)
-            {
-                this.audioIndex = 2;
-            }
-            this.audioSourceForPlayer.clip = this.footstepAudioClips[this.audioIndex];
-            this.keyIsDown = false;
-            this.keyAlreadyDown = false;
         }
     }
 

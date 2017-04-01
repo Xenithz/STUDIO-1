@@ -50,6 +50,7 @@ public class MonoCandleEvent : MonoItem
     {
         if (doOnce == false)
         {
+            Debug.Log("access");
             currentState = State.off;
             candleAudioSource.clip = candleClip;
             candleAudioSource.Play();
