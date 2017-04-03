@@ -20,6 +20,7 @@ public class GameManagerHandler : MonoBehaviour
     public List<GameObject> Event4 = new List<GameObject>();
     public List<GameObject> Event5 = new List<GameObject>();
     public List<GameObject> Writing = new List<GameObject>();
+    public List<GameObject> FinalCandles = new List<GameObject>();
     public List<Light> Lights = new List<Light>();
     public List<Light> KitchenLights = new List<Light>();
 
@@ -49,6 +50,7 @@ public class GameManagerHandler : MonoBehaviour
         gameManagerInstance.FourthEvents.AddRange(Event4);
         gameManagerInstance.FifthEvents.AddRange(Event5);
         gameManagerInstance.Writing.AddRange(Writing);
+        gameManagerInstance.FinalCandles.AddRange(FinalCandles);
         gameManagerInstance.Lights.AddRange(Lights);
         gameManagerInstance.KitchenLights.AddRange(KitchenLights);
 

@@ -101,6 +101,21 @@ public class Handler : MonoBehaviour
         }
     }
 
+    private bool screamAndRun;
+
+    public bool ScreamAndRun
+    {
+        get
+        {
+            return screamAndRun;
+        }
+
+        set
+        {
+            screamAndRun = value;
+        }
+    }
+
     private bool shouldTurnAroundInstantly;
 
     public bool ShouldTurnAroundInstantly
@@ -600,8 +615,13 @@ public class Handler : MonoBehaviour
         //Add the root to the behavior tree
         test.AddRoot();
 
+        test.DynamicAddNode(new SequenceSelector(0, "loneEvent", this), "root");
+
+        test.DynamicAddNode(new VisionLeaf(0, "visionLone", this), "loneEvent");
+        test.DynamicAddNode(new SoleInteractionLeaf(1, "loneInteraction", this), "loneEvent");
+
         //Add Sequence selector to handle the attack sequence
-        test.DynamicAddNode(new SequenceSelector(0, "attackSequence", this), "root");
+        test.DynamicAddNode(new SequenceSelector(1, "attackSequence", this), "root");
 
         //Attack Sequence Leaf Nodes
         test.DynamicAddNode(new VisionLeaf(0, "vision", this), "attackSequence");
@@ -610,7 +630,7 @@ public class Handler : MonoBehaviour
         test.DynamicAddNode(new AttackLeaf(3, "attack", this), "attackSequence");
 
         //Patrol Sequence
-        test.DynamicAddNode(new SequenceSelector(1, "patrolSequence", this), "root");
+        test.DynamicAddNode(new SequenceSelector(2, "patrolSequence", this), "root");
 
         //Patrol Sequence Leaf Nodes
         test.DynamicAddNode(new OpenDoorLeaf(0, "doorPatrol", this), "patrolSequence");

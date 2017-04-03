@@ -42,6 +42,7 @@ public class GameManager
     public List<GameObject> FourthEvents = new List<GameObject>();
     public List<GameObject> FifthEvents = new List<GameObject>();
     public List<GameObject> Writing = new List<GameObject>();
+    public List<GameObject> FinalCandles = new List<GameObject>();
     public List<Light> Lights = new List<Light>();
     public List<Light> KitchenLights = new List<Light>();
 
@@ -225,6 +226,12 @@ public class GameManager
     {
         frontDoor.GetComponent<AudioSource>().Play();
         frontDoor.GetComponent<AudioSource>().loop = true;
+
+        foreach(GameObject v in FinalCandles)
+        {
+            v.SetActive(true);
+        }
+
         SetGateState(ActionGate.shouldNotDo);
         SetGameState(GameState.phase8);
     }
