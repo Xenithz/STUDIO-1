@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class MonoDoor : MonoItem
 {
-    private enum State
+    public enum State
     {
         open,
         closed
     }
     //States for the door
 
-    private State currentState;
+    public State currentState;
     //Track the current state of the door
 
     public enum DoorType
@@ -100,6 +100,11 @@ public class MonoDoor : MonoItem
                     doorAudioSource.clip = doorClips[3];
                     doorAudioSource.Play();
                     currentState = State.closed;
+
+                    if (gameObject.GetComponentInChildren<BoxCollider>().enabled == false)
+                    {
+                        gameObject.GetComponentInChildren<BoxCollider>().enabled = true;
+                    }
                 }
             }
         }

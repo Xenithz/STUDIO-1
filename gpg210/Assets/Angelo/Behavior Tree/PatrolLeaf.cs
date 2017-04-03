@@ -59,7 +59,8 @@ public class PatrolLeaf : Node
         this.NodeHandler.AgentRigidBody.velocity = Vector3.ClampMagnitude(this.NodeHandler.AgentRigidBody.velocity + this.NodeHandler.SteeringForPatrol, this.NodeHandler.MaxSpeedForPatrol);
 
         //Make use of euler integration to apply the steering force
-        this.NodeHandler.transform.position = this.NodeHandler.transform.position + this.NodeHandler.AgentRigidBody.velocity;
+        //this.NodeHandler.transform.position = this.NodeHandler.transform.position + this.NodeHandler.AgentRigidBody.velocity;
+        this.NodeHandler.AgentRigidBody.velocity = this.NodeHandler.AgentRigidBody.velocity;
 
         //Get the direction to the patrol target by normalizing
         this.NodeHandler.DirectionForRotation = Vector3.Normalize(this.NodeHandler.PatrolTargetTransform.position - this.NodeHandler.transform.position);

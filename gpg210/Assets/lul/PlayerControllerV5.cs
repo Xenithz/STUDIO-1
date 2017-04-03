@@ -57,7 +57,7 @@ public class PlayerControllerV5 : MonoBehaviour
         staminaTexture = new Texture2D(1, 1);
 
         //setting pixel color black 
-        staminaTexture.SetPixel(0, 0, Color.black);
+        staminaTexture.SetPixel(0, 0, Color.white);
 
         // Appling the color to the pixels 
         staminaTexture.Apply();

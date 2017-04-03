@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager
 {
@@ -178,6 +179,16 @@ public class GameManager
         FourthEvents[7].GetComponent<MonoDoor>().Smoothing = 2f;
         FourthEvents[8].GetComponent<MonoDoor>().DoorIsLocked = false;
         FourthEvents[8].GetComponent<MonoDoor>().Smoothing = 2f;
+
+        FourthEvents[0].GetComponent<MonoDoor>().currentState = MonoDoor.State.closed;
+        FourthEvents[1].GetComponent<MonoDoor>().currentState = MonoDoor.State.closed;
+        FourthEvents[2].GetComponent<MonoDoor>().currentState = MonoDoor.State.closed;
+        FourthEvents[3].GetComponent<MonoDoor>().currentState = MonoDoor.State.closed;
+        FourthEvents[4].GetComponent<MonoDoor>().currentState = MonoDoor.State.closed;
+        FourthEvents[5].GetComponent<MonoDoor>().currentState = MonoDoor.State.closed;
+        FourthEvents[6].GetComponent<MonoDoor>().currentState = MonoDoor.State.closed;
+        FourthEvents[7].GetComponent<MonoDoor>().currentState = MonoDoor.State.closed;
+        FourthEvents[8].GetComponent<MonoDoor>().currentState = MonoDoor.State.closed;
         AI.SetActive(true);
         SetGateState(ActionGate.shouldDo);
         SetGameState(GameState.phase5);
@@ -185,19 +196,21 @@ public class GameManager
 
     public void FifthEvent()
     {
-        FifthEvents[0].GetComponent<MonoCandle>().currentState = MonoCandle.State.on;
-        FifthEvents[1].GetComponent<MonoCandle>().currentState = MonoCandle.State.on;
-        FifthEvents[2].GetComponent<MonoCandle>().currentState = MonoCandle.State.on;
-        FifthEvents[3].GetComponent<MonoCandle>().currentState = MonoCandle.State.on;
+        Debug.Log("test event");
         SetGateState(ActionGate.shouldDo);
         SetGameState(GameState.phase6);
     }
 
     public void SixthEvent()
     {
-        if(candleCount == 4)
+        if(candleCount == 6)
         {
             GameObject.Destroy(AI);
+
+            foreach (Light v in Lights)
+            {
+                v.enabled = true;
+            }
             frontDoor.GetComponent<MonoHandEvent>().doOnce = false;
             SetGateState(ActionGate.shouldDo);
             SetGameState(GameState.phase7);
@@ -214,7 +227,11 @@ public class GameManager
 
     public void EightEvent()
     {
-        Debug.Log("done");
+        CameronFade();
+        if(black.canvasRenderer.GetAlpha() == 1f)
+        {
+            SceneManager.LoadScene(0);
+        }
     }
 
     #endregion
