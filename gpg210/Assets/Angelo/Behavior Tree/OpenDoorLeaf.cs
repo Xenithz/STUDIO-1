@@ -23,6 +23,8 @@ public class OpenDoorLeaf : Node
         //Check if the node handler is inside the trigger
        if(this.NodeHandler.IsInTrigger == true)
         {
+            this.NodeHandler.AgentRigidBody.velocity = Vector3.ClampMagnitude(this.NodeHandler.AgentRigidBody.velocity, 0f);
+
             this.NodeHandler.Anim.SetBool("isWalking", false);
             
             //Update the timer by time.delta time so that it increases by 1 second per real time

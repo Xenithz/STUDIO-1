@@ -60,7 +60,8 @@ public class GameManagerHandler : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(gameManagerInstance.currentActionGate);
+        //Debug.Log(gameManagerInstance.currentActionGate);\
+        Debug.Log(gameManagerInstance.currentGameState);
         //Check every frame for pause
         gameManagerInstance.PauseCheck();
 
@@ -72,6 +73,7 @@ public class GameManagerHandler : MonoBehaviour
 
                 if(gameManagerInstance.black.canvasRenderer.GetAlpha() == 1f)
                 {
+                    Debug.Log("ai killed u");
                     SceneManager.LoadScene(gameOverSceneIndex);
                 }
             }
@@ -112,6 +114,11 @@ public class GameManagerHandler : MonoBehaviour
             else if (gameManagerInstance.currentGameState == GameManager.GameState.phase7 && gameManagerInstance.currentActionGate == GameManager.ActionGate.shouldDo)
             {
                 gameManagerInstance.SeventhEvent();
+            }
+
+            else if (gameManagerInstance.currentGameState == GameManager.GameState.phase8 && gameManagerInstance.currentActionGate == GameManager.ActionGate.shouldDo)
+            {
+                gameManagerInstance.EightEvent();
             }
         }
     }
