@@ -101,6 +101,21 @@ public class Handler : MonoBehaviour
         }
     }
 
+    private bool shouldTurnAroundInstantly;
+
+    public bool ShouldTurnAroundInstantly
+    {
+        get
+        {
+            return shouldTurnAroundInstantly;
+        }
+
+        set
+        {
+            shouldTurnAroundInstantly = value;
+        }
+    }
+
     private bool screamAudioCue;
 
     public bool ScreamAudioCue

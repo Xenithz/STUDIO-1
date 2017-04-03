@@ -28,6 +28,7 @@ public class GameManagerHandler : MonoBehaviour
     public Image black;
     public float fadeTime;
     public int gameOverSceneIndex;
+    public Text objectivesUI;
 
 
     private void Awake()
@@ -56,6 +57,7 @@ public class GameManagerHandler : MonoBehaviour
         gameManagerInstance.black = black;
         gameManagerInstance.fadeTime = fadeTime;
         gameManagerInstance.black.GetComponent<CanvasRenderer>().SetAlpha(0f);
+        gameManagerInstance.objectivesUI = objectivesUI;
     }
 
     private void Update()
@@ -73,7 +75,6 @@ public class GameManagerHandler : MonoBehaviour
 
                 if(gameManagerInstance.black.canvasRenderer.GetAlpha() == 1f)
                 {
-                    Debug.Log("ai killed u");
                     SceneManager.LoadScene(gameOverSceneIndex);
                 }
             }

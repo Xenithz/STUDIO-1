@@ -47,6 +47,7 @@ public class GameManager
 
     public GameObject AI;
     public GameObject frontDoor;
+    public Text objectivesUI;
 
     //Enum to contain the different states of game with relation to pausing
     public enum PauseState
@@ -161,6 +162,8 @@ public class GameManager
             v.enabled = false;
         }
 
+        objectivesUI.text = "Put out all 6 candles.";
+
         FourthEvents[0].GetComponent<MonoDoor>().DoorIsLocked = false;
         FourthEvents[0].GetComponent<MonoDoor>().Smoothing = 2f;
         FourthEvents[1].GetComponent<MonoDoor>().DoorIsLocked = false;
@@ -205,6 +208,7 @@ public class GameManager
     {
         if(candleCount == 6)
         {
+            objectivesUI.text = "";
             GameObject.Destroy(AI);
 
             foreach (Light v in Lights)

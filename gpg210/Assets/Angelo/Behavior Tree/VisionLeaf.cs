@@ -32,16 +32,23 @@ public class VisionLeaf : Node
 
             if (this.NodeHandler.Angle < this.NodeHandler.EnemyFieldOfView * 0.5)
             {
-                Debug.Log("can see");
+                this.NodeHandler.ShouldTurnAroundInstantly = false;
                 this.NodeHandler.AgentHasSightOfPlayer = true;
                 SetNodeStatus(NodeStates.success);
             }
 
-            else if(this.NodeHandler.Angle > this.NodeHandler.EnemyFieldOfView * 0.5)
+            else if(this.NodeHandler.Angle > this.NodeHandler.EnemyFieldOfView * 0.5 && this.NodeHandler.DistanceToPlayer > 3f)
             {
-                Debug.Log("cant see");
+                this.NodeHandler.ShouldTurnAroundInstantly = false;
                 this.NodeHandler.AgentHasSightOfPlayer = false;
                 SetNodeStatus(NodeStates.failed);
+            }
+
+            else if(this.NodeHandler.DistanceToPlayer < 2f && this.NodeHandler.Angle > 0.5)
+            {
+                this.NodeHandler.ShouldTurnAroundInstantly = true;
+                this.NodeHandler.AgentHasSightOfPlayer = true;
+                SetNodeStatus(NodeStates.success);
             }
         }
     }

@@ -76,6 +76,13 @@ public class MonoDoor : MonoItem
                     doorAudioSource.clip = doorClips[0];
                     doorAudioSource.time = 1.7f;
                     doorAudioSource.Play();
+
+                    if (transform.Find("Cube (1)").GetComponent<BoxCollider>().enabled == true)
+                    {
+                        Debug.Log("goaway");
+                        transform.Find("Cube (1)").GetComponent<BoxCollider>().enabled = false;
+                    }
+
                     currentState = State.open;
                 }
                 else if (currentState == State.open)
@@ -84,6 +91,11 @@ public class MonoDoor : MonoItem
                     doorAudioSource.time = 0.1f;
                     doorAudioSource.Play();
                     currentState = State.closed;
+
+                    if (transform.Find("Cube (1)").GetComponent<BoxCollider>().enabled == false)
+                    {
+                        transform.Find("Cube (1)").GetComponent<BoxCollider>().enabled = true;
+                    }
                 }
             }
 
@@ -93,18 +105,25 @@ public class MonoDoor : MonoItem
                 {
                     doorAudioSource.clip = doorClips[3];
                     doorAudioSource.Play();
+
+                    if (transform.Find("Cube").GetComponent<BoxCollider>().enabled == true)
+                    {
+                        transform.Find("Cube").GetComponent<BoxCollider>().enabled = false;
+                    }
+
                     currentState = State.open;
                 }
                 else if (currentState == State.open)
                 {
                     doorAudioSource.clip = doorClips[3];
                     doorAudioSource.Play();
-                    currentState = State.closed;
 
-                    if (gameObject.GetComponentInChildren<BoxCollider>().enabled == false)
+                    if (transform.Find("Cube").GetComponent<BoxCollider>().enabled == false)
                     {
-                        gameObject.GetComponentInChildren<BoxCollider>().enabled = true;
+                        transform.Find("Cube").GetComponent<BoxCollider>().enabled = true;
                     }
+
+                    currentState = State.closed;
                 }
             }
         }
