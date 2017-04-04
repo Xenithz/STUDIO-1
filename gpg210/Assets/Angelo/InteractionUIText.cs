@@ -29,7 +29,9 @@ public class InteractionUIText : MonoBehaviour
             case States.nothing:
                 text.text = "";
                 break;
+
             default:
+                text.text = "";
                 break;
         }
     }

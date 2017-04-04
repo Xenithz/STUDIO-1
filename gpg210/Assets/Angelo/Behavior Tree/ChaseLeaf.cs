@@ -114,6 +114,11 @@ public class ChaseLeaf : Node
             SetNodeStatus(NodeStates.success);
         }
 
+        else if(this.NodeHandler.ScreamAndRun == false)
+        {
+            SetNodeStatus(NodeStates.failed);
+        }
+
         else
         {
             SetNodeStatus(NodeStates.failed);

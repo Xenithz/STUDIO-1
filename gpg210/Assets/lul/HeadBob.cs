@@ -48,8 +48,6 @@ public class HeadBob : MonoBehaviour
         {
             // then Timer is eqaul to zero 
             timer = 0;
-
-
         }
 
         // else 

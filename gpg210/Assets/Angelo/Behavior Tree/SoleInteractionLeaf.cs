@@ -20,9 +20,15 @@ public class SoleInteractionLeaf : Node
                 SetNodeStatus(NodeStates.running);
                 this.NodeHandler.AgentRigidBody.velocity = Vector3.ClampMagnitude(this.NodeHandler.AgentRigidBody.velocity, 0f);
                 this.NodeHandler.Anim.SetBool("isWalking", false);
-                this.NodeHandler.PatrolIncrementer--;
-                this.NodeHandler.scream.PlayOneShot(this.NodeHandler.scream.clip, 15f);
-                this.NodeHandler.ScreamAndRun = true;
+
+                this.NodeHandler.QuickTimer += Time.deltaTime;
+
+                if (this.NodeHandler.QuickTimer >= 4f)
+                {
+                    this.NodeHandler.scream.PlayOneShot(this.NodeHandler.scream.clip, 15f);
+                    this.NodeHandler.PatrolIncrementer--;
+                    this.NodeHandler.ScreamAndRun = true;
+                }
             }
 
             else if (this.NodeHandler.ScreamAndRun == true)

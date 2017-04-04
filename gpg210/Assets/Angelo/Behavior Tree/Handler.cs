@@ -214,6 +214,21 @@ public class Handler : MonoBehaviour
         }
     }
 
+    private float quickTimer;
+
+    public float QuickTimer
+    {
+        get
+        {
+            return quickTimer;
+        }
+
+        set
+        {
+            quickTimer = value;
+        }
+    }
+
     //Incrementing timer for door opening mechanic
     private float doorOpenTimer;
 
