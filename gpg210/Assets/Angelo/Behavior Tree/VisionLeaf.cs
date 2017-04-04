@@ -22,6 +22,8 @@ public class VisionLeaf : Node
 
         if (this.NodeHandler.DistanceToPlayer < 10f)
         {
+            Debug.Log("i should go");
+
             //Calculate the magnitude and then normalize to get the direction
             this.NodeHandler.DirectionBetweenEnemyAndPlayer = (this.NodeHandler.Player.transform.position - this.NodeHandler.transform.position).normalized;
 
@@ -32,13 +34,15 @@ public class VisionLeaf : Node
 
             if (this.NodeHandler.Angle < this.NodeHandler.EnemyFieldOfView * 0.5)
             {
+                Debug.Log("1");
                 this.NodeHandler.ShouldTurnAroundInstantly = false;
                 this.NodeHandler.AgentHasSightOfPlayer = true;
                 SetNodeStatus(NodeStates.success);
             }
 
-            else if(this.NodeHandler.Angle > this.NodeHandler.EnemyFieldOfView * 0.5 && this.NodeHandler.DistanceToPlayer > 3f)
+            else if(this.NodeHandler.Angle > this.NodeHandler.EnemyFieldOfView * 0.5 && this.NodeHandler.DistanceToPlayer > 5f)
             {
+                Debug.Log("2");
                 this.NodeHandler.ShouldTurnAroundInstantly = false;
                 this.NodeHandler.AgentHasSightOfPlayer = false;
                 SetNodeStatus(NodeStates.failed);
@@ -46,6 +50,7 @@ public class VisionLeaf : Node
 
             else if(this.NodeHandler.DistanceToPlayer < 2f && this.NodeHandler.Angle > 0.5)
             {
+                Debug.Log("3");
                 this.NodeHandler.ShouldTurnAroundInstantly = true;
                 this.NodeHandler.AgentHasSightOfPlayer = true;
                 SetNodeStatus(NodeStates.success);

@@ -27,6 +27,10 @@ public class MonoHand : MonoBehaviour
     //itemList will store all the items inside the game scene
     public List<GameObject> itemList;
 
+    public GameObject MiddleUIInteractionHolder;
+
+    public InteractionUIText Text;
+
     private void Awake()
     {
         //On awake instantiate the itemList as a list of GameObjects
@@ -34,6 +38,10 @@ public class MonoHand : MonoBehaviour
 
         //Add all the GameObjects with the tag item to the itemList
         itemList.AddRange(GameObject.FindGameObjectsWithTag("item"));
+
+        MiddleUIInteractionHolder = GameObject.Find("interactionMiddle");
+
+        Text = MiddleUIInteractionHolder.GetComponent<InteractionUIText>();
     }
 
     private void Update()
@@ -69,6 +77,21 @@ public class MonoHand : MonoBehaviour
             {
                 //Call the currentBehavior of the item
                 targetTransform.gameObject.GetComponent<MonoItem>().CurrentBehavior();
+            }
+
+            if (targetTransform.gameObject.GetComponent<MonoDoor>() == true)
+            {
+                Text.currentState = InteractionUIText.States.door;
+            }
+
+            else if (targetTransform.gameObject.GetComponent<MonoCandle>() == true)
+            {
+                Text.currentState = InteractionUIText.States.candle;
+            }
+
+            else if (targetTransform.gameObject.GetComponent<MonoCandle>() == false && targetTransform.gameObject.GetComponent<MonoDoor>() == false)
+            {
+                Text.currentState = InteractionUIText.States.nothing;
             }
         }
     }

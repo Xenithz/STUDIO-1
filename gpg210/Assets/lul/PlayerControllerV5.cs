@@ -29,7 +29,7 @@ public class PlayerControllerV5 : MonoBehaviour
 
     float presentStamina = 1;
     float maxStamina = 1;
-    bool isRunning;
+    public bool isRunning;
 
     //Stamina Bar
     Rect staminaRect;

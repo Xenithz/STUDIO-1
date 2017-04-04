@@ -143,11 +143,6 @@ public class GameManager
 
     public void ThirdEvent()
     {
-        //foreach (GameObject v in Writing)
-        //{
-        //    v.SetActive(true);
-        //}
-
         ThirdEvents[0].GetComponent<MonoDoor>().Smoothing = 6f;
         ThirdEvents[0].GetComponent<MonoItem>().CurrentBehavior();
         ThirdEvents[0].GetComponent<DoorFast>().fastAudio.Play();
@@ -163,7 +158,7 @@ public class GameManager
             v.enabled = false;
         }
 
-        objectivesUI.text = "Put out all 6 candles.";
+        //objectivesUI.text = "Put out all 6 candles.";
 
         FourthEvents[0].GetComponent<MonoDoor>().DoorIsLocked = false;
         FourthEvents[0].GetComponent<MonoDoor>().Smoothing = 2f;

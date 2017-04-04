@@ -13,14 +13,27 @@ public class SoleInteractionLeaf : Node
 
     public override void NodeBehavior()
     {
-        if(this.NodeHandler.ScreamAndRun == false)
+        if (this.NodeHandler.AgentHasSightOfPlayer == true && this.NodeHandler.IsInTrigger == false && this.NodeHandler.DistanceToPlayer < 5.5f && this.NodeHandler.Player.GetComponent<PlayerControllerV5>().isDead == false && this.NodeHandler.ScreamAndRun == false)
         {
-            SetNodeStatus(NodeStates.running);
+            if (this.NodeHandler.ScreamAndRun == false)
+            {
+                SetNodeStatus(NodeStates.running);
+                this.NodeHandler.AgentRigidBody.velocity = Vector3.ClampMagnitude(this.NodeHandler.AgentRigidBody.velocity, 0f);
+                this.NodeHandler.Anim.SetBool("isWalking", false);
+                this.NodeHandler.PatrolIncrementer--;
+                this.NodeHandler.scream.PlayOneShot(this.NodeHandler.scream.clip, 15f);
+                this.NodeHandler.ScreamAndRun = true;
+            }
+
+            else if (this.NodeHandler.ScreamAndRun == true)
+            {
+                SetNodeStatus(NodeStates.success);
+            }
         }
 
-        else if(this.NodeHandler.ScreamAndRun == true)
+        else
         {
-            SetNodeStatus(NodeStates.success);
+            SetNodeStatus(NodeStates.failed);
         }
     }
 }

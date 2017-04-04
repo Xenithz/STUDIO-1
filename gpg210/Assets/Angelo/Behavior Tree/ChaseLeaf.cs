@@ -19,8 +19,10 @@ public class ChaseLeaf : Node
     //Override the NodeBehavior function to implement the ChaseLeaf behavior
     public override void NodeBehavior()
     {
-        if (this.NodeHandler.AgentHasSightOfPlayer == true && this.NodeHandler.IsInTrigger == false && this.NodeHandler.DistanceToPlayer < 5.5f && this.NodeHandler.Player.GetComponent<PlayerControllerV5>().isDead == false)
+        if (this.NodeHandler.AgentHasSightOfPlayer == true && this.NodeHandler.IsInTrigger == false && this.NodeHandler.DistanceToPlayer < 5.5f && this.NodeHandler.Player.GetComponent<PlayerControllerV5>().isDead == false && this.NodeHandler.ScreamAndRun == true)
         {
+            Debug.Log("chasing");
+
            if(this.NodeHandler.ShouldTurnAroundInstantly == true)
            {
                 if (this.NodeHandler.scream.isPlaying != true)
@@ -40,8 +42,6 @@ public class ChaseLeaf : Node
                 Quaternion lookAt = Quaternion.LookRotation(this.NodeHandler.DirectionForRotation);
 
                 this.NodeHandler.transform.rotation = Quaternion.Lerp(this.NodeHandler.transform.rotation, lookAt, this.NodeHandler.RotationSpeed);
-
-                //this.NodeHandler.transform.rotation = Quaternion.Euler(0, this.NodeHandler.transform.rotation.eulerAngles.y, 0);
 
                 if(this.NodeHandler.transform.rotation == lookAt)
                 {
