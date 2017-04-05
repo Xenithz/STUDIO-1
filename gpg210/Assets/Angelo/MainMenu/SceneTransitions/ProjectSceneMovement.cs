@@ -30,7 +30,7 @@ public class ProjectSceneMovement : MonoBehaviour
         loadingScreen.SetActive(true);
 
         //Load the game scene
-        LoadScene(1);
+        LoadScene(2);
     }
 
     //Function that will handle all regular scene loading
