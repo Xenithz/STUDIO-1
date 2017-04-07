@@ -1,0 +1,226 @@
+fileFormatVersion: 2
+guid: 78eedcc5c01124f4ba1531027b32f3b0
+timeCreated: 1491519163
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Box003
+    100002: Box004
+    100004: Box005
+    100006: Box006
+    100008: Box007
+    100010: Box009
+    100012: ChamferBox028
+    100014: ChamferBox029
+    100016: ChamferBox030
+    100018: ChamferBox031
+    100020: ChamferBox032
+    100022: ChamferBox033
+    100024: ChamferBox034
+    100026: ChamferBox035
+    100028: ChamferBox036
+    100030: ChamferBox037
+    100032: ChamferBox038
+    100034: ChamferBox039
+    100036: ChamferBox040
+    100038: ChamferBox041
+    100040: ChamferBox042
+    100042: key numbers
+    100044: Object003
+    100046: Object004
+    100048: phone
+    100050: Plane002
+    100052: Plane004
+    100054: Plane005
+    100056: Plane006
+    100058: portable phone 1
+    100060: portable phone_holder
+    100062: //RootNode
+    100064: top part of phone, buttons
+    400000: Box003
+    400002: Box004
+    400004: Box005
+    400006: Box006
+    400008: Box007
+    400010: Box009
+    400012: ChamferBox028
+    400014: ChamferBox029
+    400016: ChamferBox030
+    400018: ChamferBox031
+    400020: ChamferBox032
+    400022: ChamferBox033
+    400024: ChamferBox034
+    400026: ChamferBox035
+    400028: ChamferBox036
+    400030: ChamferBox037
+    400032: ChamferBox038
+    400034: ChamferBox039
+    400036: ChamferBox040
+    400038: ChamferBox041
+    400040: ChamferBox042
+    400042: key numbers
+    400044: Object003
+    400046: Object004
+    400048: phone
+    400050: Plane002
+    400052: Plane004
+    400054: Plane005
+    400056: Plane006
+    400058: portable phone 1
+    400060: portable phone_holder
+    400062: //RootNode
+    400064: top part of phone, buttons
+    2300000: Box003
+    2300002: Box004
+    2300004: Box005
+    2300006: Box006
+    2300008: Box007
+    2300010: Box009
+    2300012: ChamferBox028
+    2300014: ChamferBox029
+    2300016: ChamferBox030
+    2300018: ChamferBox031
+    2300020: ChamferBox032
+    2300022: ChamferBox033
+    2300024: ChamferBox034
+    2300026: ChamferBox035
+    2300028: ChamferBox036
+    2300030: ChamferBox037
+    2300032: ChamferBox038
+    2300034: ChamferBox039
+    2300036: ChamferBox040
+    2300038: ChamferBox041
+    2300040: ChamferBox042
+    2300042: Object003
+    2300044: Object004
+    2300046: phone
+    2300048: Plane002
+    2300050: Plane004
+    2300052: Plane005
+    2300054: Plane006
+    3300000: Box003
+    3300002: Box004
+    3300004: Box005
+    3300006: Box006
+    3300008: Box007
+    3300010: Box009
+    3300012: ChamferBox028
+    3300014: ChamferBox029
+    3300016: ChamferBox030
+    3300018: ChamferBox031
+    3300020: ChamferBox032
+    3300022: ChamferBox033
+    3300024: ChamferBox034
+    3300026: ChamferBox035
+    3300028: ChamferBox036
+    3300030: ChamferBox037
+    3300032: ChamferBox038
+    3300034: ChamferBox039
+    3300036: ChamferBox040
+    3300038: ChamferBox041
+    3300040: ChamferBox042
+    3300042: Object003
+    3300044: Object004
+    3300046: phone
+    3300048: Plane002
+    3300050: Plane004
+    3300052: Plane005
+    3300054: Plane006
+    4300000: Box006
+    4300002: Box007
+    4300004: Box003
+    4300006: Box004
+    4300008: Box005
+    4300010: Plane006
+    4300012: Plane005
+    4300014: Plane002
+    4300016: Plane004
+    4300018: Box009
+    4300020: ChamferBox030
+    4300022: ChamferBox031
+    4300024: ChamferBox028
+    4300026: Object003
+    4300028: Object004
+    4300030: phone
+    4300032: ChamferBox041
+    4300034: ChamferBox040
+    4300036: ChamferBox042
+    4300038: ChamferBox039
+    4300040: ChamferBox037
+    4300042: ChamferBox038
+    4300044: ChamferBox035
+    4300046: ChamferBox034
+    4300048: ChamferBox036
+    4300050: ChamferBox029
+    4300052: ChamferBox032
+    4300054: ChamferBox033
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
