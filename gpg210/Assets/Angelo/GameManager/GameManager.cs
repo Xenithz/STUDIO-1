@@ -137,6 +137,9 @@ public class GameManager
         SecondEvents[1].GetComponent<MonoDoor>().DoorIsLocked = false;
         SecondEvents[1].GetComponent<MonoItem>().CurrentBehavior();
         SecondEvents[1].GetComponent<AudioSource>().time = 0.2f;
+        SecondEvents[2].GetComponent<MonoDoor>().DoorIsLocked = false;
+        SecondEvents[2].GetComponent<MonoItem>().CurrentBehavior();
+        SecondEvents[2].GetComponent<AudioSource>().time = 0.2f;
         SetGateState(ActionGate.shouldNotDo);
         SetGameState(GameState.phase3);
     }
@@ -147,6 +150,10 @@ public class GameManager
         ThirdEvents[0].GetComponent<MonoItem>().CurrentBehavior();
         ThirdEvents[0].GetComponent<DoorFast>().fastAudio.Play();
         ThirdEvents[0].GetComponent<MonoDoor>().DoorIsLocked = true;
+        ThirdEvents[1].GetComponent<MonoDoor>().Smoothing = 6f;
+        ThirdEvents[1].GetComponent<MonoItem>().CurrentBehavior();
+        ThirdEvents[1].GetComponent<DoorFast>().fastAudio.Play();
+        ThirdEvents[1].GetComponent<MonoDoor>().DoorIsLocked = true;
         SetGateState(ActionGate.shouldNotDo);
         SetGameState(GameState.phase4);
     }
@@ -185,8 +192,8 @@ public class GameManager
         FourthEvents[3].GetComponent<MonoDoor>().currentState = MonoDoor.State.closed;
         FourthEvents[4].GetComponent<MonoDoor>().currentState = MonoDoor.State.closed;
         FourthEvents[5].GetComponent<MonoDoor>().currentState = MonoDoor.State.closed;
-        FourthEvents[6].GetComponent<MonoDoor>().currentState = MonoDoor.State.closed;
-        FourthEvents[7].GetComponent<MonoDoor>().currentState = MonoDoor.State.closed;
+        FourthEvents[6].GetComponent<MonoDoor>().currentState = MonoDoor.State.open;
+        FourthEvents[7].GetComponent<MonoDoor>().currentState = MonoDoor.State.open;
         FourthEvents[8].GetComponent<MonoDoor>().currentState = MonoDoor.State.closed;
         AI.SetActive(true);
         SetGateState(ActionGate.shouldDo);

@@ -94,6 +94,7 @@ public class MonoDoor : MonoItem
 
                     if (transform.Find("Cube (1)").GetComponent<BoxCollider>().enabled == false)
                     {
+                        Debug.Log("goaway2");
                         transform.Find("Cube (1)").GetComponent<BoxCollider>().enabled = true;
                     }
                 }
@@ -108,6 +109,7 @@ public class MonoDoor : MonoItem
 
                     if (transform.Find("Cube").GetComponent<BoxCollider>().enabled == true)
                     {
+                        Debug.Log("goaway3");
                         transform.Find("Cube").GetComponent<BoxCollider>().enabled = false;
                     }
 
@@ -120,6 +122,7 @@ public class MonoDoor : MonoItem
 
                     if (transform.Find("Cube").GetComponent<BoxCollider>().enabled == false)
                     {
+                        Debug.Log("goaway4");
                         transform.Find("Cube").GetComponent<BoxCollider>().enabled = true;
                     }
 
