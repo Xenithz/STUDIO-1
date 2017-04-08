@@ -69,13 +69,9 @@ public class MonoAudioManager : MonoBehaviour
                 if (!this.audioSourceForPlayer.isPlaying)
                 {
                     //if its gravel
-                    if (this.soundType == SoundType.wood)
+                    if (this.soundType == SoundType.wood && this.audioIndex > 1)
                     {
-                        //set to hardcoded value
-                        if (this.audioIndex > 3)
-                        {
-                            this.audioIndex = 0;
-                        }
+                        this.audioIndex = 0;
                     }
 
                     else if (this.soundType == SoundType.ceramic && this.audioIndex > 3)
@@ -91,6 +87,7 @@ public class MonoAudioManager : MonoBehaviour
             {
                 this.keyAlreadyDown = true;
             }
+
             if (!this.keys[0] && !this.keys[1] && !this.keys[2] && !this.keys[3] && this.keyAlreadyDown)
             {
                 this.audioSourceForPlayer.Stop();

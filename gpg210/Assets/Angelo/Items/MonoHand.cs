@@ -31,6 +31,8 @@ public class MonoHand : MonoBehaviour
 
     public InteractionUIText Text;
 
+    public GameManagerHandler GameManager;
+
     private void Awake()
     {
         //On awake instantiate the itemList as a list of GameObjects
@@ -39,9 +41,11 @@ public class MonoHand : MonoBehaviour
         //Add all the GameObjects with the tag item to the itemList
         itemList.AddRange(GameObject.FindGameObjectsWithTag("item"));
 
-        //MiddleUIInteractionHolder = GameObject.Find("interactionMiddle");
+        MiddleUIInteractionHolder = GameObject.Find("interactionMiddle");
 
-        //Text = MiddleUIInteractionHolder.GetComponent<InteractionUIText>();
+        Text = MiddleUIInteractionHolder.GetComponent<InteractionUIText>();
+
+        GameManager = GameObject.Find("GameManager").GetComponent<GameManagerHandler>();
     }
 
     private void Update()
@@ -70,14 +74,43 @@ public class MonoHand : MonoBehaviour
         Debug.DrawLine(transform.position, transform.position + directionFromPlayerToItem * 5, Color.red, 0.5f);
 
         //Check if the distance is smaller than 4, and the angle is smaller than 40
-        if(distanceFromPlayerToItem < 5f && angle <= 60f)
+        if(distanceFromPlayerToItem <= 5.25f && angle <= 70f)
         {
-            //CHeck if the player presses the left click
-            if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.E))
+            Text.text.enabled = true;
+
+            if(targetTransform.GetComponent<MonoDoor>() == true || targetTransform.GetComponent<MonoHandEvent>() == true)
             {
-                //Call the currentBehavior of the item
-                targetTransform.gameObject.GetComponent<MonoItem>().CurrentBehavior();
+                Text.currentState = InteractionUIText.TextStates.door;
+
+                //CHeck if the player presses the left click
+                if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.E))
+                {
+                    //Call the currentBehavior of the item
+                    targetTransform.gameObject.GetComponent<MonoItem>().CurrentBehavior();
+                }
             }
+
+            else if(targetTransform.GetComponent<MonoCandle>() == true && GameManager.gameManagerInstance.currentGameState == global::GameManager.GameState.phase6 || targetTransform.GetComponent<MonoCandleEvent>() == true)
+            {
+                Text.currentState = InteractionUIText.TextStates.candle;
+
+                //CHeck if the player presses the left click
+                if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.E))
+                {
+                    //Call the currentBehavior of the item
+                    targetTransform.gameObject.GetComponent<MonoItem>().CurrentBehavior();
+                }
+            }
+
+            else if (targetTransform.GetComponent<MonoCandle>() == true && GameManager.gameManagerInstance.currentGameState != global::GameManager.GameState.phase6)
+            {
+                Text.text.enabled = false;
+            }
+        }
+
+        else
+        {
+            Text.text.enabled = false;
         }
     }
 }

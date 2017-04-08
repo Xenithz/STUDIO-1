@@ -5,33 +5,38 @@ using UnityEngine.UI;
 
 public class InteractionUIText : MonoBehaviour
 {
-    public enum States
+    public enum TextStates
     {
         candle,
         door,
         nothing,
     }
 
-    public States currentState;
+    public TextStates currentState;
 
     public Text text;
+
+    private void Awake()
+    {
+        currentState = TextStates.nothing;
+    }
 
     private void Update()
     {
         switch (currentState)
         {
-            case States.candle:
+            case TextStates.candle:
                 text.text = "Press E to interact with the candle";
                 break;
-            case States.door:
+            case TextStates.door:
                 text.text = "Press E to interact with the door";
                 break;
-            case States.nothing:
-                text.text = "";
+            case TextStates.nothing:
+                text.text = " ";
                 break;
 
             default:
-                text.text = "";
+                text.text = " ";
                 break;
         }
     }
