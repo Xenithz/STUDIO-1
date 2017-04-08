@@ -23,7 +23,7 @@ public class SoleInteractionLeaf : Node
 
                 this.NodeHandler.QuickTimer += Time.deltaTime;
 
-                if (this.NodeHandler.QuickTimer >= 4f)
+                if (this.NodeHandler.QuickTimer >= 1f)
                 {
                     this.NodeHandler.scream.PlayOneShot(this.NodeHandler.scream.clip, 15f);
                     this.NodeHandler.PatrolIncrementer--;

@@ -173,6 +173,11 @@ public class PlayerControllerV5 : MonoBehaviour
                         presentStamina = Mathf.Clamp(presentStamina, 0, maxStamina);
                     }
 
+                    else if (!isRunning)
+                    {
+                        breathing.Stop();
+                    }
+
 
 
                     //Mouse Rotation 
