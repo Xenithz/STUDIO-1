@@ -123,6 +123,7 @@ public class GameManager
         FirstEvents[6].GetComponent<MonoDoor>().DoorIsLocked = true;
         FirstEvents[7].GetComponent<MonoDoor>().DoorIsLocked = true;
         FirstEvents[8].GetComponent<MonoDoor>().DoorIsLocked = true;
+        objectivesUI.text = "Answer the front door.";
         SetGateState(ActionGate.shouldNotDo);
         SetGameState(GameState.phase2);
     }
@@ -165,7 +166,7 @@ public class GameManager
             v.enabled = false;
         }
 
-        //objectivesUI.text = "Put out all 6 candles.";
+        objectivesUI.text = "Put out all 6 candles.";
 
         FourthEvents[0].GetComponent<MonoDoor>().DoorIsLocked = false;
         FourthEvents[0].GetComponent<MonoDoor>().Smoothing = 2f;

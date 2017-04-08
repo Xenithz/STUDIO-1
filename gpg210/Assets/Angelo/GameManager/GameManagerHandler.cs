@@ -31,7 +31,6 @@ public class GameManagerHandler : MonoBehaviour
     public int gameOverSceneIndex;
     public Text objectivesUI;
 
-
     private void Awake()
     {
         //Set this object to the static instance of the game manager
