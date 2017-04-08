@@ -22,6 +22,9 @@ public class Steering : MonoBehaviour
 
     public float distanceFromAgentToWaypoint;
 
+    public Vector3 desiredVelocity2;
+    public Vector3 velocity2;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();

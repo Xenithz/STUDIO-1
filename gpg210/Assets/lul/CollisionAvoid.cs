@@ -7,14 +7,17 @@ public class CollisionAvoid : MonoBehaviour
     public Transform target;
     Rigidbody rb;
 
-    float rayRange = 5.0f;
+    Vector3 direction;
 
-    public Vector3 steeringForce;
-    public Vector3 desiredVelocity;
+    public float force;
+
     public Vector3 velocity;
-    public float maxVelocity;
-    public float maxForce;
+    public Vector3 desiredVelocity;
+    public Vector3 steeringForce;
     public float maxSpeed;
+    public float maxForce;
+    public float maxVelocity;
+
 
     // Use this for initialization
     void Start()
@@ -24,40 +27,78 @@ public class CollisionAvoid : MonoBehaviour
 
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
 
-        // Setting direction and distance
+        // Declaring velocity of the object's rigidbody
+        velocity = rb.velocity;
 
-        Vector3 direction = (target.position - transform.position).normalized;
+        // setting desired velocity by normalizing the distance between target postion and this object postion 
+        desiredVelocity = Vector3.Normalize(target.position - transform.position) * maxVelocity;
+
+
 
         RaycastHit hit;
 
 
-        //  if shooting a raycats from all the three side of this object with distance to travel
+        float maxDis = 10.0f;
 
-        if (Physics.Raycast(transform.position, transform.forward, out hit, rayRange))
+        // declaring vector position of forward position where the AI would be 
+        Vector3 ahead = transform.position + velocity.normalized * maxDis;
+
+        Debug.DrawLine(transform.position, transform.position + transform.forward * maxDis, Color.red);
+
+        // pointing at the ahead postion of AI
+        transform.LookAt(ahead);
+        //  if shooting a raycats from all the three side of this object with distance to travel
+        /* foreach (GameObject obstacle in obstacles)
         {
 
-            // if ray not hitting this object and hitting the gameobjects with tag 
+            //Vector3.Distance(transform.position, obstacle.transform.position);
+
+            
+            if (Vector3.Distance(obstacle.transform.position, ahead) < 6)//(Physics.Raycast(transform.position, transform.forward, out hit, maxDis))
+            {
+
+                // if ray not hitting this object and hitting the gameobjects with tag 
+
+                // startRay += Time.time * 1.0f; 
+                //Vector3 hitNormal = hit.point + hit.normal;
+                //hitNormal.y = 0.0f;
+                //adding normalized hit direction with some pulling away type force
+                //direction = transform.forward + hitNormal * 300.0f; 
+                //transform.Rotate(Vector3.up * Time.deltaTime * 20);
+
+                Vector3 aviodence = (ahead - obstacle.transform.position).normalized;
+                Debug.DrawLine(obstacle.transform.position, ahead, Color.white);
+
+                desiredVelocity += aviodence * 4;//rb.AddForce(aviodence * 2.5f);
+
+
+            }
+        }*/
+
+
+        // Shotting a raycast   
+        if (Physics.Raycast(transform.position, transform.forward, out hit, maxDis))
+        {
+            // If hitting any object with tag "obb"
             if (hit.collider.gameObject.CompareTag("obb"))
             {
-                // startRay += Time.time * 1.0f; 
-                Debug.DrawLine(transform.position, transform.position + transform.forward * rayRange, Color.red);
-                Vector3 hitNormal = hit.point + hit.normal;
-                hitNormal.y = 0.0f;
-                //adding normalized hit direction with some pulling away type force
-                direction = transform.forward + hitNormal * 300.0f;
-                //transform.Rotate(Vector3.up * Time.deltaTime * 20);
+                //then
+                // setting aviodence which is normiling the distance between forward postion of this object and positon of object which we are about to collide
+                Vector3 aviodence = (ahead - hit.transform.position).normalized;
+
+                //adding two vectors and multipling it with force 
+                desiredVelocity += aviodence * 500.0f * Time.deltaTime;
 
 
 
 
             }
-
-
-
         }
+
+
 
 
 
@@ -67,42 +108,45 @@ public class CollisionAvoid : MonoBehaviour
 
         Vector3 right = transform.position;
 
-
-        if (Physics.Raycast(right + (transform.right), transform.forward, out hit, rayRange))
+        // Shotting a raycast   
+        if (Physics.Raycast(right + (transform.right * 5f), transform.forward, out hit, maxDis))
         {
-            // if ray not hitting this object and hitting the gameobjects with tag 
+            //hitting the gameobjects with tag 
             if (hit.collider.gameObject.CompareTag("obb"))
             {
-                // startRay += Time.time * 1.0f; 
-                Debug.DrawRay(transform.position, hit.point, Color.red);
+                //then
+                // setting aviodence which is normiling the distance between forward postion of this object and positon of object which we are about to collide
+                Vector3 aviodence = (ahead - hit.transform.position).normalized;
+                // Debug.DrawLine(hit2.transform.position, ahead, Color.white);
 
-                Vector3 hitNormal = hit.normal;
-                //adding normalized hit direction with some pulling away type force
-                direction += hitNormal * 30.0f;
+                //adding two vectors and multipling it with force 
+                desiredVelocity += aviodence * 500.0f * Time.deltaTime;
+            }
+        }
 
+        // Shotting a raycast   
+        if (Physics.Raycast(left - (transform.right * 5f), transform.forward, out hit, maxDis))
+        {
+            //hitting the gameobjects with tag 
+            if (hit.collider.gameObject.CompareTag("obb"))
+            {
+                //then
+                // setting aviodence which is normiling the distance between forward postion of this object and positon of object which we are about to collide
+                Vector3 aviodence = (ahead - hit.transform.position).normalized;
 
+                //adding two vectors and multipling it with force 
+                desiredVelocity += aviodence * 500.0f * Time.deltaTime;
 
             }
         }
 
-        if (Physics.Raycast(left - (transform.right), transform.forward, out hit, rayRange))
-        {
-            // if ray not hitting this object and hitting the gameobjects with tag 
-            if (hit.collider.gameObject.CompareTag("obb"))
-            {
-                // startRay += Time.time * 1.0f; 
-                Debug.DrawRay(transform.position, hit.point, Color.red);
-                Vector3 hitNormal = hit.normal;
-
-                //adding normalized hit direction with some pulling away type force
-                direction += hitNormal * 30.0f;
-
-            }
-        }
+        steeringForce = desiredVelocity - velocity;
+        steeringForce = Vector3.ClampMagnitude(steeringForce, maxForce);
+        rb.AddForce(steeringForce);
+        rb.velocity = Vector3.ClampMagnitude(velocity, maxSpeed);
 
 
 
-        Move();
     }
 
 

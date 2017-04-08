@@ -70,7 +70,7 @@ public class MonoHand : MonoBehaviour
         Debug.DrawLine(transform.position, transform.position + directionFromPlayerToItem * 5, Color.red, 0.5f);
 
         //Check if the distance is smaller than 4, and the angle is smaller than 40
-        if(distanceFromPlayerToItem < 3.5f && angle <= 60f)
+        if(distanceFromPlayerToItem < 5f && angle <= 60f)
         {
             //CHeck if the player presses the left click
             if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.E))
