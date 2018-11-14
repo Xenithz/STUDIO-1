@@ -36,10 +36,7 @@ public class CollisionAvoid : MonoBehaviour
         // setting desired velocity by normalizing the distance between target postion and this object postion 
         desiredVelocity = Vector3.Normalize(target.position - transform.position) * maxVelocity;
 
-
-
         RaycastHit hit;
-
 
         float maxDis = 10.0f;
 
@@ -51,33 +48,6 @@ public class CollisionAvoid : MonoBehaviour
         // pointing at the ahead postion of AI
         transform.LookAt(ahead);
         //  if shooting a raycats from all the three side of this object with distance to travel
-        /* foreach (GameObject obstacle in obstacles)
-        {
-
-            //Vector3.Distance(transform.position, obstacle.transform.position);
-
-            
-            if (Vector3.Distance(obstacle.transform.position, ahead) < 6)//(Physics.Raycast(transform.position, transform.forward, out hit, maxDis))
-            {
-
-                // if ray not hitting this object and hitting the gameobjects with tag 
-
-                // startRay += Time.time * 1.0f; 
-                //Vector3 hitNormal = hit.point + hit.normal;
-                //hitNormal.y = 0.0f;
-                //adding normalized hit direction with some pulling away type force
-                //direction = transform.forward + hitNormal * 300.0f; 
-                //transform.Rotate(Vector3.up * Time.deltaTime * 20);
-
-                Vector3 aviodence = (ahead - obstacle.transform.position).normalized;
-                Debug.DrawLine(obstacle.transform.position, ahead, Color.white);
-
-                desiredVelocity += aviodence * 4;//rb.AddForce(aviodence * 2.5f);
-
-
-            }
-        }*/
-
 
         // Shotting a raycast   
         if (Physics.Raycast(transform.position, transform.forward, out hit, maxDis))
@@ -91,18 +61,8 @@ public class CollisionAvoid : MonoBehaviour
 
                 //adding two vectors and multipling it with force 
                 desiredVelocity += aviodence * 500.0f * Time.deltaTime;
-
-
-
-
             }
         }
-
-
-
-
-
-
         // To create two raycast left and rigth (to avoid corners
         Vector3 left = transform.position;
 
@@ -144,9 +104,6 @@ public class CollisionAvoid : MonoBehaviour
         steeringForce = Vector3.ClampMagnitude(steeringForce, maxForce);
         rb.AddForce(steeringForce);
         rb.velocity = Vector3.ClampMagnitude(velocity, maxSpeed);
-
-
-
     }
 
 
